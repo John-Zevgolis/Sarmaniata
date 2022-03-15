@@ -8,10 +8,13 @@ import store from './store';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFacebookF } from '@fortawesome/free-brands-svg-icons';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { faPhone } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import VueMeta from 'vue-meta';
 import scrollSpy, { Easing } from 'vue2-scrollspy';
-library.add(faFacebookF, faTwitter);
+library.add(faFacebookF, faTwitter, faLocationDot, faPhone, faEnvelope);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 

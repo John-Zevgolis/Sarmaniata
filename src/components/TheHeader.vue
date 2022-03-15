@@ -1,11 +1,11 @@
 <template>
-	<header class="fixed-top mx-auto py-3 py-xl-0" :class="{active: show}">
+	<header ref="header" class="fixed-top mx-auto py-2 py-xl-0" :class="{active: show}">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-12">
 					<nav class="d-flex flex-wrap flex-lg-nowrap align-items-center navbar-expand-xl position-relative px-1 px-xl-3">
-						<router-link class="d-block" to="/">
-							<img src="http://tk-themes.net/html-ueneo/images/logodark.png">
+						<router-link class="d-block logo" to="/">
+							<img :src="logo" @load="onImgLoad">
 						</router-link>
 						<div class="ms-auto ms-xl-0">
 							<nav class="social mx-2 mx-xl-4">
@@ -24,27 +24,10 @@
 							</nav>
 						</div>
 						<nav class="main-menu ms-auto d-flex align-items-center justify-content-center" v-click-outside="closeMenu">
-							<ul v-scroll-spy-active v-scroll-spy-link="{selector: 'a.menu-link'}" class="nav flex-nowrap flex-xl-wrap flex-column flex-xl-row text-center text-xl-start w-100">
-								<li class="position-relative">
-									<a href="#" click.prevent class="d-block menu-link">HOME</a>
-								</li>
-								<li class="position-relative">
-									<a href="#" click.prevent class="d-block menu-link">HISTORY</a>
-								</li>
-								<li class="position-relative">
-									<a href="#" click.prevent class="d-block menu-link">SERVICES</a>
-								</li>
-								<li class="position-relative">
-									<a href="#" click.prevent class="d-block menu-link">PORTFOLIO</a>
-								</li>
-								<li class="position-relative">
-									<a href="#" click.prevent class="d-block menu-link">PRICING</a>
-								</li>
-								<li class="position-relative">
-									<a href="#" click.prevent class="d-block menu-link">BLOG</a>
-								</li>
-								<li class="position-relative">
-									<a href="https://youtube.com" class="d-block">CONTACT</a>
+							<ul v-scroll-spy-active="{selector: 'a.menu-link', class: 'active'}" v-scroll-spy-link="{selector: 'a.menu-link'}" class="nav flex-nowrap flex-xl-wrap flex-column flex-xl-row text-center text-xl-start w-100">
+								<li v-for="(item, index) in objData.metadata" :key="index">
+									<router-link :to="item.slug" class="d-block position-relative" v-if="item.metadata.inner_page">{{item.title}}</router-link>
+									<a v-else href="#" click.prevent class="d-block menu-link position-relative">{{item.title}}</a>
 								</li>
 							</ul>
 						</nav>
@@ -64,19 +47,25 @@
 import ClickOutside from 'vue-click-outside';
 
 export default {
+	props: ['logo', 'objData'],
 	directives: {
 		ClickOutside
 	},
 	data() {
 		return {
-			show: false
+			show: false,
+			isLoaded: false
 		};
 	},
 	mounted() {
 		this.handleResize();
-		window.addEventListener('resize', this.handleResize());
+		window.addEventListener('resize', () => this.handleResize());	
 	},
 	methods: {
+		onImgLoad () {
+			this.$store.commit('headerHeight', this.$refs.header.offsetHeight);
+			window.addEventListener('resize', () => this.$store.commit('headerHeight', this.$refs.header.offsetHeight));
+		},
 		closeMenu() {
 			if(this.show) {
 				this.show = false;
@@ -93,14 +82,19 @@ export default {
 };
 </script>
 
-<style lang="scss">
-body {
-	height: 4000px;
-}
+<style lang="scss" scoped>
 header {
 	background: #fff;
 	border-bottom: 1px solid #e2e2e2;
 	max-width: 1920px;
+
+	.logo {
+		img {
+			@media (max-width: 1199.98px) {
+				max-width: 90px;
+			}
+		}
+	}
 
 	.hamburger {
       line-height: 1;
@@ -150,30 +144,30 @@ header {
 						font-family: 'Montserrat', sans-serif;
 						letter-spacing: 2px;
 						font-size: 0.75rem;
-						padding: 2.1875rem 1.875rem;
+						padding: 3rem 1.875rem;
+
+						&:after {
+							content: '';
+							position: absolute;
+							top: 100%;
+							left: 0;
+							width: 100%;
+							height: 1px;
+							background: #181818;
+							transform: scaleX(0);
+							transition: all .3s;
+						}
 
 						&:hover {
-							color: #8b8b8b;
-						}
-					}
-
-					&:after {
-						content: '';
-						position: absolute;
-						top: 100%;
-						height: 2px;
-						background: #8b8b8b;
-						width: 100%;
-						transform: scaleX(0);
-					}
-
-					&.active {
-						&:after {
-							transform: none;
+							color: #999;
 						}
 
-						a {
-							color: #8b8b8b;
+						&.active {
+							
+
+							&:after {
+								transform: none;
+							}
 						}
 					}
 
@@ -198,30 +192,34 @@ header {
 			@media (max-width: 1199.98px) {
 				width: 100%;
 				position: absolute;
-				transition: transform .3s;
-				top: calc(47px + 1rem + 1px);
+				transition: transform .5s ease;
+				top: calc(109.69px - .5rem);
 				background: #181818;
 				width: 100%;
 				max-width: 295px;
-				min-height: calc(100vh - 80px);
-				max-height: calc(100vh - 80px);
+				min-height: calc(100vh - (109.69px - 1px));
+				max-height: calc(100vh - (109.69px - 1px));
 				right: calc(-1rem - 295px);
 				overflow: auto;
 				padding: 1.5625rem;
 
 				ul {
-					max-height: calc(100vh - 80px);
+					max-height: calc(100vh - (109.69px - 1px));
 
 					li {
-						&:after {
-							display: none;
-						}
-
 						a {
 							padding: 1rem 0;
-							color: #fff;
+							color: #999;
 							border-bottom: 1px solid #222;
 							font-size: 0.75rem;
+
+							&:after {
+								display: none;
+							}
+
+							&.active,&:hover {
+								color: #fff;
+							}
 						}
 					}
 				}

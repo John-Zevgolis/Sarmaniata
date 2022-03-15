@@ -1,10 +1,16 @@
 <template>
-	<div class="loader fixed-top h-100" :class="{remove: loading}">
-		<div class="position-absolute loading">
-			<img src="http://tk-themes.net/html-ueneo/images/loader2.gif">
+	<div class="loader fixed-top h-100 align-items-center justify-content-center" :class="{remove: loading}">
+		<div class="sk-cube-grid">
+			<div class="sk-cube sk-cube1"></div>
+			<div class="sk-cube sk-cube2"></div>
+			<div class="sk-cube sk-cube3"></div>
+			<div class="sk-cube sk-cube4"></div>
+			<div class="sk-cube sk-cube5"></div>
+			<div class="sk-cube sk-cube6"></div>
+			<div class="sk-cube sk-cube7"></div>
+			<div class="sk-cube sk-cube8"></div>
+			<div class="sk-cube sk-cube9"></div>
 		</div>
-		<div class="left-overlay h-100 w-50 position-absolute bg-white"></div>
-		<div class="right-overlay h-100 w-50 position-absolute bg-white"></div>
 	</div>
 </template>
 
@@ -14,48 +20,61 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .loader {
 	z-index: 5000;
-	transition: all .3s 1s ease-out;
+	background: #fff;
+	display: flex;
 
-	.loading {
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		z-index: 1;
-	}
+	.sk-cube-grid {
+		width: 40px;
+		height: 40px;
 
-	.left-overlay,
-	.right-overlay {
-		top: 0;
-		transition: all .7s .3s cubic-bezier(0.645, 0.045, 0.355, 1);
-	}
+		.sk-cube {
+			width: 33%;
+			height: 33%;
+			background-color: #181818;
+			float: left;
+			animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out; 
 
-	.left-overlay {
-		left: 0;
-	}
-
-	.right-overlay {
-		right: 0;
-	}
-
-	&.remove {
-		visibility: hidden;
-		opacity: 0;
-
-		.loading {
-			opacity: 0;
-			visibility: hidden;
+			.sk-cube-grid .sk-cube1 {
+				animation-delay: 0.2s;
+			}
+			.sk-cube-grid .sk-cube2 {
+				animation-delay: 0.3s;
+			}
+			.sk-cube-grid .sk-cube3 {
+				animation-delay: 0.4s;
+			}
+			.sk-cube-grid .sk-cube4 {
+				animation-delay: 0.1s;
+			}
+			.sk-cube-grid .sk-cube5 {
+				animation-delay: 0.2s;
+			}
+			.sk-cube-grid .sk-cube6 {
+				animation-delay: 0.3s;
+			}
+			.sk-cube-grid .sk-cube7 {
+				animation-delay: 0s; 
+			}
+			.sk-cube-grid .sk-cube8 {
+				animation-delay: 0.1s;
+			}
+			.sk-cube-grid .sk-cube9 {
+				animation-delay: 0.2s; 
+			}
 		}
-
-		.left-overlay {
-			transform: translateX(-100%);
-		}
-
-		.right-overlay {
-			transform: translateX(100%);
-		}
 	}
+}
+
+@keyframes sk-cubeGridScaleDelay {
+  0%, 70%, 100% {
+    -webkit-transform: scale3D(1, 1, 1);
+            transform: scale3D(1, 1, 1);
+  } 35% {
+    -webkit-transform: scale3D(0, 0, 1);
+            transform: scale3D(0, 0, 1);
+  } 
 }
 </style>

@@ -47,21 +47,21 @@
 								<p>{{contact.metadata.subtitle}}</p>
 							</div>
 							<div class="form">
-								<form>
+								<form @submit.prevent="submitForm">
 									<div>
-										<input class="form-control shadow-none rounded-0" placeholder="Name" name="name" type="text">
+										<input class="form-control shadow-none rounded-0" placeholder="Name" v-model="name" name="name" type="text">
 									</div>
 									<div>
-										<input class="form-control shadow-none rounded-0" placeholder="Email" name="email" type="email">
+										<input class="form-control shadow-none rounded-0" placeholder="Email" v-model="email" name="email" type="email">
 									</div>
 									<div>
-										<input class="form-control shadow-none rounded-0" placeholder="Subject" name="subject" type="text">
+										<input class="form-control shadow-none rounded-0" placeholder="Subject" v-model="subject" name="subject" type="text">
 									</div>
 									<div>
-										<textarea class="form-control shadow-none rounded-0" placeholder="Message" name="message"></textarea>
+										<textarea class="form-control shadow-none rounded-0" placeholder="Message" v-model="message" name="message"></textarea>
 									</div>
 									<div class="mt-4 d-flex justify-content-end">
-										<button @click.prevent class="form-control shadow-none rounded-0 my-0 w-auto">SEND MESSAGE</button>
+										<button class="form-control shadow-none rounded-0 my-0 w-auto">SEND MESSAGE</button>
 									</div>
 								</form>
 							</div>
@@ -102,12 +102,28 @@
 <script>
 export default {
 	props: ['logo', 'objData'],
+	data() {
+		return {
+			name: '',
+			email: '',
+			subject: '',
+			message: ''
+		};
+	},
 	methods: {
 		trimWhiteSpaces(value) {
 			return value.trim().replace(/\s/g, "");
 		},
 		trimLowercase(value) {
 			return value.trim().toLowerCase();
+		},
+		submitForm() {
+			this.$store.dispatch('sendEmail', {
+				name: this.name,
+				email: this.email,
+				subject: this.subject,
+				message: this.message
+			});
 		}
 	},
 	computed: {

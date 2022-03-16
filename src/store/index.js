@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import axios from 'axios';
 
 Vue.use(Vuex);
 
@@ -51,6 +52,9 @@ const store = new Vuex.Store({
 				id: '622f69dac93ec40e343cf4d7',
 				props: 'url'
 			}).then(response => commit('storeLogo', response.media.url));
+		},
+		async sendEmail(_, payload) {
+			axios.post('http://localhost:8080/process.php', payload).then(res => console.log(res)).catch(err => console.log(err.message));
 		}
 	},
 	getters: {

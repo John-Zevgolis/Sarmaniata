@@ -13,19 +13,19 @@
 							<div class="address">
 								<ul class="list-unstyled mb-0">
 									<li v-for="(item, index) in contact.metadata.contact_info" :key="index">
-										<span v-if="item.address" class="d-flex align-items-center">
+										<span v-if="item.address" class="d-inline-flex align-items-center">
 											<span class="icon-square me-4 text-center d-inline-block">
 												<font-awesome-icon icon="fa-solid fa-location-dot" />
 											</span>
 											{{item.address}}
 										</span>
-										<a :href="`tel:${trimWhiteSpaces(item.phone)}`" v-if="item.phone" class="d-flex align-items-center">
+										<a :href="`tel:${trimWhiteSpaces(item.phone)}`" v-if="item.phone" class="d-inline-flex align-items-center">
 											<span class="icon-square me-4 text-center d-inline-block">
 												<font-awesome-icon icon="fa-solid fa-phone" />
 											</span>
 											{{item.phone}}
 										</a>
-										<a :href="`mailto:${trimLowercase(item.email)}`" v-if="item.email" class="d-flex align-items-center">
+										<a :href="`mailto:${trimWhiteSpaces(item.email)}`" v-if="item.email" class="d-inline-flex align-items-center">
 											<span class="icon-square me-4 text-center d-inline-block">
 												<font-awesome-icon icon="fa-solid fa-envelope" />
 											</span>
@@ -33,12 +33,6 @@
 										</a>
 									</li>
 								</ul>
-							</div>
-							<div class="time">
-								<span class="d-inline-block text-white title mb-4">Opening Hours</span>
-								<div class="time-detail">
-									<p>Mon - Sat  :   8am - 5pm <br> Sunday : 8am - 10am</p>
-								</div>
 							</div>
 						</div>
 						<div class="col-lg-5 offset-lg-2">
@@ -75,7 +69,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-						<p class="d-block copyright">© {{year}} ZANKOVER DESIGNS - ALL RIGHT RESERVED</p>
+						<p class="d-block copyright">© {{year}} - ALL RIGHT RESERVED</p>
 					</div>
 					<div class="col-md-6">
 						<nav class="social mx-2 mx-xl-4">
@@ -86,7 +80,7 @@
 									</a>
 								</li>
 								<li class="px-3">
-									<a href="#" target="_blank">
+									<a href="https://www.facebook.com/groups/sarmaniata/?ref=share" target="_blank">
 										<font-awesome-icon icon="fa-brands fa-facebook-f" />
 									</a>
 								</li>
@@ -113,9 +107,6 @@ export default {
 	methods: {
 		trimWhiteSpaces(value) {
 			return value.trim().replace(/\s/g, "");
-		},
-		trimLowercase(value) {
-			return value.trim().toLowerCase();
 		},
 		submitForm() {
 			this.$store.dispatch('sendEmail', {
@@ -237,16 +228,6 @@ footer {
 						}
 					}
 				}
-			}
-		}
-
-		.time {
-			.title {
-				font-size: 1.25rem;
-				line-height: 24px;
-				font-style: italic;
-				padding: 0 3.75rem 0.4375rem 0;
-				border-bottom: 1px solid #222;
 			}
 		}
 

@@ -45,7 +45,9 @@ const store = new Vuex.Store({
 			bucket.getObject({
 				id: payload.id,
 				props: payload.props
-			}).then(response => commit('storeHomepageData', response.object));
+			}).then(response => {
+				commit('storeHomepageData', response.object)
+			});
 		},
 		fetchLogo({commit}) {
 			bucket.getSingleMedia({
@@ -53,8 +55,9 @@ const store = new Vuex.Store({
 				props: 'url'
 			}).then(response => commit('storeLogo', response.media.url));
 		},
-		async sendEmail(_, payload) {
-			axios.post('http://localhost:8080/process.php', payload).then(res => console.log(res)).catch(err => console.log(err.message));
+		sendEmail(context, payload) {
+			console.log(context)
+			axios.post('http://192.168.1.2:8081/process.php', payload).then(res => console.log(res)).catch(err => console.log(err.message));
 		}
 	},
 	getters: {

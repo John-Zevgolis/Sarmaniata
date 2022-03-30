@@ -29,33 +29,6 @@ export default {
 
 @font-face {
     font-family: 'Open Sans';
-    src: url('/fonts/OpenSans-Light.woff2') format('woff2'),
-        url('/fonts/OpenSans-Light.woff') format('woff');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Open Sans';
-    src: url('/fonts/OpenSans-Italic.woff2') format('woff2'),
-        url('/fonts/OpenSans-Italic.woff') format('woff');
-    font-weight: normal;
-    font-style: italic;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Open Sans';
-    src: url('/fonts/OpenSans-Medium.woff2') format('woff2'),
-        url('/fonts/OpenSans-Medium.woff') format('woff');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Open Sans';
     src: url('/fonts/OpenSans-Regular.woff2') format('woff2'),
         url('/fonts/OpenSans-Regular.woff') format('woff');
     font-weight: normal;
@@ -64,10 +37,10 @@ export default {
 }
 
 @font-face {
-    font-family: 'Open Sans';
-    src: url('/fonts/OpenSans-SemiBold.woff2') format('woff2'),
-        url('/fonts/OpenSans-SemiBold.woff') format('woff');
-    font-weight: 600;
+    font-family: 'GFS Didot';
+    src: url('/fonts/GFSDidot-Regular.woff2') format('woff2'),
+        url('/fonts/GFSDidot-Regular.woff') format('woff');
+    font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
@@ -75,12 +48,64 @@ export default {
 body {
   max-width: 1920px;
   margin: 0 auto;
-  font-family: 'Open Sans';
+  font-family: 'GFS Didot', serif;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    line-height: 24px;
+
+    &.underline {
+        &:after {
+            content: '';
+            display: block;
+            width: 30px;
+            height: 3px;
+            background-color: #252525;
+            margin: .75rem 0 0;
+        }
+    }
+
+    &.section-title {
+        color: #181818;
+        letter-spacing: 4px;
+        line-height: 24px;
+    }
+}
+
+h3 {
+    font-size: 1.375rem;
+}
+
+p {
+    color: #696969;
+    line-height: 24px;
 }
 
 img {
   height: auto;
   max-width: 100%;
+}
+
+.overlay {
+    top: 0;
+    left: 0;
+    transition: all .6s cubic-bezier(0.16, 0.01, 0.77, 1);
+
+    &.remove {
+        animation: overlay .6s forwards;
+    }
+}
+
+@keyframes overlay {
+    from {
+        transform: scaleY(1);
+    }
+    to {
+        transform: scaleY(0);
+    }
 }
 
 a {
@@ -150,6 +175,8 @@ a {
                 h1,h2 {
                     font-size: 3.125rem;
                     transform: translateY(20px);
+                    letter-spacing: 0;
+                    line-height: 1.1;
 
                     @media (max-width: 1199.98px) {
                         font-size: 2.25rem;
@@ -164,12 +191,8 @@ a {
                     }
 
                     &:after {
-                        content: '';
-                        width: 30px;
-                        height: 3px;
                         background: #fff;
-                        display: block;
-                        margin: 1rem auto 0;
+                        margin: .75rem auto 0;
                     }
                 }
 
@@ -178,6 +201,7 @@ a {
                     font-size: 1.375rem;
                     transform: translateY(30px);
                     line-height: 1.4;
+                    color: #fff;
 
                     &:before {
                         content: "“";

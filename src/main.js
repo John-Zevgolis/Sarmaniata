@@ -14,6 +14,8 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import VueMeta from 'vue-meta';
 import scrollSpy, { Easing } from 'vue2-scrollspy';
+import VueLazyload from 'vue-lazyload';
+import * as VueGoogleMaps from 'vue2-google-maps';
 library.add(faFacebookF, faTwitter, faLocationDot, faPhone, faEnvelope);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
@@ -22,6 +24,12 @@ Vue.config.productionTip = false;
 Vue.use(VueMeta);
 Vue.use(scrollSpy, {
   easing: Easing.Linear.None
+});
+Vue.use(VueLazyload);
+Vue.use(VueGoogleMaps, {
+	load: {
+		key: 'AIzaSyCBmUXYXi_Zufpz1rKucKIT1dsU9yIdx_Y',
+	}
 });
 
 new Vue({

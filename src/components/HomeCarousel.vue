@@ -4,8 +4,8 @@
 			<div v-for="(item, index) in home.metadata.carousel" :key="index">
 				<div class="bg-img d-flex justify-content-center align-items-center" :style="`background-image: url(${item.thumbnail});`">
 					<div class="position-relative box text-center">
-					<h1 v-if="index === 0" class="mb-2 fw-normal">{{item.title}}</h1>
-					<h2 v-else class="mb-2 fw-normal">{{item.title}}</h2>
+					<h1 v-if="index === 0" class="mb-2 underline">{{item.title}}</h1>
+					<h2 v-else class="mb-2 underline">{{item.title}}</h2>
 					<div v-html="item.content"></div>
 					</div>
 				</div>

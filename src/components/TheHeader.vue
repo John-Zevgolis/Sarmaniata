@@ -16,7 +16,7 @@
 										</a>
 									</li>
 									<li class="px-3">
-										<a href="#" target="_blank">
+										<a href="https://www.facebook.com/groups/sarmaniata/?ref=share" target="_blank">
 											<font-awesome-icon icon="fa-brands fa-facebook-f" />
 										</a>
 									</li>
@@ -26,8 +26,7 @@
 						<nav class="main-menu ms-auto d-flex align-items-center justify-content-center" v-click-outside="closeMenu">
 							<ul v-scroll-spy-active="{selector: 'a.menu-link', class: 'active'}" v-scroll-spy-link="{selector: 'a.menu-link'}" class="nav flex-nowrap flex-xl-wrap flex-column flex-xl-row text-center text-xl-start w-100">
 								<li v-for="(item, index) in objData.metadata" :key="index">
-									<router-link :to="item.slug" class="d-block position-relative" v-if="item.metadata.inner_page">{{item.title}}</router-link>
-									<a v-else href="#" click.prevent class="d-block menu-link position-relative">{{item.title}}</a>
+									<a href="#" click.prevent class="d-block menu-link position-relative">{{item.title}}</a>
 								</li>
 							</ul>
 						</nav>
@@ -141,10 +140,10 @@ header {
 			ul {
 				li {
 					a {
-						font-family: 'Montserrat', sans-serif;
 						letter-spacing: 2px;
 						font-size: 0.75rem;
 						padding: 3rem 1.875rem;
+						font-family: 'Open Sans';
 
 						&:after {
 							content: '';
@@ -163,8 +162,6 @@ header {
 						}
 
 						&.active {
-							
-
 							&:after {
 								transform: none;
 							}

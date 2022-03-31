@@ -1,6 +1,6 @@
 <template>
 	<section class="samarina">
-		<div class="map position-relative">
+		<div class="map position-relative" :class="{active: showFilters}">
 			<transition name="infobox-animation">
 				<div class="infobox d-flex position-absolute col-sm-7 col-md-6 col-lg-5 col-xl-4 col-xxl-3 px-0" style="height: 400px;" :class="{loading: infoLoading}" v-if="showInfoBox">
 					<button aria-label="Close" @click="closeInfobox" class="close-btn bg-transparent border-0 position-absolute d-flex justify-content-center align-items-center">
@@ -36,21 +36,37 @@
                     </div>
                 </div>
             </button>
-            <div class="filters position-absolute h-100">
+			<GmapMap :center="{lat: 10, lng: 10}" :options="options" id="map" ref="Map">
+				<GmapCluster :zoomOnClick="true" :styles="clusterStyles">
+					<GmapMarker
+						v-for="marker in samarina.metadata.locations" 
+						:key="marker.id" 
+						:position="{'lat':marker.lat, 'lng': marker.lon}"
+						:icon="{url: getMarkers(marker)}"
+						:clickable="true"
+						@click="infobox({
+							title: marker.title,
+							position: $event.latLng,
+							id: marker.id
+						})"
+					/>
+				</GmapCluster>
+			</GmapMap>
+			<div class="filters h-100 position-absolute">
 				<transition name="filters-animation">
 					<div id="filters" class="pt-5 pb-3 h-100" v-show="showFilters">
-						<div class="d-flex justify-content-end px-5">
+						<div class="d-flex justify-content-end px-4">
 							<button @click="closeFilters" :class="{'animate-btn': animateBtn}" class="close-btn position-relative"></button>
 						</div>
 						<div class="row mx-0">
 							<div class="col px-0">
-								<div class="goals px-5 py-4">
+								<div class="goals p-4">
 									<h6 class="mb-0">SELECT A SUSTAINABILITY GOAL</h6>
 									<ul class="list-unstyled">
 										<li v-for="(item, index) in filters" :key="index">
-											<a href="#" :class="{active: item.category.active}" @click.prevent="filterMarkers(item)" class="d-flex align-items-center">
+											<a href="#" :class="{active: item.category.active}" @click.prevent="filterMarkers(item)" class="d-flex align-items-center p-2 rounded border border-white">
 												<span class="d-block me-3">
-													<img :src="item.icon">
+													<img width="32" :src="item.icon">
 												</span>
 												{{item.category.text}}
 											</a>
@@ -62,27 +78,13 @@
 						<div class="row mx-0">
 							<div class="col-8 offset-2 px-0">
 								<div class="units text-center mt-n4 pt-4">
-									<button class="reset-btn" @click="resetMarkers">RESET FILTERS</button>
+									<button class="reset-btn btn shadow-none" :class="{disabled: disabled}" :disabled="disabled" @click="resetMarkers">RESET FILTERS</button>
 								</div>
 							</div>
 						</div>
 					</div>
 				</transition>
-            </div>  
-			<GmapMap :center="{lat: 10, lng: 10}" :options="options" id="map" ref="Map">
-				<GmapMarker
-					v-for="marker in samarina.metadata.locations" 
-					:key="marker.id" 
-					:position="{'lat':marker.lat, 'lng': marker.lon}"
-					:icon="{url: getMarkers(marker)}"
-					:clickable="true"
-					@click="infobox({
-						title: marker.title,
-						position: $event.latLng,
-						id: marker.id
-					})"
-				/>
-			</GmapMap>
+			</div>  
 		</div>
 	</section>
 </template>
@@ -105,49 +107,140 @@ export default {
 			showFilters: false,
 			animateBtn: false,
 			locations: null,
+			disabled: true,
 			categories: [],
 			options: {
 				fullscreenControl: false,
 				styles: [
     {
+        "featureType": "water",
+        "elementType": "geometry",
         "stylers": [
             {
-                "hue": "#baf4c4"
+                "color": "#e9e9e9"
             },
             {
-                "saturation": 10
+                "lightness": 17
             }
         ]
     },
     {
-        "featureType": "water",
+        "featureType": "landscape",
+        "elementType": "geometry",
         "stylers": [
             {
-                "color": "#effefd"
+                "color": "#f5f5f5"
+            },
+            {
+                "lightness": 20
             }
         ]
     },
     {
-        "featureType": "all",
-        "elementType": "labels",
+        "featureType": "road.highway",
+        "elementType": "geometry.fill",
         "stylers": [
             {
-                "visibility": "off"
+                "color": "#ffffff"
+            },
+            {
+                "lightness": 17
             }
         ]
     },
     {
-        "featureType": "administrative",
-        "elementType": "labels",
+        "featureType": "road.highway",
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "color": "#ffffff"
+            },
+            {
+                "lightness": 29
+            },
+            {
+                "weight": 0.2
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#ffffff"
+            },
+            {
+                "lightness": 18
+            }
+        ]
+    },
+    {
+        "featureType": "road.local",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#ffffff"
+            },
+            {
+                "lightness": 16
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#f5f5f5"
+            },
+            {
+                "lightness": 21
+            }
+        ]
+    },
+    {
+        "featureType": "poi.park",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#dedede"
+            },
+            {
+                "lightness": 21
+            }
+        ]
+    },
+    {
+        "elementType": "labels.text.stroke",
         "stylers": [
             {
                 "visibility": "on"
+            },
+            {
+                "color": "#ffffff"
+            },
+            {
+                "lightness": 16
             }
         ]
     },
     {
-        "featureType": "road",
-        "elementType": "all",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "saturation": 36
+            },
+            {
+                "color": "#333333"
+            },
+            {
+                "lightness": 40
+            }
+        ]
+    },
+    {
+        "elementType": "labels.icon",
         "stylers": [
             {
                 "visibility": "off"
@@ -156,16 +249,54 @@ export default {
     },
     {
         "featureType": "transit",
-        "elementType": "all",
+        "elementType": "geometry",
         "stylers": [
             {
-                "visibility": "off"
+                "color": "#f2f2f2"
+            },
+            {
+                "lightness": 19
+            }
+        ]
+    },
+    {
+        "featureType": "administrative",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#fefefe"
+            },
+            {
+                "lightness": 20
+            }
+        ]
+    },
+    {
+        "featureType": "administrative",
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "color": "#fefefe"
+            },
+            {
+                "lightness": 17
+            },
+            {
+                "weight": 1.2
             }
         ]
     }
 ]
 
-			}
+			},
+			clusterStyles: [
+				{
+					textColor: '#fff',
+					url: 'https://static.umobit.com/landings/Mytil_map/assets/images/expand.png',
+					height: 50,
+					width: 49
+				}
+			]
 		}
 	},
 	created() {
@@ -176,6 +307,7 @@ export default {
 	},
 	methods: {
 		resetMarkers() {
+			this.disabled = true;
 			this.samarina.metadata.locations = this.locations;
 
 			this.categories = [];
@@ -192,6 +324,11 @@ export default {
 		},
 		filterMarkers(item) {
 			item.category.active = !item.category.active;
+			if(this.filters.some(item => {
+				return item.category.active === true;
+			})) {
+				this.disabled = false;
+			}
 
 			if(item.category.active) {
 				if(this.categories.indexOf(item.category.value) === -1) {
@@ -321,6 +458,17 @@ export default {
 	#map {
 		height: 700px;
 		width: 100%;
+		transition: all .3s;
+	}
+
+	&.active {
+		#map {
+			width: calc(100% - 360px);
+
+			@media (max-width: 991.98px) {
+				width: 100%;
+			}
+		}
 	}
 
 	.infobox {
@@ -420,17 +568,12 @@ export default {
 		top: 0;
 		z-index: 5;
 
-		@media (max-width: 576px) {
-			width: 100%;
-			max-width: 100%;
-		}
-
 		#filters {
 			background-color: #fff;
 			max-height: 100%;
 			width: 100%;
-			min-width: 460px;
-			max-width: 460px;
+			min-width: 360px;
+			max-width: 360px;
 			overflow: auto;
 			box-shadow: -10px 10px 30px 0px rgba(0,0,0,0.1);
 
@@ -492,8 +635,8 @@ export default {
 		}
 
 		.reset-btn {
-			background-color: #fff;
-			color: #000;
+			background: #000;
+			color: #fff;
 			outline: none;
 			width: 200px;
 			height: 50px;
@@ -502,8 +645,8 @@ export default {
 			cursor: pointer;
 
 			&:hover {
-				background-color: #000;
-				color: #fff;
+				background: transparent;
+				color: #000;
 			}
 		}
 	}
@@ -535,7 +678,8 @@ export default {
 
 .filters-animation-enter,
 .filters-animation-leave-to {
-  transform: translateX(100%);
+  transform: translateX(calc(-100%/2));
+  opacity: 0;
 }
 
 .filters-animation-enter-active {

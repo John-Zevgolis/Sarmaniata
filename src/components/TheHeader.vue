@@ -26,7 +26,7 @@
 						<nav class="main-menu ms-auto d-flex align-items-center justify-content-center" v-click-outside="closeMenu">
 							<ul v-scroll-spy-active="{selector: 'a.menu-link', class: 'active'}" v-scroll-spy-link="{selector: 'a.menu-link'}" class="nav flex-nowrap flex-xl-wrap flex-column flex-xl-row text-center text-xl-start w-100">
 								<li v-for="(item, index) in objData.metadata" :key="index">
-									<a href="#" click.prevent class="d-block menu-link position-relative">{{item.title}}</a>
+									<a class="d-block menu-link position-relative">{{item.title}}</a>
 								</li>
 							</ul>
 						</nav>
@@ -144,6 +144,7 @@ header {
 						font-size: 0.75rem;
 						padding: 3rem 1.875rem;
 						font-family: 'Open Sans';
+						cursor: pointer;
 
 						&:after {
 							content: '';

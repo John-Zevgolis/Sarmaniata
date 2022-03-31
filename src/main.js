@@ -16,6 +16,7 @@ import VueMeta from 'vue-meta';
 import scrollSpy, { Easing } from 'vue2-scrollspy';
 import VueLazyload from 'vue-lazyload';
 import * as VueGoogleMaps from 'vue2-google-maps';
+import GmapCluster from 'vue2-google-maps/dist/components/cluster';
 library.add(faFacebookF, faTwitter, faLocationDot, faPhone, faEnvelope);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
@@ -31,6 +32,7 @@ Vue.use(VueGoogleMaps, {
 		key: 'AIzaSyCBmUXYXi_Zufpz1rKucKIT1dsU9yIdx_Y',
 	}
 });
+Vue.component('GmapCluster', GmapCluster);
 
 new Vue({
   router,

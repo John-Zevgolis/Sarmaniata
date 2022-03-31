@@ -338,4 +338,29 @@ a {
     transform: none;
   }
 }
+
+.vue-map-container {
+    .vue-map {
+        .gm-style {
+            .cluster {
+                & > div {
+                    border-radius: 100%;
+                    animation: pulse 2s ease-in infinite;
+
+                    @keyframes pulse {
+                      0% {
+                        box-shadow: 0 0 0 0 rgba(116, 192, 67, .2);
+                      }
+                      70% {
+                          box-shadow: 0 0 0 10px rgba(116, 192, 67, .2);
+                      }
+                      100% {
+                          box-shadow: 0 0 0 0 rgba(116, 192, 67, .2);
+                      }
+                    }
+                } 
+            }
+        }
+    }
+}
 </style>

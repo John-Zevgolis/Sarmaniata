@@ -1,5 +1,5 @@
 <template>
-	<footer>
+	<footer id="contact" class="section">
 		<div class="footer-top position-relative">
 			<div class="container">
 			<div class="row justify-content-center">
@@ -37,27 +37,34 @@
 						</div>
 						<div class="col-lg-5 offset-lg-2">
 							<div class="contact mt-4 mt-lg-0">
-								<h3 class="pb-3 text-white fw-normal">{{contact.title}}</h3>
+								<h3 class="pb-3 underline text-white fw-normal">{{contact.title}}</h3>
 								<p>{{contact.metadata.subtitle}}</p>
 							</div>
 							<div class="form">
-								<form @submit.prevent="submitForm">
+								<form @submit.prevent="submitForm" novalidate>
 									<div>
-										<input class="form-control shadow-none rounded-0" placeholder="Name" v-model="name" name="name" type="text">
+										<input :class="{error: response && response.status === 'error' && errorMessage('name', response)}" class="form-control rounded-0" placeholder="Ονοματεπώνυμο" v-model="name" name="name" type="text">
+										<span class="d-block error text-danger" v-if="response && response.status === 'error' && errorMessage('name', response)">{{errorMessage('name', response)}}</span>
 									</div>
 									<div>
-										<input class="form-control shadow-none rounded-0" placeholder="Email" v-model="email" name="email" type="email">
+										<input :class="{error: response && response.status === 'error' && errorMessage('email', response)}" class="form-control rounded-0" placeholder="Email" v-model="email" name="email" type="email">
+										<span class="d-block error text-danger" v-if="response && response.status === 'error' && errorMessage('email', response)">{{errorMessage('email', response)}}</span>
 									</div>
 									<div>
-										<input class="form-control shadow-none rounded-0" placeholder="Subject" v-model="subject" name="subject" type="text">
+										<input :class="{error: response && response.status === 'error' && errorMessage('subject', response)}" class="form-control rounded-0" placeholder="Θέμα" v-model="subject" name="subject" type="text">
+										<span class="d-block error text-danger" v-if="response && response.status === 'error' && errorMessage('subject', response)">{{errorMessage('subject', response)}}</span>
 									</div>
 									<div>
-										<textarea class="form-control shadow-none rounded-0" placeholder="Message" v-model="message" name="message"></textarea>
+										<textarea :class="{error: response && response.status === 'error' && errorMessage('message', response)}" class="form-control rounded-0" placeholder="Μήνυμα" v-model="message" name="message"></textarea>
+										<span class="d-block error text-danger" v-if="response && response.status === 'error' && errorMessage('message', response)">{{errorMessage('message', response)}}</span>
 									</div>
 									<div class="mt-4 d-flex justify-content-end">
-										<button class="form-control shadow-none rounded-0 my-0 w-auto">SEND MESSAGE</button>
+										<button :class="{disabled: response && response.status === 'success'}" :disabled="response && response.status === 'success'" class="form-control btn shadow-none rounded-0 my-0 w-auto">ΑΠΟΣΤΟΛΗ</button>
 									</div>
 								</form>
+								<div class="alert alert-success mb-0 mt-4" v-if="response && response.status === 'success'" role="alert">
+									Το μήνυμά σας απεστάλη με επιτυχία! Θα επικοινωνήσουμε άμεσα μαζί σας τις επομένες ώρες.
+								</div>
 							</div>
 						</div>
 					</div>
@@ -94,6 +101,8 @@
 </template>
 
 <script>
+import { bus } from '../main';
+
 export default {
 	props: ['logo', 'objData'],
 	data() {
@@ -104,7 +113,23 @@ export default {
 			message: ''
 		};
 	},
+	created() {
+		bus.$on('reset', () => {
+			this.name = '';
+			this.email = '';
+			this.subject = '';
+			this.message = '';
+		})
+	},
 	methods: {
+		errorMessage(field, res) {
+			const error = res.errors.find(item => {
+				return item.field === field;
+			});
+			if(error) {
+				return error.text;
+			}
+		},
 		trimWhiteSpaces(value) {
 			return value.trim().replace(/\s/g, "");
 		},
@@ -130,6 +155,9 @@ export default {
 				return item.id === '622e1f0df1322f0009f67fc0'
 			});
 		},
+		response() {
+			return this.$store.getters['response'];
+		}
 	}
 };
 </script>
@@ -175,8 +203,8 @@ footer {
 			&:after {
 				content: '';
 				display: block;
-				width: 30px;
-				height: 3px;
+				width: 35px;
+				height: 2px;
 				margin-top: 1.5rem;
 				background: #fff;
 			}
@@ -256,11 +284,6 @@ footer {
 				}
 
 				&:after {
-					content: '';
-					display: block;
-					width: 30px;
-					height: 3px;
-					margin-top: 1rem;
 					background: #fff;
 				}
 			}
@@ -273,11 +296,17 @@ footer {
 		.form {
 			margin-top: 3.75rem;
 
-			.form-control {
+			.form-control,
+			.form-control:-webkit-autofill,
+			.form-control:-webkit-autofill:hover, 
+			.form-control:-webkit-autofill:focus, 
+			.form-control:-webkit-autofill:active {
 				height: 46px;
 				line-height: 44px;
 				border: 1px solid #222;
 				background: transparent;
+				-webkit-text-fill-color: #fff;
+				-webkit-box-shadow: 0 0 0px 1000px #181818 inset;
 				color: #585858;
 				font-style: italic;
 				padding: 0 1.125rem;
@@ -298,11 +327,22 @@ footer {
 				&:focus:not(button) {
 					border-color: #999;
 				}
+
+				&.error {
+					color: #842029;
+					background: #f8d7da;
+					border-color: #f5c2c7;
+					-webkit-text-fill-color: #842029;
+					-webkit-box-shadow: 0 0 0px 1000px #f8d7da inset;
+				}
 			}
 
 			textarea.form-control {
 				height: 194px;
 				resize: none;
+				line-height: 1.42857143;
+				padding-top: 1.125rem;
+				padding-bottom: 1.125rem;
 			}
 
 			button.form-control {
@@ -317,6 +357,10 @@ footer {
 				&:hover {
 					background: #222;
 				}
+			}
+
+			span.error {
+				font-size: 0.75rem;
 			}
 		}
 	}

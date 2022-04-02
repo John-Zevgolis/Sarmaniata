@@ -5,14 +5,12 @@
 		</transition>
 		<div v-if="objData && logo">
 			<the-header :obj-data="objData" :logo="logo"></the-header>
-			<div v-if="headerHeight" v-scroll-spy="{offset: headerHeight, time: 100, steps: 0}">
-				<home-carousel :obj-data="objData"></home-carousel>
-				<sarmaniata :obj-data="objData"></sarmaniata>
-				<samarina :obj-data="objData"></samarina>
-				<div style="min-height: 100vh; background: aquamarine;">ΦΩΤΟΓΡΑΦΙΕΣ</div>
-				<div style="min-height: 100vh; background: yellow;">ΧΑΡΤΟΓΡΑΦΗΣΗ</div>
-				<the-footer :obj-data="objData" :logo="logo"></the-footer>
-			</div>
+			<home-carousel :obj-data="objData"></home-carousel>
+			<sarmaniata :obj-data="objData"></sarmaniata>
+			<samarina :obj-data="objData"></samarina>
+			<div class="section" id="photos" style="min-height: 100vh; background: aquamarine;">ΦΩΤΟΓΡΑΦΙΕΣ</div>
+			<div class="section" id="events" style="min-height: 100vh; background: yellow;">ΧΑΡΤΟΓΡΑΦΗΣΗ</div>
+			<the-footer :obj-data="objData" :logo="logo"></the-footer>
 		</div>
 	</div>
 </template>
@@ -24,6 +22,9 @@ import Samarina from '../components/Samarina.vue';
 import TheHeader from '../components/TheHeader.vue';
 import TheFooter from '../components/TheFooter.vue';
 import Loader from '../components/Loader.vue';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
 
 export default {
 	components: {
@@ -40,6 +41,53 @@ export default {
 		};
 	},
 	methods: {
+		scrollSpy() {
+			const interval = setInterval(() => {
+				const sections = gsap.utils.toArray('.section');
+				if(sections && sections.length && this.headerHeight) {
+					sections.forEach(item => {
+						const id = item.id;
+						gsap.to(item, {
+							scrollTrigger: {
+								start: `top ${this.headerHeight + 5}px`,
+								end: `bottom ${this.headerHeight + 5}px`,
+								trigger: item,
+								onEnter: () => {										
+									document.querySelector(`[data-id=${id}]`).classList.add('active');
+								},
+								onLeave: () => {
+									document.querySelector(`[data-id=${id}]`).classList.remove('active');
+								},
+								onEnterBack: () => {
+									document.querySelector(`[data-id=${id}]`).classList.add('active');
+								},
+								onLeaveBack: () => {
+									document.querySelector(`[data-id=${id}]`).classList.remove('active');
+								}
+							}
+						});
+					});
+					clearInterval(interval);
+				}
+			}, 50);
+		},
+		animations() {
+			const elements = document.getElementsByClassName('from-bottom');
+			const interval = setInterval(() => {
+				if(elements && elements.length) {
+					elements.forEach(item => {
+						gsap.to(item, {
+							scrollTrigger: {
+								start: "top 85%",
+								trigger: item,
+								onEnter: () => item.classList.add("fire")
+							}
+						});
+					});
+					clearInterval(interval);
+				}
+			}, 50);
+		},
 		fetchLogo() {
 			this.$store.dispatch('fetchLogo');
 		},
@@ -47,7 +95,7 @@ export default {
 			this.$store.dispatch('fetchHomepage', {
 				id: '622e0cef23ee59000927c017',
 				props: 'metadata'
-			});  
+			});
 		}
     },
 	async created() {
@@ -56,15 +104,19 @@ export default {
 		await this.fetchData();
 		this.loading = false;
 	},
+	mounted() {
+		this.animations();
+		this.scrollSpy();
+	},
 	computed: {
-		headerHeight() {
-			return this.$store.getters['headerHeight'];
-		},
 		logo() {
 			return this.$store.getters['logo'];
 		},
 		objData() {
 			return this.$store.getters['homepageObjData'];
+		},
+		headerHeight() {
+			return this.$store.getters['headerHeight'];
 		}
 	}
 };

@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
+import { bus } from '../main';
 
 Vue.use(Vuex);
 
@@ -17,7 +18,8 @@ const store = new Vuex.Store({
 			objData: null,
 			homepageObjData: null,
 			logo: null,
-			headerHeight: null
+			headerHeight: null,
+			response: null
 		};
 	},
 	mutations: {
@@ -32,6 +34,9 @@ const store = new Vuex.Store({
 		},
 		headerHeight(state, payload) {
 			state.headerHeight = payload;
+		},
+		saveResponse(state, payload) {
+			state.response = payload;
 		}
 	},
 	actions: {
@@ -55,9 +60,18 @@ const store = new Vuex.Store({
 				props: 'url'
 			}).then(response => commit('storeLogo', response.media.url));
 		},
-		sendEmail(context, payload) {
-			console.log(context)
-			axios.post('http://192.168.1.2:8081/process.php', payload).then(res => console.log(res)).catch(err => console.log(err.message));
+		sendEmail({commit}, payload) {
+			const data = new FormData();
+			data.append('name', payload.name);
+			data.append('email', payload.email);
+			data.append('subject', payload.subject);
+			data.append('message', payload.message);
+			axios.post('/process.php', data).then(res => res.data, err => console.log(err.message))
+			.then(res => {
+				commit('saveResponse', res);
+				if(res.status === 'success') bus.$emit('reset');
+			})
+			.catch(err => console.log(err.message));
 		}
 	},
 	getters: {
@@ -72,6 +86,9 @@ const store = new Vuex.Store({
 		},
 		headerHeight(state) {
 			return state.headerHeight;
+		},
+		response(state) {
+			return state.response;
 		}
 	}
 });

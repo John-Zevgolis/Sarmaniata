@@ -48,11 +48,10 @@ export default {
 body {
   max-width: 1920px;
   margin: 0 auto;
-  font-family: 'GFS Didot', serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 h1,h2,h3,h4,h5,h6 {
-    font-family: 'Open Sans', sans-serif;
     font-weight: 400;
     margin-bottom: 1rem;
     line-height: 24px;
@@ -61,10 +60,10 @@ h1,h2,h3,h4,h5,h6 {
         &:after {
             content: '';
             display: block;
-            width: 30px;
-            height: 3px;
-            background-color: #252525;
-            margin: .75rem 0 0;
+            width: 35px;
+            height: 2px;
+            background: #252525;
+            margin: 1.5rem 0 0;
         }
     }
 
@@ -87,6 +86,17 @@ p {
 img {
   height: auto;
   max-width: 100%;
+}
+
+.from-bottom {
+    transition: all .3s;
+    opacity: 0;
+    transform: translateY(30px);
+
+    &.fire {
+        opacity: 1;
+        transform: none;
+    }
 }
 
 .overlay {
@@ -178,16 +188,12 @@ a {
                     letter-spacing: 0;
                     line-height: 1.1;
 
-                    @media (max-width: 1199.98px) {
-                        font-size: 2.25rem;
-                    }
-
                     @media (max-width: 991.98px) {
-                        font-size: 1.5rem;
+                       font-size: 2.25rem;
                     }
 
                     @media (max-width: 767.98px) {
-                        font-size: 1.125rem;
+                        font-size: 1.875rem;
                     }
 
                     &:after {
@@ -202,6 +208,7 @@ a {
                     transform: translateY(30px);
                     line-height: 1.4;
                     color: #fff;
+                    font-family: 'GFS Didot', serif;
 
                     &:before {
                         content: "“";
@@ -349,13 +356,13 @@ a {
 
                     @keyframes pulse {
                       0% {
-                        box-shadow: 0 0 0 0 rgba(116, 192, 67, .2);
+                        box-shadow: 0 0 0 0 rgba(0, 0, 0, .4);
                       }
                       70% {
-                          box-shadow: 0 0 0 10px rgba(116, 192, 67, .2);
+                          box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
                       }
                       100% {
-                          box-shadow: 0 0 0 0 rgba(116, 192, 67, .2);
+                          box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
                       }
                     }
                 } 

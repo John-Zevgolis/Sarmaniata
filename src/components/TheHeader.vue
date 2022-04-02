@@ -24,9 +24,9 @@
 							</nav>
 						</div>
 						<nav class="main-menu ms-auto d-flex align-items-center justify-content-center" v-click-outside="closeMenu">
-							<ul v-scroll-spy-active="{selector: 'a.menu-link', class: 'active'}" v-scroll-spy-link="{selector: 'a.menu-link'}" class="nav flex-nowrap flex-xl-wrap flex-column flex-xl-row text-center text-xl-start w-100">
+							<ul class="nav flex-nowrap flex-xl-wrap flex-column flex-xl-row text-center text-xl-start w-100">
 								<li v-for="(item, index) in objData.metadata" :key="index">
-									<a class="d-block menu-link position-relative">{{item.title}}</a>
+									<a :data-id="item.slug" @click="moveToSection(item.slug)" class="d-block menu-link position-relative">{{item.title}}</a>
 								</li>
 							</ul>
 						</nav>
@@ -52,8 +52,7 @@ export default {
 	},
 	data() {
 		return {
-			show: false,
-			isLoaded: false
+			show: false
 		};
 	},
 	mounted() {
@@ -61,9 +60,23 @@ export default {
 		window.addEventListener('resize', () => this.handleResize());	
 	},
 	methods: {
+		moveToSection(id) {
+			const interval = setInterval(() => {
+				if(this.headerHeight && document.querySelector(`[id=${id}]`)) {
+					const y = document.querySelector(`[id=${id}]`).offsetTop - this.headerHeight;
+					window.scrollTo({top: y, behavior: 'smooth'});
+					clearInterval(interval);
+				}
+			}, 50);
+		},
 		onImgLoad () {
-			this.$store.commit('headerHeight', this.$refs.header.offsetHeight);
-			window.addEventListener('resize', () => this.$store.commit('headerHeight', this.$refs.header.offsetHeight));
+			const interval = setInterval(() => {
+				if(this.$refs && this.$refs.header) {
+					this.$store.commit('headerHeight', this.$refs.header.offsetHeight);
+					window.addEventListener('resize', () => this.$store.commit('headerHeight', this.$refs.header.offsetHeight));
+					clearInterval(interval);
+				}
+			}, 50);	
 		},
 		closeMenu() {
 			if(this.show) {
@@ -76,6 +89,11 @@ export default {
 					this.show = false;
 				}
 			}
+		}
+	},
+	computed: {
+		headerHeight() {
+			return this.$store.getters['headerHeight'];
 		}
 	}
 };
@@ -166,12 +184,6 @@ header {
 							&:after {
 								transform: none;
 							}
-						}
-					}
-
-					&:last-child {
-						a {
-							padding-right: 0;
 						}
 					}
 				}

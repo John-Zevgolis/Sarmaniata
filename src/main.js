@@ -13,19 +13,15 @@ import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import VueMeta from 'vue-meta';
-import scrollSpy, { Easing } from 'vue2-scrollspy';
-import VueLazyload from 'vue-lazyload';
 import * as VueGoogleMaps from 'vue2-google-maps';
 import GmapCluster from 'vue2-google-maps/dist/components/cluster';
 library.add(faFacebookF, faTwitter, faLocationDot, faPhone, faEnvelope);
+import VueLazyload from 'vue-lazyload';
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 Vue.config.productionTip = false;
 Vue.use(VueMeta);
-Vue.use(scrollSpy, {
-  easing: Easing.Linear.None
-});
 Vue.use(VueLazyload);
 Vue.use(VueGoogleMaps, {
 	load: {
@@ -33,6 +29,8 @@ Vue.use(VueGoogleMaps, {
 	}
 });
 Vue.component('GmapCluster', GmapCluster);
+
+export const bus = new Vue();
 
 new Vue({
   router,

@@ -1,17 +1,14 @@
 <template>
-	<section class="sarmaniata">
+	<section id="sarmaniata" class="sarmaniata section">
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
-					<h3 class="section-title underline mb-5">{{sarmaniata.title}}</h3>
-					<div class="pt-2">
-						<div class="bg-img-wrapper mb-4 mb-lg-0">
-							<div class="bg-img position-relative" v-lazy:background-image="sarmaniata.thumbnail">
-								<div class="overlay position-absolute w-100 h-100" ref="overlay"></div>
-							</div>
+					<div class="bg-img-wrapper mb-4 mb-lg-0">
+						<div class="bg-img position-relative" v-lazy:background-image="sarmaniata.thumbnail">
+							<div class="overlay position-absolute w-100 h-100" ref="overlay"></div>
 						</div>
-						<span v-html="sarmaniata.content"></span>
 					</div>
+					<span v-html="sarmaniata.content"></span>
 				</div>
 			</div>
 		</div>	
@@ -32,7 +29,7 @@ export default {
 		scrollAnimation() {
 			gsap.to('.overlay', {
 				scrollTrigger: {
-					start: "center bottom",
+					start: "top 75%",
 					trigger: this.$refs.overlay,
 					onEnter: () => this.$refs.overlay.classList.add("remove")
 				}
@@ -79,6 +76,7 @@ export default {
 
 	p {
 		font-style: italic;
+		font-family: 'GFS Didot', serif;
 	}
 }
 </style>

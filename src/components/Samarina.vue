@@ -1,5 +1,17 @@
 <template>
-	<section class="samarina">
+	<section id="samarina" class="samarina section">
+		<div class="parallax position-relative">
+			<div class="parallax-img position-absolute w-100 h-100 bg-img" v-lazy:background-image="samarina.thumbnail"></div>
+			<div class="container-fluid px-0 position-relative">
+				<div class="row gx-0">
+					<div class="col-lg-6 offset-lg-6">
+						<div class="parallax-content">
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="map position-relative" :class="{active: showFilters}">
 			<transition name="infobox-animation">
 				<div class="infobox d-flex position-absolute col-sm-7 col-md-6 col-lg-5 col-xl-4 col-xxl-3 px-0" style="height: 400px;" :class="{loading: infoLoading}" v-if="showInfoBox">
@@ -54,33 +66,26 @@
 			</GmapMap>
 			<div class="filters h-100 position-absolute">
 				<transition name="filters-animation">
-					<div id="filters" class="pt-5 pb-3 h-100" v-show="showFilters">
+					<div id="filters" class="py-5 flex-column h-100" v-show="showFilters">
 						<div class="d-flex justify-content-end px-4">
 							<button @click="closeFilters" :class="{'animate-btn': animateBtn}" class="close-btn position-relative"></button>
 						</div>
-						<div class="row mx-0">
-							<div class="col px-0">
-								<div class="goals p-4">
-									<h6 class="mb-0">SELECT A SUSTAINABILITY GOAL</h6>
-									<ul class="list-unstyled">
-										<li v-for="(item, index) in filters" :key="index">
-											<a href="#" :class="{active: item.category.active}" @click.prevent="filterMarkers(item)" class="d-flex align-items-center p-2 rounded border border-white">
-												<span class="d-block me-3">
-													<img width="32" :src="item.icon">
-												</span>
-												{{item.category.text}}
-											</a>
-										</li>
-									</ul>
-								</div>
+						<div class="p-4">
+							<div class="filters-scroll">
+								<ul class="list-unstyled mb-0">
+									<li v-for="(item, index) in filters" :key="index">
+										<a href="#" :class="{active: item.category.active}" @click.prevent="filterMarkers(item)" class="d-flex align-items-center p-2 rounded border border-white">
+											<span class="d-block me-3">
+												<img width="32" :src="item.icon">
+											</span>
+											{{item.category.text}}
+										</a>
+									</li>
+								</ul>
 							</div>
 						</div>
-						<div class="row mx-0">
-							<div class="col-8 offset-2 px-0">
-								<div class="units text-center mt-n4 pt-4">
-									<button class="reset-btn btn shadow-none" :class="{disabled: disabled}" :disabled="disabled" @click="resetMarkers">RESET FILTERS</button>
-								</div>
-							</div>
+						<div class="text-center mt-auto">
+							<button class="reset-btn btn shadow-none rouded-0" :class="{disabled: disabled}" :disabled="disabled" @click="resetMarkers">ΑΚΥΡΩΣΗ ΦΙΛΤΡΩΝ</button>
 						</div>
 					</div>
 				</transition>
@@ -113,65 +118,80 @@ export default {
 				fullscreenControl: false,
 				styles: [
     {
-        "featureType": "water",
-        "elementType": "geometry",
+        "featureType": "all",
+        "elementType": "labels",
         "stylers": [
             {
-                "color": "#e9e9e9"
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "administrative",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "administrative.country",
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "visibility": "on"
             },
             {
-                "lightness": 17
+                "color": "#F7F5F2"
+            },
+            {
+                "weight": 0.8
             }
         ]
     },
     {
         "featureType": "landscape",
+        "elementType": "all",
+        "stylers": [
+            {
+                "color": "#DDD4CB"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "all",
+        "stylers": [
+            {
+                "color": "#DDD4CB"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway.controlled_access",
         "elementType": "geometry",
         "stylers": [
             {
-                "color": "#f5f5f5"
-            },
-            {
-                "lightness": 20
-            }
-        ]
-    },
-    {
-        "featureType": "road.highway",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "color": "#ffffff"
-            },
-            {
-                "lightness": 17
-            }
-        ]
-    },
-    {
-        "featureType": "road.highway",
-        "elementType": "geometry.stroke",
-        "stylers": [
-            {
-                "color": "#ffffff"
-            },
-            {
-                "lightness": 29
-            },
-            {
-                "weight": 0.2
+                "visibility": "on"
             }
         ]
     },
     {
         "featureType": "road.arterial",
-        "elementType": "geometry",
+        "elementType": "all",
         "stylers": [
             {
-                "color": "#ffffff"
-            },
-            {
-                "lightness": 18
+                "visibility": "on"
             }
         ]
     },
@@ -180,67 +200,22 @@ export default {
         "elementType": "geometry",
         "stylers": [
             {
-                "color": "#ffffff"
-            },
-            {
-                "lightness": 16
+                "visibility": "on"
             }
         ]
     },
     {
-        "featureType": "poi",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "color": "#f5f5f5"
-            },
-            {
-                "lightness": 21
-            }
-        ]
-    },
-    {
-        "featureType": "poi.park",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "color": "#dedede"
-            },
-            {
-                "lightness": 21
-            }
-        ]
-    },
-    {
-        "elementType": "labels.text.stroke",
+        "featureType": "road.local",
+        "elementType": "labels",
         "stylers": [
             {
                 "visibility": "on"
-            },
-            {
-                "color": "#ffffff"
-            },
-            {
-                "lightness": 16
             }
         ]
     },
     {
-        "elementType": "labels.text.fill",
-        "stylers": [
-            {
-                "saturation": 36
-            },
-            {
-                "color": "#333333"
-            },
-            {
-                "lightness": 40
-            }
-        ]
-    },
-    {
-        "elementType": "labels.icon",
+        "featureType": "transit",
+        "elementType": "all",
         "stylers": [
             {
                 "visibility": "off"
@@ -252,47 +227,25 @@ export default {
         "elementType": "geometry",
         "stylers": [
             {
-                "color": "#f2f2f2"
-            },
-            {
-                "lightness": 19
+                "visibility": "on"
             }
         ]
     },
     {
-        "featureType": "administrative",
-        "elementType": "geometry.fill",
+        "featureType": "water",
+        "elementType": "all",
         "stylers": [
             {
-                "color": "#fefefe"
-            },
-            {
-                "lightness": 20
-            }
-        ]
-    },
-    {
-        "featureType": "administrative",
-        "elementType": "geometry.stroke",
-        "stylers": [
-            {
-                "color": "#fefefe"
-            },
-            {
-                "lightness": 17
-            },
-            {
-                "weight": 1.2
+                "color": "#F7F5F2"
             }
         ]
     }
 ]
-
 			},
 			clusterStyles: [
 				{
 					textColor: '#fff',
-					url: 'https://static.umobit.com/landings/Mytil_map/assets/images/expand.png',
+					url: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAxCAYAAACYq/ofAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA4RpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTExIDc5LjE1ODMyNSwgMjAxNS8wOS8xMC0wMToxMDoyMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDplZjhjN2I4NC1mMGZhLWNkNDEtODgzOS02ZDM0M2UyNzYzZDciIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjdDQzM4QUFGRkM2MTFFOUJBNDFGQkFBMjExOUE2QzEiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjdDQzM4QTlGRkM2MTFFOUJBNDFGQkFBMjExOUE2QzEiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6Y2RkYTRjMjctYzdmOC00ZTQzLTg4NDktODcwZGYwMGE0N2RiIiBzdFJlZjpkb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6NDM0ZTUzODQtZmJkYy0xMWU5LTg4ODMt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',
 					height: 50,
 					width: 49
 				}
@@ -454,199 +407,238 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.map {
-	#map {
-		height: 700px;
-		width: 100%;
-		transition: all .3s;
-	}
+.samarina {
+	.parallax {
 
-	&.active {
-		#map {
-			width: calc(100% - 360px);
-
-			@media (max-width: 991.98px) {
-				width: 100%;
-			}
-		}
-	}
-
-	.infobox {
-		left: 5%;
-		top: 50%;
-		transform: translate(0, -50%);
-		z-index: 1;
-		box-shadow: 0px 2px 57px 0px rgba(0, 0, 46, .1);
-
-		@media (max-width: 575.98px) {
-			left: 1rem;
-			right: 1rem;
-		}
-
-		.close-btn {
-			top: 0;
-			right: 0;
-			font-size: 1.3rem;
-			color: #181818;
-		}
-
-		&.loading {
-			.field {
-				color: transparent;
-				background-image: linear-gradient(90deg, #F4F4F4 0px, rgba(229, 229, 229, 0.8) 40px, #F4F4F4 80px) !important;
-				background-size: 100%;
-				animation: shine-lines .5s infinite ease-out;
-			}
-		}
-	}
-
-	.filters-btn {
-		background-color: transparent;
-		border: none;
-		cursor: pointer;
-		outline: none;
-		width: 100px;
-		height: 100px;
-		z-index: 5;
-		top: 55px;
-		right: 0;
-
-		@media (max-width: 575.98px) {
-			width: 80px;
-			height: 80px;
-		}
-
-		.filter-wrapper {
+		.parallax-img {
 			top: 0;
 			left: 0;
-			background: #fff;
-			transition: all .4s;
+			background-attachment: fixed;
 		}
 
-		.filter-line {
-			width: 38px;
-			height: 10px;
-			margin: 1px 0;
+		.parallax-content {
+			padding: 9.5% 6.5% 6% 6.5%;
+			background-color: rgba(255,255,255,0.8);
+			min-height: 775px;
+		}
+	}
 
-			& > div {
-				background: #000;
-				transition: all .4s;
+	.map {
+		#map {
+			height: 700px;
+			width: 100%;
+			transition: all .3s;
+		}
+
+		&.active {
+			#map {
+				width: calc(100% - 360px);
+
+				@media (max-width: 991.98px) {
+					width: 100%;
+				}
+			}
+
+			.filters {
+				pointer-events: all;
 			}
 		}
 
-		.filter-line-inner-long {
-			width: 22px;
-			height: 3px;
+		.infobox {
+			left: 5%;
+			top: 50%;
+			transform: translate(0, -50%);
+			z-index: 1;
+			box-shadow: 0px 2px 57px 0px rgba(0, 0, 46, .1);
+
+			@media (max-width: 575.98px) {
+				left: 1rem;
+				right: 1rem;
+			}
+
+			.close-btn {
+				top: 0;
+				right: 0;
+				font-size: 1.3rem;
+				color: #181818;
+			}
+
+			&.loading {
+				.field {
+					color: transparent;
+					background-image: linear-gradient(90deg, #F4F4F4 0px, rgba(229, 229, 229, 0.8) 40px, #F4F4F4 80px) !important;
+					background-size: 100%;
+					animation: shine-lines .5s infinite ease-out;
+				}
+			}
 		}
 
-		.filter-line-inner-thick {
-			width: 6px;
-			height: 6px;
-			border-radius: 100%;
-		}
+		.filters-btn {
+			background-color: transparent;
+			border: none;
+			cursor: pointer;
+			outline: none;
+			width: 100px;
+			height: 100px;
+			z-index: 5;
+			top: 55px;
+			right: 0;
 
-		.filter-line-inner-short {
-			width: 7px;
-			height: 3px;
-		}
+			@media (max-width: 575.98px) {
+				width: 80px;
+				height: 80px;
+			}
 
-		&:hover {
+			.filter-wrapper {
+				top: 0;
+				left: 0;
+				background: #fff;
+				transition: all .4s;
+			}
+
+			.filter-line {
+				width: 38px;
+				height: 10px;
+				margin: 1px 0;
+
+				& > div {
+					background: #181818;
+					transition: all .4s;
+				}
+			}
+
 			.filter-line-inner-long {
+				width: 22px;
+				height: 3px;
+			}
+
+			.filter-line-inner-thick {
+				width: 6px;
+				height: 6px;
+				border-radius: 100%;
+			}
+
+			.filter-line-inner-short {
 				width: 7px;
 				height: 3px;
 			}
 
-			.filter-line-inner-short {
-				width: 22px;
-				height: 3px;
+			&:hover {
+				.filter-line-inner-long {
+					width: 7px;
+					height: 3px;
+				}
+
+				.filter-line-inner-short {
+					width: 22px;
+					height: 3px;
+				}
 			}
 		}
-	}
 
-	.filters {			
-		right: 0;
-		top: 0;
-		z-index: 5;
-
-		#filters {
-			background-color: #fff;
-			max-height: 100%;
-			width: 100%;
-			min-width: 360px;
-			max-width: 360px;
-			overflow: auto;
-			box-shadow: -10px 10px 30px 0px rgba(0,0,0,0.1);
+		.filters {			
+			right: 0;
+			top: 0;
+			z-index: 5;
+			pointer-events: none;
 
 			@media (max-width: 575.98px) {
-				min-width: auto;
-				max-width: none;
-				box-shadow: none;
+				width: 100%;
 			}
 
-			ul {
-				li {
-					a {
-						&.active {
-							background: rgba(0, 0, 0, .1);
+			#filters {
+				background-color: #fff;
+				width: 100%;
+				min-width: 360px;
+				max-width: 360px;
+				box-shadow: -10px 10px 30px 0px rgba(0,0,0,0.1);
+				display: flex;
+
+				@media (max-width: 575.98px) {
+					min-width: auto;
+					max-width: none;
+					box-shadow: none;
+				}
+
+				.filters-scroll {
+					max-height: calc(700px - (17px + 6rem + 50px + 3rem));
+					overflow: auto;
+
+					&::-webkit-scrollbar {
+						width: 7px;
+					}
+
+					&::-webkit-scrollbar-track {
+						background: #f1f1f1;
+					}
+
+					&::-webkit-scrollbar-thumb {
+						background: #181818;
+					}
+				}
+
+				ul {
+					li {
+						a {
+							color: #181818;
+
+							&.active {
+								background: rgba(24, 24, 24, .1)
+							}
 						}
 					}
 				}
 			}
-		}
 
-		.close-btn {
-			border: none;
-			outline: none;
-			background-color: transparent;
-			cursor: pointer;
-			display: block;
-			width: 17px;
-			height: 17px;
-
-			&:before,
-			&:after{
-				content: '';
+			.close-btn {
+				border: none;
+				outline: none;
+				background-color: transparent;
+				cursor: pointer;
+				display: block;
 				width: 17px;
-				height: 2px;
-				background: #000;
-				position: absolute;
-				top: 0;
-				left: 0;
-				transform: rotate(-45deg);
-				transition: all 0.3s;
-			}
+				height: 17px;
 
-			&:after{
-				transform: rotate(45deg);
-				transition: all 0.3s;
-			}
-
-			&.animate-btn {
 				&:before,
-				&:after {
-					transform: rotate(180deg);
+				&:after{
+					content: '';
+					width: 17px;
+					height: 2px;
+					background: #181818;
+					position: absolute;
+					top: 0;
+					left: 0;
+					transform: rotate(-45deg);
+					transition: all 0.3s;
+				}
+
+				&:after{
+					transform: rotate(45deg);
+					transition: all 0.3s;
+				}
+
+				&.animate-btn {
+					&:before,
+					&:after {
+						transform: rotate(180deg);
+					}
 				}
 			}
-		}
 
-		h6 {
-			font-size: 1rem;
-			color: #000;
-		}
+			.reset-btn {
+				background: #181818;
+				color: #fff;
+				outline: none;
+				width: 200px;
+				height: 50px;
+				border: 1px solid #181818;
+				transition: all .3s;
+				cursor: pointer;
 
-		.reset-btn {
-			background: #000;
-			color: #fff;
-			outline: none;
-			width: 200px;
-			height: 50px;
-			border: 1px solid #000;
-			transition: all .3s;
-			cursor: pointer;
-
-			&:hover {
-				background: transparent;
-				color: #000;
+				&:hover {
+					background: transparent;
+					color: #181818;
+				}
 			}
 		}
 	}

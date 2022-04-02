@@ -10,11 +10,6 @@ const routes = [
     component: () => import('../views/Home.vue')
   },
   {
-    path: '/events',
-    name: 'Events',
-    component: () => import('../views/Events.vue')
-  },
-  {
     path: '/:notFound(.*)',
     redirect: '/'
   }

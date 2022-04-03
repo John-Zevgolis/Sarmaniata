@@ -6,7 +6,7 @@
 				<div class="col-xxl-11">
 					<div class="row">
 						<div class="col-lg-5">
-							<div class="mb-4">
+							<div class="mb-4 logo bg-white d-inline-block p-2">
 								<img :src="logo">
 							</div>
 							<div class="description" v-html="contact.content"></div>
@@ -83,7 +83,7 @@
 					</div>
 					<div class="col-md-6">
 						<div class="d-md-flex justify-content-md-end align-items-md-end text-center text-md-start">
-							<nav class="social mx-2 mx-xl-4 mb-3 mb-md-0">
+							<nav class="social mx-2 mx-xxl-4 mb-3 mb-md-0">
 								<ul class="nav justify-content-center justify-content-md-end align-items-center">
 									<li class="px-3">
 										<a href="#" target="_blank">
@@ -186,7 +186,7 @@ footer {
 		}
 
 		@media (max-width: 575.98px) {
-			padding: 2.5rem 0;
+			padding-bottom: 2.5rem;
 		}
 
 		&:after {

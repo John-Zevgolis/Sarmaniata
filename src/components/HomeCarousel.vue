@@ -79,8 +79,20 @@ export default {
 .home-carousel {
 	margin-top: 115px;
 
+	@media (max-width: 1399.98px) {
+		margin-top: 97.5px;
+	}
+
 	@media (max-width: 1199.98px) {
-		margin-top: 109.69px;
+		margin-top: 110px;
+	}
+
+	@media (max-width: 767.98px) {
+		margin-top: 94.5px;
+	}
+
+	@media (max-width: 575.98px) {
+		margin-top: 79px;
 	}
 
 	.bar-left,

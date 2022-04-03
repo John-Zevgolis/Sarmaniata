@@ -11,22 +11,7 @@ export default {
             title: 'Sarmaniata',
             meta: [
                 {name: 'description', content: 'Ομάδα για τη φύση και τον πολιτισμό της Σαμαρίνας'},
-                {name: 'keywords', content: 'sarmaniata, samarina, festival, σαμαρινα, φεστιβαλ'},
-                // {property: 'og:url', content: 'https://sarmaniata.gr/'},
-                // {property: 'og:type', content: 'website'},
-                // {property: 'og:title', content: 'Sarmaniata'},
-                // {property: 'og:description', content: 'Ομάδα για τη φύση και τον πολιτισμό της Σαμαρίνας'},
-                // {property: 'og:image', content: 'https://sarmaniata.gr/og-image.jpg'},
-                // {property: 'og:image:secure_url', content: 'https://sarmaniata.gr/og-image.jpg'},
-                // {property: 'og:image:type', content: 'image/jpg'},
-                // {property: 'og:image:width', content: '600'},
-                // {property: 'og:image:height', content: '265'},
-                // {property: 'og:image:alt', content: 'Ομάδα για τη φύση και τον πολιτισμό της Σαμαρίνας'},
-                // {property: 'twitter:card', content: 'summary_large_image'},
-                // {property: 'twitter:title', content: 'Sarmaniata'},
-                // {property: 'twitter:description', content: 'Ομάδα για τη φύση και τον πολιτισμό της Σαμαρίνας'},
-                // {property: 'twitter:url', content: 'https://sarmaniata.gr/'},
-                // {property: 'twitter:image', content: 'https://imgix.cosmicjs.com/e941bdb0-b32e-11ec-97bc-19d12908cbbe-og-image.jpg'},
+                {name: 'keywords', content: 'sarmaniata, samarina, festival, σαμαρινα, φεστιβαλ'}
             ]
         }
     },
@@ -110,6 +95,26 @@ p {
 img {
   height: auto;
   max-width: 100%;
+}
+
+.logo {
+    img {
+        @media (max-width: 1399.98px) {
+            max-width: 250px;
+        }
+
+        @media (max-width: 1199.98px) {
+            max-width: none;
+        }
+
+        @media (max-width: 767.98px) {
+            max-width: 250px;
+        }
+
+        @media (max-width: 575.98px) {
+            max-width: 200px;
+        }
+    }
 }
 
 .animated {
@@ -207,8 +212,20 @@ a {
         .bg-img {
             min-height: calc(100vh - 115px);
 
+            @media (max-width: 1399.98px) {
+                min-height: calc(100vh - 97.5px);
+            }
+
             @media (max-width: 1199.98px) {
-                min-height: calc(100vh - 109.69px);
+                min-height: calc(100vh - 110px);
+            }
+
+            @media (max-width: 767.98px) {
+                min-height: calc(100vh - 94.5px);
+            }
+
+            @media (max-width: 767.98px) {
+                min-height: calc(100vh - 79px);
             }
 
             .box {

@@ -52,7 +52,7 @@ const store = new Vuex.Store({
 		},
 		fetchLogo({commit}) {
 			bucket.getSingleMedia({
-				id: '622f69dac93ec40e343cf4d7',
+				id: '6249ee0841ddce0e52b038d3',
 				props: 'url'
 			}).then(response => commit('storeLogo', response.media.url));
 		},

@@ -7,8 +7,8 @@
 						<router-link class="d-block logo" to="/">
 							<img :src="logo" @load="onImgLoad">
 						</router-link>
-						<div class="ms-auto ms-xl-0">
-							<nav class="social mx-2 mx-xl-4">
+						<div class="d-none d-xl-block">
+							<nav class="social mx-2 mx-xxl-4">
 								<ul class="nav align-items-center">
 									<li class="px-3">
 										<a href="#" target="_blank">
@@ -28,9 +28,25 @@
 								<li v-for="(item, index) in objData.metadata" :key="index">
 									<a :data-id="item.slug" @click="moveToSection(item.slug)" class="d-block menu-link position-relative">{{item.title}}</a>
 								</li>
+								<li class="d-xl-none mt-3">
+									<nav class="social">
+										<ul class="nav justify-content-center align-items-center">
+											<li class="px-3">
+												<a href="#" target="_blank">
+													<font-awesome-icon icon="fa-brands fa-twitter" />
+												</a>
+											</li>
+											<li class="px-3">
+												<a href="https://www.facebook.com/groups/sarmaniata/?ref=share" target="_blank">
+													<font-awesome-icon icon="fa-brands fa-facebook-f" />
+												</a>
+											</li>
+										</ul>
+									</nav>
+								</li>
 							</ul>
 						</nav>
-						<button class="hamburger shadow-none p-0 hamburger--collapse hamburger--collapse navbar-toggler" :class="{'is-active': show}" type="button" @click.stop="show = !show">
+						<button class="ms-auto hamburger shadow-none p-0 hamburger--collapse hamburger--collapse navbar-toggler" :class="{'is-active': show}" type="button" @click.stop="show = !show">
 							<span class="hamburger-box">
 								<span class="hamburger-inner"></span>
 							</span>						
@@ -78,7 +94,6 @@ export default {
 			const interval = setInterval(() => {
 				if(this.$refs && Object.keys(this.$refs).length && this.$refs.header) {
 					bus.$emit('header-height', this.$refs.header.offsetHeight);
-					// this.$store.commit('headerHeight', this.$refs.header.offsetHeight);
 					window.addEventListener('resize', () => bus.$emit('header-height', this.$refs.header.offsetHeight));
 					clearInterval(interval);
 				}
@@ -96,12 +111,7 @@ export default {
 				}
 			}
 		}
-	},
-	// computed: {
-	// 	headerHeight() {
-	// 		return this.$store.getters['headerHeight'];
-	// 	}
-	// }
+	}
 };
 </script>
 
@@ -111,22 +121,18 @@ header {
 	border-bottom: 1px solid #e2e2e2;
 	max-width: 1920px;
 
-	.logo {
-		img {
-			@media (max-width: 1199.98px) {
-				max-width: 90px;
+	.hamburger {
+		line-height: 1;
+
+		.hamburger-box {
+			width: 35px;
+
+			.hamburger-inner, .hamburger-inner:after, .hamburger-inner:before {
+				height: 2px;
+				width: 35px;
 			}
 		}
-	}
-
-	.hamburger {
-      line-height: 1;
-
-      .hamburger-inner, .hamburger-inner:after, .hamburger-inner:before {
-         height: 2px;
-         width: 35px;
-      }
-
+     
       &.is-active:hover, &:hover {
         opacity: 1;
       }
@@ -155,15 +161,23 @@ header {
 						&:hover {
 							color: #999;
 						}
+
+						@media (max-width: 1199.98px) {
+							color: #999;
+
+							&:hover {
+								color: #fff;
+							}
+						}
 					}
 				}
 			}
 		}
 
 		&.main-menu {
-			ul {
-				li {
-					a {
+			& > ul {
+				& > li {
+					& > a {
 						letter-spacing: 2px;
 						font-size: 0.75rem;
 						padding: 3rem 1.875rem;
@@ -196,10 +210,11 @@ header {
 			}
 
 			@media (max-width: 1399.98px) {
-				ul {
-					li {
-						a {
+				& > ul {
+					& > li {
+						& > a {
 							font-size: 0.6875rem;
+							padding: 2.5rem 1.5rem;
 						}
 					}
 				}
@@ -209,21 +224,20 @@ header {
 				width: 100%;
 				position: absolute;
 				transition: transform .5s ease;
-				top: calc(109.69px - .5rem);
+				top: calc(110px - .5rem);
 				background: #181818;
-				width: 100%;
 				max-width: 295px;
-				min-height: calc(100vh - (109.69px - 1px));
-				max-height: calc(100vh - (109.69px - 1px));
+				min-height: calc(100vh - (110px - 1px));
+				max-height: calc(100vh - (110px - 1px));
 				right: calc(-1rem - 295px);
 				overflow: auto;
 				padding: 1.5625rem;
 
-				ul {
-					max-height: calc(100vh - (109.69px - 1px));
+				& > ul {
+					max-height: calc(100vh - (110px - 1px));
 
-					li {
-						a {
+					& > li {
+						& > a {
 							padding: 1rem 0;
 							color: #999;
 							border-bottom: 1px solid #222;
@@ -238,6 +252,26 @@ header {
 							}
 						}
 					}
+				}
+			}
+
+			@media (max-width: 767.98px) {
+				top: calc(94.5px - .5rem);
+				min-height: calc(100vh - (94.5px - 1px));
+				max-height: calc(100vh - (94.5px - 1px));
+
+				& > ul {
+					max-height: calc(100vh - (94.5px - 1px));
+				}
+			}
+
+			@media (max-width: 575.98px) {
+				top: calc(79px - .5rem);
+				min-height: calc(100vh - (79px - 1px));
+				max-height: calc(100vh - (79px - 1px));
+
+				& > ul {
+					max-height: calc(100vh - (79px - 1px));
 				}
 			}
 		}

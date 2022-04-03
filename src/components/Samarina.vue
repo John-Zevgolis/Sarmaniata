@@ -1,5 +1,5 @@
 <template>
-	<section id="samarina" class="samarina section">
+	<section id="samarina" class="samarina">
 		<div class="parallax position-relative">
 			<div class="parallax-img position-absolute w-100 h-100 bg-img" v-lazy:background-image="samarina.thumbnail"></div>
 			<div class="container-fluid px-0 position-relative">
@@ -74,7 +74,7 @@
 							<div class="filters-scroll">
 								<ul class="list-unstyled mb-0">
 									<li v-for="(item, index) in filters" :key="index">
-										<a href="#" :class="{active: item.category.active}" @click.prevent="filterMarkers(item)" class="d-flex align-items-center p-2 rounded border border-white">
+										<a href="#" :class="[{active: item.category.active}, item.category.value]" @click.prevent="filterMarkers(item)" class="d-flex align-items-center p-2 rounded border border-white">
 											<span class="d-block me-3">
 												<img width="32" :src="item.icon">
 											</span>
@@ -96,6 +96,9 @@
 
 <script>
 import { gmapApi } from 'vue2-google-maps';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
 
 export default {
 	props: ['objData'],
@@ -117,135 +120,194 @@ export default {
 			options: {
 				fullscreenControl: false,
 				styles: [
-    {
-        "featureType": "all",
-        "elementType": "labels",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "administrative",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "administrative.country",
-        "elementType": "geometry.stroke",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "color": "#F7F5F2"
-            },
-            {
-                "weight": 0.8
-            }
-        ]
-    },
-    {
-        "featureType": "landscape",
-        "elementType": "all",
-        "stylers": [
-            {
-                "color": "#DDD4CB"
-            }
-        ]
-    },
-    {
-        "featureType": "poi",
-        "elementType": "all",
-        "stylers": [
-            {
-                "color": "#DDD4CB"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "road.highway.controlled_access",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "road.arterial",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "road.local",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "road.local",
-        "elementType": "labels",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "transit",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "transit",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "elementType": "all",
-        "stylers": [
-            {
-                "color": "#F7F5F2"
-            }
-        ]
-    }
-]
+				{
+				"featureType": "all",
+				"elementType": "labels.text",
+				"stylers": [
+				{
+				"visibility": "off"
+				}
+				]
+				},
+				{
+				"featureType": "water",
+				"elementType": "geometry",
+				"stylers": [
+				{
+				"visibility": "on"
+				},
+				{
+				"color": "#aee2e0"
+				}
+				]
+				},
+				{
+				"featureType": "landscape",
+				"elementType": "geometry.fill",
+				"stylers": [
+				{
+				"color": "#abce83"
+				}
+				]
+				},
+				{
+				"featureType": "poi",
+				"elementType": "geometry.fill",
+				"stylers": [
+				{
+				"color": "#769E72"
+				}
+				]
+				},
+				{
+				"featureType": "poi",
+				"elementType": "labels.text.fill",
+				"stylers": [
+				{
+				"color": "#7B8758"
+				}
+				]
+				},
+				{
+				"featureType": "poi",
+				"elementType": "labels.text.stroke",
+				"stylers": [
+				{
+				"color": "#EBF4A4"
+				}
+				]
+				},
+				{
+				"featureType": "poi.park",
+				"elementType": "geometry",
+				"stylers": [
+				{
+				"visibility": "simplified"
+				},
+				{
+				"color": "#8dab68"
+				}
+				]
+				},
+				{
+				"featureType": "road",
+				"elementType": "geometry.fill",
+				"stylers": [
+				{
+				"visibility": "simplified"
+				}
+				]
+				},
+				{
+				"featureType": "road",
+				"elementType": "labels.text.fill",
+				"stylers": [
+				{
+				"color": "#5B5B3F"
+				}
+				]
+				},
+				{
+				"featureType": "road",
+				"elementType": "labels.text.stroke",
+				"stylers": [
+				{
+				"color": "#ABCE83"
+				}
+				]
+				},
+				{
+				"featureType": "road",
+				"elementType": "labels.icon",
+				"stylers": [
+				{
+				"visibility": "off"
+				}
+				]
+				},
+				{
+				"featureType": "road.local",
+				"elementType": "geometry",
+				"stylers": [
+				{
+				"color": "#A4C67D"
+				}
+				]
+				},
+				{
+				"featureType": "road.arterial",
+				"elementType": "geometry",
+				"stylers": [
+				{
+				"color": "#9BBF72"
+				}
+				]
+				},
+				{
+				"featureType": "road.highway",
+				"elementType": "geometry",
+				"stylers": [
+				{
+				"color": "#EBF4A4"
+				}
+				]
+				},
+				{
+				"featureType": "transit",
+				"stylers": [
+				{
+				"visibility": "off"
+				}
+				]
+				},
+				{
+				"featureType": "administrative",
+				"elementType": "geometry.stroke",
+				"stylers": [
+				{
+				"visibility": "on"
+				},
+				{
+				"color": "#87ae79"
+				}
+				]
+				},
+				{
+				"featureType": "administrative",
+				"elementType": "geometry.fill",
+				"stylers": [
+				{
+				"color": "#7f2200"
+				},
+				{
+				"visibility": "off"
+				}
+				]
+				},
+				{
+				"featureType": "administrative",
+				"elementType": "labels.text.fill",
+				"stylers": [
+				{
+				"color": "#495421"
+				}
+				]
+				},
+				{
+				"featureType": "administrative.neighborhood",
+				"elementType": "labels",
+				"stylers": [
+				{
+				"visibility": "off"
+				}
+				]
+				}
+				]
 			},
 			clusterStyles: [
 				{
 					textColor: '#fff',
-					url: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAxCAYAAACYq/ofAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA4RpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTExIDc5LjE1ODMyNSwgMjAxNS8wOS8xMC0wMToxMDoyMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDplZjhjN2I4NC1mMGZhLWNkNDEtODgzOS02ZDM0M2UyNzYzZDciIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjdDQzM4QUFGRkM2MTFFOUJBNDFGQkFBMjExOUE2QzEiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjdDQzM4QTlGRkM2MTFFOUJBNDFGQkFBMjExOUE2QzEiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6Y2RkYTRjMjctYzdmOC00ZTQzLTg4NDktODcwZGYwMGE0N2RiIiBzdFJlZjpkb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6NDM0ZTUzODQtZmJkYy0xMWU5LTg4ODMt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',
+					url: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAxCAYAAACYq/ofAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA25pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDY3IDc5LjE1Nzc0NywgMjAxNS8wMy8zMC0yMzo0MDo0MiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDplZjhjN2I4NC1mMGZhLWNkNDEtODgzOS02ZDM0M2UyNzYzZDciIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NERFMDUxRTlCMzI1MTFFQ0FDNjM5M0RFMEEyNjQxMjciIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NERFMDUxRThCMzI1MTFFQ0FDNjM5M0RFMEEyNjQxMjciIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NjdDQzM4QTlGRkM2MTFFOUJBNDFGQkFBMjExOUE2QzEiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NjdDQzM4QUFGRkM2MTFFOUJBNDFGQkFBMjExOUE2QzEiLz4gPC9yZGY6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',
 					height: 50,
 					width: 49
 				}
@@ -583,7 +645,29 @@ export default {
 							color: #181818;
 
 							&.active {
-								background: rgba(24, 24, 24, .1)
+								&.vrysi, &.locations, &.nera {
+									background: rgba(2, 136, 209, .1);
+								}
+
+								&.ekklisies, &.ktiria {
+									background: rgba(165, 39, 20, .1);
+								}
+
+								&.dasi {
+									background: rgba(9, 113, 56, .1);
+								}
+
+								&.diadromes {
+									background: rgba(0, 96, 100, .1);
+								}
+
+								&.vouna {
+									background: rgba(66, 166, 221, .1);
+								}
+
+								&.oryxeia {
+									background: rgba(117, 117, 117, .1);
+								}
 							}
 						}
 					}

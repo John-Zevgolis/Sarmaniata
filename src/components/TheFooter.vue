@@ -38,24 +38,27 @@
 						<div class="col-lg-5 offset-lg-2">
 							<div class="contact mt-4 mt-lg-0">
 								<h3 class="pb-3 underline text-white fw-normal">{{contact.title}}</h3>
-								<p>{{contact.metadata.subtitle}}</p>
+								<div class="subtitle">
+									<p>Για να επικοινωνήσετε μαζί μας, συμπληρώστε την παρακάτω φόρμα.</p>
+									<p><small>* Δεχόμαστε μηνύματα και στη βλαχική</small> <i class="bi bi-emoji-wink"></i></p>
+								</div>
 							</div>
 							<div class="form">
 								<form @submit.prevent="submitForm" novalidate>
 									<div>
-										<input :class="{error: response && response.status === 'error' && errorMessage('name', response)}" class="form-control rounded-0" placeholder="Ονοματεπώνυμο" v-model="name" name="name" type="text">
+										<input :disabled="response && response.status === 'success'" :class="{error: response && response.status === 'error' && errorMessage('name', response)}" class="form-control rounded-0" placeholder="Ονοματεπώνυμο" v-model="name" name="name" type="text">
 										<span class="d-block error text-danger" v-if="response && response.status === 'error' && errorMessage('name', response)">{{errorMessage('name', response)}}</span>
 									</div>
 									<div>
-										<input :class="{error: response && response.status === 'error' && errorMessage('email', response)}" class="form-control rounded-0" placeholder="Email" v-model="email" name="email" type="email">
+										<input :disabled="response && response.status === 'success'" :class="{error: response && response.status === 'error' && errorMessage('email', response)}" class="form-control rounded-0" placeholder="Email" v-model="email" name="email" type="email">
 										<span class="d-block error text-danger" v-if="response && response.status === 'error' && errorMessage('email', response)">{{errorMessage('email', response)}}</span>
 									</div>
 									<div>
-										<input :class="{error: response && response.status === 'error' && errorMessage('subject', response)}" class="form-control rounded-0" placeholder="Θέμα" v-model="subject" name="subject" type="text">
+										<input :disabled="response && response.status === 'success'" :class="{error: response && response.status === 'error' && errorMessage('subject', response)}" class="form-control rounded-0" placeholder="Θέμα" v-model="subject" name="subject" type="text">
 										<span class="d-block error text-danger" v-if="response && response.status === 'error' && errorMessage('subject', response)">{{errorMessage('subject', response)}}</span>
 									</div>
 									<div>
-										<textarea :class="{error: response && response.status === 'error' && errorMessage('message', response)}" class="form-control rounded-0" placeholder="Μήνυμα" v-model="message" name="message"></textarea>
+										<textarea :disabled="response && response.status === 'success'" :class="{error: response && response.status === 'error' && errorMessage('message', response)}" class="form-control rounded-0" placeholder="Μήνυμα" v-model="message" name="message"></textarea>
 										<span class="d-block error text-danger" v-if="response && response.status === 'error' && errorMessage('message', response)">{{errorMessage('message', response)}}</span>
 									</div>
 									<div class="mt-4 d-flex justify-content-end">
@@ -74,25 +77,28 @@
 		</div>
 		<div class="footer-bottom py-3 py-md-4">
 			<div class="container">
-				<div class="row">
+				<div class="row align-items-end">
 					<div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-						<p class="d-block copyright">© {{year}} - ALL RIGHT RESERVED</p>
+						<p class="d-block copyright">© {{year}} - ALL RIGHTS RESERVED</p>
 					</div>
 					<div class="col-md-6">
-						<nav class="social mx-2 mx-xl-4">
-							<ul class="nav justify-content-center justify-content-md-end align-items-center">
-								<li class="px-3">
-									<a href="#" target="_blank">
-										<font-awesome-icon icon="fa-brands fa-twitter" />
-									</a>
-								</li>
-								<li class="px-3">
-									<a href="https://www.facebook.com/groups/sarmaniata/?ref=share" target="_blank">
-										<font-awesome-icon icon="fa-brands fa-facebook-f" />
-									</a>
-								</li>
-							</ul>
-						</nav>
+						<div class="d-md-flex justify-content-md-end align-items-md-end text-center text-md-start">
+							<nav class="social mx-2 mx-xl-4 mb-3 mb-md-0">
+								<ul class="nav justify-content-center justify-content-md-end align-items-center">
+									<li class="px-3">
+										<a href="#" target="_blank">
+											<font-awesome-icon icon="fa-brands fa-twitter" />
+										</a>
+									</li>
+									<li class="px-3">
+										<a href="https://www.facebook.com/groups/sarmaniata/?ref=share" target="_blank">
+											<font-awesome-icon icon="fa-brands fa-facebook-f" />
+										</a>
+									</li>
+								</ul>
+							</nav>
+							<p>MADE WITH <i class="bi bi-balloon-heart-fill text-danger"></i></p>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -162,7 +168,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 footer {
 	background: #181818;
 
@@ -213,6 +219,15 @@ footer {
 				padding-bottom: 1.0625rem;
 				letter-spacing: .1px;
 				margin-bottom: 0.3125rem;
+				font-family: 'GFS Didot', serif;
+
+				&:before {
+                    content: "“";
+                }
+                
+                &:after {
+                    content:"”"
+                }
 			}
 		}
 
@@ -266,22 +281,9 @@ footer {
 			}
 
 			h3 {
-				font-size: 1.375rem;
 				letter-spacing: 4px;
 				line-height: 24px;
 				margin-bottom: 0.625rem;
-
-				@media (max-width: 991.98px) {
-					font-size: 1.25rem;
-				}
-
-				@media (max-width: 767.98px) {
-					font-size: 1.125rem;
-				}
-
-				@media (max-width: 575.98px) {
-					font-size: 1rem;
-				}
 
 				&:after {
 					background: #fff;
@@ -289,7 +291,24 @@ footer {
 			}
 
 			p {
-				font-style: italic;
+				font-size: 1.125rem;
+
+				@media (max-width: 767.98px) {
+					font-size: 1.0625rem;
+				}
+
+				@media (max-width: 575.98px) {
+					font-size: 1rem;
+				}
+
+				small {
+					font-size: .75rem;
+				}
+
+				i,svg {
+					font-size: 1.5rem;
+					color: #fff;
+				}
 			}
 		}
 
@@ -308,7 +327,6 @@ footer {
 				-webkit-text-fill-color: #fff;
 				-webkit-box-shadow: 0 0 0px 1000px #181818 inset;
 				color: #585858;
-				font-style: italic;
 				padding: 0 1.125rem;
 				margin: 0.46875rem 0;
 
@@ -371,6 +389,10 @@ footer {
 		p {
 			font-size: 0.625rem;
 			letter-spacing: 2px;
+
+			i {
+				font-size: 1.5rem;
+			}
 		}
 
 		.social {

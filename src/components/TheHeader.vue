@@ -44,6 +44,7 @@
 
 <script>
 import ClickOutside from 'vue-click-outside';
+import { bus } from '../main';
 
 export default {
 	props: ['logo', 'objData'],
@@ -52,8 +53,12 @@ export default {
 	},
 	data() {
 		return {
-			show: false
+			show: false,
+			headerHeight: null
 		};
+	},
+	created() {
+		bus.$on('header-height', value => this.headerHeight = value);
 	},
 	mounted() {
 		this.handleResize();
@@ -71,9 +76,10 @@ export default {
 		},
 		onImgLoad () {
 			const interval = setInterval(() => {
-				if(this.$refs && this.$refs.header) {
-					this.$store.commit('headerHeight', this.$refs.header.offsetHeight);
-					window.addEventListener('resize', () => this.$store.commit('headerHeight', this.$refs.header.offsetHeight));
+				if(this.$refs && Object.keys(this.$refs).length && this.$refs.header) {
+					bus.$emit('header-height', this.$refs.header.offsetHeight);
+					// this.$store.commit('headerHeight', this.$refs.header.offsetHeight);
+					window.addEventListener('resize', () => bus.$emit('header-height', this.$refs.header.offsetHeight));
 					clearInterval(interval);
 				}
 			}, 50);	
@@ -91,11 +97,11 @@ export default {
 			}
 		}
 	},
-	computed: {
-		headerHeight() {
-			return this.$store.getters['headerHeight'];
-		}
-	}
+	// computed: {
+	// 	headerHeight() {
+	// 		return this.$store.getters['headerHeight'];
+	// 	}
+	// }
 };
 </script>
 

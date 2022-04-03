@@ -1,5 +1,5 @@
 <template>
-	<main id="home" class="section home-carousel position-relative">
+	<main id="home" class="home-carousel position-relative">
 		<VueSlickCarousel v-bind="settings">
 			<div v-for="(item, index) in home.metadata.carousel" :key="index">
 				<div class="bg-img d-flex justify-content-center align-items-center" :style="`background-image: url(${item.thumbnail});`">
@@ -25,6 +25,7 @@
 import VueSlickCarousel from 'vue-slick-carousel';
 import 'vue-slick-carousel/dist/vue-slick-carousel.css';
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css';
+import { bus } from '../main';
 
 export default {
 	components: {
@@ -33,8 +34,7 @@ export default {
 	props: ['objData'],
 	data() {
 		return {
-			header: null,
-			historySection: null,
+			headerHeight: null,
 			settings: {
 				"lazyLoad": "ondemand",
 				"fade": true,
@@ -50,8 +50,8 @@ export default {
 	methods: {
 		moveToFirstSection() {
 			const interval = setInterval(() => {
-				if(this.headerHeight) {
-					const y = document.getElementsByClassName('sarmaniata')[0].offsetTop - this.headerHeight;
+				if(this.headerHeight && document.getElementById('sarmaniata')) {
+					const y = document.getElementById('sarmaniata').offsetTop - this.headerHeight;
 					window.scrollTo({top: y, behavior: 'smooth'});
 					clearInterval(interval);
 				}
@@ -67,11 +67,11 @@ export default {
 			return items.find(item => {
 				return item.id === '622e1ed3f1322f0009f67fbe'
 			});
-		},
-		headerHeight() {
-			return this.$store.getters['headerHeight'];
 		}
-	}
+	},
+	created() {
+		bus.$on('header-height', value => this.headerHeight = value);
+	},
 };
 </script>
 

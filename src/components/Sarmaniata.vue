@@ -1,11 +1,11 @@
 <template>
-	<section id="sarmaniata" class="sarmaniata section">
+	<section id="sarmaniata" class="sarmaniata">
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
 					<div class="bg-img-wrapper mb-4 mb-lg-0">
 						<div class="bg-img position-relative" v-lazy:background-image="sarmaniata.thumbnail">
-							<div class="overlay position-absolute w-100 h-100" ref="overlay"></div>
+							<div class="overlay position-absolute w-100 h-100 animated" ref="overlay"></div>
 						</div>
 					</div>
 					<span v-html="sarmaniata.content"></span>
@@ -22,20 +22,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default {
 	props: ['objData'],
-	mounted() {
-		this.scrollAnimation();
-	},
-	methods: {
-		scrollAnimation() {
-			gsap.to('.overlay', {
-				scrollTrigger: {
-					start: "top 75%",
-					trigger: this.$refs.overlay,
-					onEnter: () => this.$refs.overlay.classList.add("remove")
-				}
-			});
-		}
-	},
 	computed: {
 		sarmaniata() {
 			const items = [];

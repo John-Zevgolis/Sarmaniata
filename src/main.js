@@ -11,11 +11,12 @@ import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faAtlassian } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import VueMeta from 'vue-meta';
 import * as VueGoogleMaps from 'vue2-google-maps';
 import GmapCluster from 'vue2-google-maps/dist/components/cluster';
-library.add(faFacebookF, faTwitter, faLocationDot, faPhone, faEnvelope);
+library.add(faFacebookF, faTwitter, faLocationDot, faPhone, faEnvelope, faAtlassian);
 import VueLazyload from 'vue-lazyload';
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);

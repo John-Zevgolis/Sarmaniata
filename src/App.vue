@@ -6,15 +6,31 @@
 
 <script>
 export default {
-    metaInfo() {
+    metaInfo () {
         return {
             title: 'Sarmaniata',
             meta: [
-                { name: 'description', content: '' }
+                {name: 'description', content: 'Ομάδα για τη φύση και τον πολιτισμό της Σαμαρίνας'},
+                {name: 'keywords', content: 'sarmaniata, samarina, festival, σαμαρινα, φεστιβαλ'},
+                // {property: 'og:url', content: 'https://sarmaniata.gr/'},
+                // {property: 'og:type', content: 'website'},
+                // {property: 'og:title', content: 'Sarmaniata'},
+                // {property: 'og:description', content: 'Ομάδα για τη φύση και τον πολιτισμό της Σαμαρίνας'},
+                // {property: 'og:image', content: 'https://sarmaniata.gr/og-image.jpg'},
+                // {property: 'og:image:secure_url', content: 'https://sarmaniata.gr/og-image.jpg'},
+                // {property: 'og:image:type', content: 'image/jpg'},
+                // {property: 'og:image:width', content: '600'},
+                // {property: 'og:image:height', content: '265'},
+                // {property: 'og:image:alt', content: 'Ομάδα για τη φύση και τον πολιτισμό της Σαμαρίνας'},
+                // {property: 'twitter:card', content: 'summary_large_image'},
+                // {property: 'twitter:title', content: 'Sarmaniata'},
+                // {property: 'twitter:description', content: 'Ομάδα για τη φύση και τον πολιτισμό της Σαμαρίνας'},
+                // {property: 'twitter:url', content: 'https://sarmaniata.gr/'},
+                // {property: 'twitter:image', content: 'https://imgix.cosmicjs.com/e941bdb0-b32e-11ec-97bc-19d12908cbbe-og-image.jpg'},
             ]
         }
-    }
-};
+    },
+}
 </script>
 
 <style lang="scss">
@@ -60,10 +76,10 @@ h1,h2,h3,h4,h5,h6 {
         &:after {
             content: '';
             display: block;
-            width: 35px;
+            width: 30px;
             height: 2px;
             background: #252525;
-            margin: 1.5rem 0 0;
+            margin: 1rem 0 0;
         }
     }
 
@@ -75,7 +91,15 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 h3 {
-    font-size: 1.375rem;
+    font-size: 1.5rem;
+
+    @media (max-width: 767.98px) {
+        font-size: 1.375rem;
+    }
+
+    @media (max-width: 576.98px) {
+        font-size: 1.25rem;
+    }
 }
 
 p {
@@ -88,26 +112,44 @@ img {
   max-width: 100%;
 }
 
-.from-bottom {
+.animated {
     transition: all .3s;
-    opacity: 0;
-    transform: translateY(30px);
 
-    &.fire {
-        opacity: 1;
-        transform: none;
+    &.overlay {
+        top: 0;
+        left: 0;
+        transition: all .6s cubic-bezier(0.16, 0.01, 0.77, 1);
+
+        &.fire {
+            animation: overlay .6s forwards;
+        }
+    }
+
+    &.from-bottom {
+        transform: translateY(30px);
+    }
+
+    &.scale {
+        transform: scale(0);
+
+        &.fire {
+            transform: none;
+        }
+    }
+    
+    &.from-bottom, &.opacity-0 {
+        opacity: 0;
+        visibility: hidden;
+
+        &.fire {
+            opacity: 1 !important;
+            transform: none;
+            visibility: visible;
+        }
     }
 }
 
-.overlay {
-    top: 0;
-    left: 0;
-    transition: all .6s cubic-bezier(0.16, 0.01, 0.77, 1);
 
-    &.remove {
-        animation: overlay .6s forwards;
-    }
-}
 
 @keyframes overlay {
     from {
@@ -356,13 +398,13 @@ a {
 
                     @keyframes pulse {
                       0% {
-                        box-shadow: 0 0 0 0 rgba(0, 0, 0, .4);
+                        box-shadow: 0 0 0 0 rgba(24, 24, 24, .4);
                       }
                       70% {
-                          box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+                          box-shadow: 0 0 0 10px rgba(24, 24, 24, 0);
                       }
                       100% {
-                          box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+                          box-shadow: 0 0 0 0 rgba(24, 24, 24, 0);
                       }
                     }
                 } 

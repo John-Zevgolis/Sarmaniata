@@ -10,6 +10,26 @@ const routes = [
     component: () => import('../views/Home.vue')
   },
   {
+    path: '/provoles',
+    name: 'Provoles',
+    component: () => import('../views/Provoles.vue')
+  },
+  {
+    path: '/paidikes-drastiriotites',
+    name: 'PaidikesDrastiriotites',
+    component: () => import('../views/PaidikesDrastiriotites.vue')
+  },
+  {
+    path: '/syzitiseis',
+    name: 'Syzitiseis',
+    component: () => import('../views/Syzitiseis.vue')
+  },
+  {
+    path: '/alles-ekdilwseis',
+    name: 'AllesEkdilwseis',
+    component: () => import('../views/AllesEkdilwseis.vue')
+  },
+  {
     path: '/:notFound(.*)',
     redirect: '/'
   }

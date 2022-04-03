@@ -4,13 +4,13 @@
 			<loader v-show="loading"></loader>
 		</transition>
 		<div v-if="objData && logo">
-			<the-header :obj-data="objData" :logo="logo"></the-header>
-			<home-carousel :obj-data="objData"></home-carousel>
-			<sarmaniata :obj-data="objData"></sarmaniata>
-			<samarina :obj-data="objData"></samarina>
-			<div class="section" id="photos" style="min-height: 100vh; background: aquamarine;">ΦΩΤΟΓΡΑΦΙΕΣ</div>
-			<div class="section" id="events" style="min-height: 100vh; background: yellow;">ΧΑΡΤΟΓΡΑΦΗΣΗ</div>
-			<the-footer :obj-data="objData" :logo="logo"></the-footer>
+			<the-header ref="header" :obj-data="objData" :logo="logo"></the-header>
+			<home-carousel ref="home" :obj-data="objData"></home-carousel>
+			<sarmaniata ref="sarmaniata" :obj-data="objData"></sarmaniata>
+			<samarina ref="samarina" :obj-data="objData"></samarina>
+			<photos ref="photos" :obj-data="objData"></photos>
+			<events ref="events" :obj-data="objData"></events>
+			<the-footer ref="contact" :obj-data="objData" :logo="logo"></the-footer>
 		</div>
 	</div>
 </template>
@@ -19,12 +19,15 @@
 import HomeCarousel from '../components/HomeCarousel.vue';
 import Sarmaniata from '../components/Sarmaniata.vue';
 import Samarina from '../components/Samarina.vue';
+import Events from '../components/Events.vue';
+import Photos from '../components/Photos.vue';
 import TheHeader from '../components/TheHeader.vue';
 import TheFooter from '../components/TheFooter.vue';
 import Loader from '../components/Loader.vue';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
+import { bus } from '../main';
 
 export default {
 	components: {
@@ -32,38 +35,28 @@ export default {
 		HomeCarousel,
 		Sarmaniata,
 		Samarina,
+		Events,
+		Photos,
 		Loader,
 		TheFooter
 	},
 	data() {
 		return {
-			loading: false
+			loading: false,
+			headerHeight: null
 		};
 	},
 	methods: {
-		scrollSpy() {
+		animations() {
+			const elements = document.getElementsByClassName('animated');
 			const interval = setInterval(() => {
-				const sections = gsap.utils.toArray('.section');
-				if(sections && sections.length && this.headerHeight) {
-					sections.forEach(item => {
-						const id = item.id;
+				if(elements && elements.length > 0) {
+					elements.forEach(item => {
 						gsap.to(item, {
 							scrollTrigger: {
-								start: `top ${this.headerHeight + 5}px`,
-								end: `bottom ${this.headerHeight + 5}px`,
+								start: "top 75%",
 								trigger: item,
-								onEnter: () => {										
-									document.querySelector(`[data-id=${id}]`).classList.add('active');
-								},
-								onLeave: () => {
-									document.querySelector(`[data-id=${id}]`).classList.remove('active');
-								},
-								onEnterBack: () => {
-									document.querySelector(`[data-id=${id}]`).classList.add('active');
-								},
-								onLeaveBack: () => {
-									document.querySelector(`[data-id=${id}]`).classList.remove('active');
-								}
+								onEnter: () => item.classList.add('fire')
 							}
 						});
 					});
@@ -71,19 +64,33 @@ export default {
 				}
 			}, 50);
 		},
-		animations() {
-			const elements = document.getElementsByClassName('from-bottom');
+		scrollSpy() {
 			const interval = setInterval(() => {
-				if(elements && elements.length) {
-					elements.forEach(item => {
-						gsap.to(item, {
+				const sections = this.$refs;
+				if(sections && Object.keys(sections).length && this.headerHeight) {
+					const header = this.$refs.header;
+					delete sections['header']
+					for(const prop in sections) {
+						gsap.to(this.$refs[prop].$el, {
 							scrollTrigger: {
-								start: "top 85%",
-								trigger: item,
-								onEnter: () => item.classList.add("fire")
+								start: `top ${this.headerHeight + 5}px`,
+								end: `bottom ${this.headerHeight + 5}px`,
+								trigger: this.$refs[prop].$el,
+								onEnter: () => {
+									header.$el.querySelector(`.menu-link[data-id=${prop}]`).classList.add('active');
+								},
+								onLeave: () => {
+									header.$el.querySelector(`.menu-link[data-id=${prop}]`).classList.remove('active');
+								},
+								onEnterBack: () => {
+									header.$el.querySelector(`.menu-link[data-id=${prop}]`).classList.add('active');
+								},
+								onLeaveBack: () => {
+									header.$el.querySelector(`.menu-link[data-id=${prop}]`).classList.remove('active');
+								}
 							}
 						});
-					});
+					}
 					clearInterval(interval);
 				}
 			}, 50);
@@ -102,11 +109,12 @@ export default {
 		this.loading = true;
 		await this.fetchLogo();
 		await this.fetchData();
+		bus.$on('header-height', value => this.headerHeight = value);
 		this.loading = false;
 	},
 	mounted() {
-		this.animations();
 		this.scrollSpy();
+		this.animations();
 	},
 	computed: {
 		logo() {
@@ -114,9 +122,6 @@ export default {
 		},
 		objData() {
 			return this.$store.getters['homepageObjData'];
-		},
-		headerHeight() {
-			return this.$store.getters['headerHeight'];
 		}
 	}
 };

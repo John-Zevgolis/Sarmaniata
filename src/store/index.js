@@ -18,7 +18,6 @@ const store = new Vuex.Store({
 			objData: null,
 			homepageObjData: null,
 			logo: null,
-			headerHeight: null,
 			response: null
 		};
 	},
@@ -31,9 +30,6 @@ const store = new Vuex.Store({
 		},
 		storeLogo(state, payload) {
 			state.logo = payload;
-		},
-		headerHeight(state, payload) {
-			state.headerHeight = payload;
 		},
 		saveResponse(state, payload) {
 			state.response = payload;
@@ -83,9 +79,6 @@ const store = new Vuex.Store({
 		},
 		homepageObjData(state) {
 			return state.homepageObjData;
-		},
-		headerHeight(state) {
-			return state.headerHeight;
 		},
 		response(state) {
 			return state.response;

@@ -18,6 +18,7 @@ const store = new Vuex.Store({
 			objData: null,
 			homepageObjData: null,
 			logo: null,
+			whiteLogo: null,
 			response: null
 		};
 	},
@@ -30,6 +31,9 @@ const store = new Vuex.Store({
 		},
 		storeLogo(state, payload) {
 			state.logo = payload;
+		},
+		storeWhiteLogo(state, payload) {
+			state.whiteLogo = payload;
 		},
 		saveResponse(state, payload) {
 			state.response = payload;
@@ -52,9 +56,15 @@ const store = new Vuex.Store({
 		},
 		fetchLogo({commit}) {
 			bucket.getSingleMedia({
-				id: '6249ee0841ddce0e52b038d3',
-				props: 'url'
-			}).then(response => commit('storeLogo', response.media.url));
+				id: '624d6a92354d6f0e475d4d3f',
+				props: 'url,original_name'
+			}).then(response => commit('storeLogo', response.media));
+		},
+		fetchWhiteLogo({commit}) {
+			bucket.getSingleMedia({
+				id: '624d6bc9354d6f0e475d4d41',
+				props: 'url,original_name'
+			}).then(response => commit('storeWhiteLogo', response.media));
 		},
 		sendEmail({commit}, payload) {
 			const data = new FormData();
@@ -76,6 +86,9 @@ const store = new Vuex.Store({
 		},
 		logo(state) {
 			return state.logo;
+		},
+		whiteLogo(state) {
+			return state.whiteLogo;
 		},
 		homepageObjData(state) {
 			return state.homepageObjData;

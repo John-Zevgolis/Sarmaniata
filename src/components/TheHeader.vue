@@ -1,22 +1,22 @@
 <template>
-	<header ref="header" class="fixed-top mx-auto py-2 py-xl-0" :class="{active: show}">
+	<header ref="header" class="fixed-top mx-auto py-1 py-lg-0" :class="{active: show}">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-12">
-					<nav class="d-flex flex-wrap flex-lg-nowrap align-items-center navbar-expand-xl position-relative px-1 px-xl-3">
-						<router-link class="d-block logo" to="/">
-							<img :src="logo" @load="onImgLoad">
+					<nav class="d-flex flex-wrap flex-lg-nowrap align-items-center navbar-expand-lg position-relative px-1 px-xl-3">
+						<router-link class="d-block logo" to="/" aria-label="Home">
+							<img :src="logo.url" :alt="logo.original_name" @load="onImgLoad">
 						</router-link>
-						<div class="d-none d-xl-block">
+						<div class="d-none d-lg-block">
 							<nav class="social mx-2 mx-xxl-4">
 								<ul class="nav align-items-center">
 									<li class="px-3">
-										<a href="#" target="_blank">
+										<a href="#" aria-label="Twitter" target="_blank">
 											<font-awesome-icon icon="fa-brands fa-twitter" />
 										</a>
 									</li>
 									<li class="px-3">
-										<a href="https://www.facebook.com/groups/sarmaniata/?ref=share" target="_blank">
+										<a href="https://www.facebook.com/groups/sarmaniata/?ref=share" aria-label="Facebook" target="_blank">
 											<font-awesome-icon icon="fa-brands fa-facebook-f" />
 										</a>
 									</li>
@@ -24,20 +24,20 @@
 							</nav>
 						</div>
 						<nav class="main-menu ms-auto d-flex align-items-center justify-content-center" v-click-outside="closeMenu">
-							<ul class="nav flex-nowrap flex-xl-wrap flex-column flex-xl-row text-center text-xl-start w-100">
+							<ul class="nav flex-nowrap flex-lg-wrap flex-column flex-lg-row text-center text-xl-start w-100">
 								<li v-for="(item, index) in objData.metadata" :key="index">
-									<a :data-id="item.slug" @click="moveToSection(item.slug)" class="d-block menu-link position-relative">{{item.title}}</a>
+									<a :href="`#${item.slug}`" @click.prevent="moveToSection(item.slug)" class="d-block bg-transparent menu-link position-relative">{{item.title}}</a>
 								</li>
-								<li class="d-xl-none mt-3">
+								<li class="d-lg-none mt-3">
 									<nav class="social">
 										<ul class="nav justify-content-center align-items-center">
 											<li class="px-3">
-												<a href="#" target="_blank">
+												<a href="#" aria-label="Twitter" target="_blank">
 													<font-awesome-icon icon="fa-brands fa-twitter" />
 												</a>
 											</li>
 											<li class="px-3">
-												<a href="https://www.facebook.com/groups/sarmaniata/?ref=share" target="_blank">
+												<a href="https://www.facebook.com/groups/sarmaniata/?ref=share" aria-label="Facebook" target="_blank">
 													<font-awesome-icon icon="fa-brands fa-facebook-f" />
 												</a>
 											</li>
@@ -46,7 +46,7 @@
 								</li>
 							</ul>
 						</nav>
-						<button class="ms-auto hamburger shadow-none p-0 hamburger--collapse hamburger--collapse navbar-toggler" :class="{'is-active': show}" type="button" @click.stop="show = !show">
+						<button aria-label="Hamburger" class="ms-auto hamburger shadow-none p-0 hamburger--collapse hamburger--collapse navbar-toggler" :class="{'is-active': show}" type="button" @click.stop="show = !show">
 							<span class="hamburger-box">
 								<span class="hamburger-inner"></span>
 							</span>						
@@ -70,7 +70,9 @@ export default {
 	data() {
 		return {
 			show: false,
-			headerHeight: null
+			headerHeight: null,
+			timeout: null,
+			timeout2: null
 		};
 	},
 	created() {
@@ -78,26 +80,26 @@ export default {
 	},
 	mounted() {
 		this.handleResize();
-		window.addEventListener('resize', () => this.handleResize());	
+		window.addEventListener('resize', () => {
+			if(this.timeout) clearTimeout(this.timeout);
+			this.timeout = setTimeout(() => {
+				this.handleResize(); 
+			}, 150);
+		});
 	},
 	methods: {
 		moveToSection(id) {
-			const interval = setInterval(() => {
-				if(this.headerHeight && document.querySelector(`[id=${id}]`)) {
-					const y = document.querySelector(`[id=${id}]`).offsetTop - this.headerHeight;
-					window.scrollTo({top: y, behavior: 'smooth'});
-					clearInterval(interval);
-				}
-			}, 50);
+			const y = document.querySelector(`.section[id=${id}]`).offsetTop -  this.headerHeight;
+			window.scrollTo({top: y, behavior: 'smooth'});
 		},
 		onImgLoad () {
-			const interval = setInterval(() => {
-				if(this.$refs && Object.keys(this.$refs).length && this.$refs.header) {
-					bus.$emit('header-height', this.$refs.header.offsetHeight);
-					window.addEventListener('resize', () => bus.$emit('header-height', this.$refs.header.offsetHeight));
-					clearInterval(interval);
-				}
-			}, 50);	
+			bus.$emit('header-height', this.$refs.header.offsetHeight);
+			window.addEventListener('resize', () => {
+				if(this.timeout2) clearTimeout(this.timeout2);
+				this.timeout2 = setTimeout(() => {
+					bus.$emit('header-height', this.$refs.header.offsetHeight)
+				}, 150);
+			});
 		},
 		closeMenu() {
 			if(this.show) {
@@ -105,7 +107,7 @@ export default {
 			}
 		},
 		handleResize() {
-			if(window.matchMedia('(min-width: 1200px)').matches) {
+			if(window.matchMedia('(min-width: 992px)').matches) {
 				if(this.show === true) {
 					this.show = false;
 				}
@@ -162,7 +164,7 @@ header {
 							color: #999;
 						}
 
-						@media (max-width: 1199.98px) {
+						@media (max-width: 991.98px) {
 							color: #999;
 
 							&:hover {
@@ -182,7 +184,7 @@ header {
 						font-size: 0.75rem;
 						padding: 3rem 1.875rem;
 						font-family: 'Open Sans';
-						cursor: pointer;
+						border: 0;
 
 						&:after {
 							content: '';
@@ -220,21 +222,21 @@ header {
 				}
 			}
 
-			@media (max-width: 1199.98px) {
+			@media (max-width: 991.98px) {
 				width: 100%;
 				position: absolute;
 				transition: transform .5s ease;
-				top: calc(110px - .5rem);
+				top: calc(96.55px - 3px);
 				background: #181818;
 				max-width: 295px;
-				min-height: calc(100vh - (110px - 1px));
-				max-height: calc(100vh - (110px - 1px));
-				right: calc(-1rem - 295px);
-				overflow: auto;
-				padding: 1.5625rem;
+				min-height: calc(100vh - 96.55px);
+				max-height: calc(100vh - 96.55px);
+				right: calc(-1rem - 295px);	
 
 				& > ul {
-					max-height: calc(100vh - (110px - 1px));
+					max-height: calc(100vh - 96.55px);
+					overflow: auto;
+					padding: 1.5625rem;
 
 					& > li {
 						& > a {
@@ -242,6 +244,7 @@ header {
 							color: #999;
 							border-bottom: 1px solid #222;
 							font-size: 0.75rem;
+							width: 100%;
 
 							&:after {
 								display: none;
@@ -254,44 +257,26 @@ header {
 					}
 				}
 			}
-
-			@media (max-width: 767.98px) {
-				top: calc(94.5px - .5rem);
-				min-height: calc(100vh - (94.5px - 1px));
-				max-height: calc(100vh - (94.5px - 1px));
-
-				& > ul {
-					max-height: calc(100vh - (94.5px - 1px));
-				}
-			}
-
-			@media (max-width: 575.98px) {
-				top: calc(79px - .5rem);
-				min-height: calc(100vh - (79px - 1px));
-				max-height: calc(100vh - (79px - 1px));
-
-				& > ul {
-					max-height: calc(100vh - (79px - 1px));
-				}
-			}
 		}
 	}
 
-	@media (max-width: 1199.98px) {
+	@media (max-width: 991.98px) {
 		&.active {
 			.main-menu {
 				transform: translateX(-295px);
 				
-				&::-webkit-scrollbar {
-					width: 7px;
-				}
+				& > ul {
+					&::-webkit-scrollbar {
+						width: 7px;
+					}
 
-				&::-webkit-scrollbar-track {
-					background: #181818;
-				}
+					&::-webkit-scrollbar-track {
+						background: #181818;
+					}
 
-				&::-webkit-scrollbar-thumb {
-					background: #fff;
+					&::-webkit-scrollbar-thumb {
+						background: #fff;
+					}
 				}
 			}
 		}

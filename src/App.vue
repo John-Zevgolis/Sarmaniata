@@ -100,19 +100,7 @@ img {
 .logo {
     img {
         @media (max-width: 1399.98px) {
-            max-width: 250px;
-        }
-
-        @media (max-width: 1199.98px) {
-            max-width: none;
-        }
-
-        @media (max-width: 767.98px) {
-            max-width: 250px;
-        }
-
-        @media (max-width: 575.98px) {
-            max-width: 200px;
+            max-width: 85px;
         }
     }
 }
@@ -190,16 +178,16 @@ a {
 
 .slick-slider {
     .slick-track {
-        display: flex;
+        display: flex !important;
 
         &:after,&:before {
-            display: none;
+            display: none !important;
         }
     }
 
     .slick-slide {
-        height: auto;
-        float: none;
+        height: auto !important;
+        float: none !important;
 
         & > div {
             height: 100%;
@@ -211,21 +199,14 @@ a {
 
         .bg-img {
             min-height: calc(100vh - 115px);
+            padding: 1.5rem 0 calc(91.5px + 1.5rem);
 
             @media (max-width: 1399.98px) {
                 min-height: calc(100vh - 97.5px);
             }
 
-            @media (max-width: 1199.98px) {
-                min-height: calc(100vh - 110px);
-            }
-
-            @media (max-width: 767.98px) {
-                min-height: calc(100vh - 94.5px);
-            }
-
-            @media (max-width: 767.98px) {
-                min-height: calc(100vh - 79px);
+            @media (max-width: 991.98px) {
+                min-height: calc(100vh - 96.55px);
             }
 
             .box {
@@ -248,10 +229,14 @@ a {
                     line-height: 1.1;
 
                     @media (max-width: 991.98px) {
-                       font-size: 2.25rem;
+                       font-size: 2.75rem;
                     }
 
                     @media (max-width: 767.98px) {
+                       font-size: 2.25rem;
+                    }
+
+                    @media (max-width: 575.98px) {
                         font-size: 1.875rem;
                     }
 
@@ -268,6 +253,7 @@ a {
                     line-height: 1.4;
                     color: #fff;
                     font-family: 'GFS Didot', serif;
+                    margin: 0;
 
                     &:before {
                         content: "“";
@@ -283,6 +269,10 @@ a {
 
                     @media (max-width: 767.98px) {
                         font-size: 1.125rem;
+                    }
+
+                    @media (max-width: 575.98px) {
+                        font-size: 1rem;
                     }
                 }
             }

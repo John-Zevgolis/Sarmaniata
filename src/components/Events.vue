@@ -1,5 +1,5 @@
 <template>
-	<section class="events py-5" id="events">
+	<section id="events" class="section events py-5">
 		<div class="container py-5">
 			<div class="row">
 				<div class="col-12 text-center">
@@ -10,14 +10,14 @@
 				<div class="col-xl-10 col-xxl-9">
 					<div class="row">
 						<div class="col-sm-6 col-md-3 mb-4 mb-md-0 text-center" v-for="(event, index) in events.metadata.icons" :key="index">
-							<router-link class="d-inline-block" :to="`${event.slug}`">
+							<router-link class="d-inline-block opacity-0 animated" :to="`${event.slug}`">
 								<span class="icon d-flex justify-content-center align-items-center rounded-circle mx-auto animated scale">
 									<i class="bi bi-camera-reels-fill" v-if="event.slug === 'provoles'"></i>
 									<i class="bi bi-puzzle-fill" v-if="event.slug === 'paidikes-drastiriotites'"></i>
 									<i class="bi bi-chat-dots-fill" v-if="event.slug === 'syzitiseis'"></i>
 									<font-awesome-icon icon="fa-brands fa-atlassian" v-if="event.slug === 'alles-ekdilwseis'" />
 								</span>
-								<span class="d-block mt-3 opacity-0 animated">{{event.title}}</span>
+								<span class="d-block mt-3">{{event.title}}</span>
 							</router-link>
 						</div>
 					</div>

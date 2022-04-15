@@ -1,5 +1,5 @@
 <template>
-	<section id="samarina" class="samarina">
+	<section id="samarina" class="section samarina">
 		<div class="parallax position-relative">
 			<div class="parallax-img position-absolute w-100 h-100 bg-img" v-lazy:background-image="samarina.thumbnail"></div>
 			<div class="container-fluid px-0 position-relative">
@@ -15,7 +15,7 @@
 		<div class="map position-relative" :class="{active: showFilters}">
 			<transition name="infobox-animation">
 				<div class="infobox d-flex position-absolute col-sm-7 col-md-6 col-lg-5 col-xl-4 col-xxl-3 px-0" style="height: 400px;" :class="{loading: infoLoading}" v-if="showInfoBox">
-					<button aria-label="Close" @click="closeInfobox" class="close-btn bg-transparent border-0 position-absolute d-flex justify-content-center align-items-center">
+					<button aria-label="CloseFilters" @click="closeInfobox" class="close-btn bg-transparent border-0 position-absolute d-flex justify-content-center align-items-center">
 						<span>&#10006;</span>
 					</button>
 					<div class="project-box w-100 d-flex flex-column">
@@ -27,7 +27,7 @@
 					</div>
 				</div>
 			</transition>
-			<button class="filters-btn position-absolute" @click="showFilters = true">
+			<button aria-label="OpenFilters" class="filters-btn position-absolute" @click="showFilters = true">
                 <div class="filter-wrapper w-100 h-100 d-flex justify-content-center align-items-center position-absolute">
                     <div class="filter">
                         <div class="filter-line d-flex justify-content-center align-items-center">
@@ -122,186 +122,183 @@ export default {
 				styles: [
 				{
 				"featureType": "all",
-				"elementType": "labels.text",
-				"stylers": [
-				{
-				"visibility": "off"
-				}
-				]
-				},
-				{
-				"featureType": "water",
-				"elementType": "geometry",
-				"stylers": [
-				{
-				"visibility": "on"
-				},
-				{
-				"color": "#aee2e0"
-				}
-				]
-				},
-				{
-				"featureType": "landscape",
-				"elementType": "geometry.fill",
-				"stylers": [
-				{
-				"color": "#abce83"
-				}
-				]
-				},
-				{
-				"featureType": "poi",
-				"elementType": "geometry.fill",
-				"stylers": [
-				{
-				"color": "#769E72"
-				}
-				]
-				},
-				{
-				"featureType": "poi",
-				"elementType": "labels.text.fill",
-				"stylers": [
-				{
-				"color": "#7B8758"
-				}
-				]
-				},
-				{
-				"featureType": "poi",
-				"elementType": "labels.text.stroke",
-				"stylers": [
-				{
-				"color": "#EBF4A4"
-				}
-				]
-				},
-				{
-				"featureType": "poi.park",
-				"elementType": "geometry",
-				"stylers": [
-				{
-				"visibility": "simplified"
-				},
-				{
-				"color": "#8dab68"
-				}
-				]
-				},
-				{
-				"featureType": "road",
-				"elementType": "geometry.fill",
-				"stylers": [
-				{
-				"visibility": "simplified"
-				}
-				]
-				},
-				{
-				"featureType": "road",
-				"elementType": "labels.text.fill",
-				"stylers": [
-				{
-				"color": "#5B5B3F"
-				}
-				]
-				},
-				{
-				"featureType": "road",
-				"elementType": "labels.text.stroke",
-				"stylers": [
-				{
-				"color": "#ABCE83"
-				}
-				]
-				},
-				{
-				"featureType": "road",
-				"elementType": "labels.icon",
-				"stylers": [
-				{
-				"visibility": "off"
-				}
-				]
-				},
-				{
-				"featureType": "road.local",
-				"elementType": "geometry",
-				"stylers": [
-				{
-				"color": "#A4C67D"
-				}
-				]
-				},
-				{
-				"featureType": "road.arterial",
-				"elementType": "geometry",
-				"stylers": [
-				{
-				"color": "#9BBF72"
-				}
-				]
-				},
-				{
-				"featureType": "road.highway",
-				"elementType": "geometry",
-				"stylers": [
-				{
-				"color": "#EBF4A4"
-				}
-				]
-				},
-				{
-				"featureType": "transit",
-				"stylers": [
-				{
-				"visibility": "off"
-				}
-				]
-				},
-				{
-				"featureType": "administrative",
-				"elementType": "geometry.stroke",
-				"stylers": [
-				{
-				"visibility": "on"
-				},
-				{
-				"color": "#87ae79"
-				}
-				]
-				},
-				{
-				"featureType": "administrative",
-				"elementType": "geometry.fill",
-				"stylers": [
-				{
-				"color": "#7f2200"
-				},
-				{
-				"visibility": "off"
-				}
-				]
-				},
-				{
-				"featureType": "administrative",
-				"elementType": "labels.text.fill",
-				"stylers": [
-				{
-				"color": "#495421"
-				}
-				]
-				},
-				{
-				"featureType": "administrative.neighborhood",
 				"elementType": "labels",
 				"stylers": [
 				{
 				"visibility": "off"
 				}
 				]
+				},
+				// {
+				// "featureType": "water",
+				// "elementType": "geometry",
+				// "stylers": [
+				// {
+				// "visibility": "on"
+				// },
+				// {
+				// "color": "#aee2e0"
+				// }
+				// ]
+				// },
+				// {
+				// "featureType": "landscape",
+				// "elementType": "geometry.fill",
+				// "stylers": [
+				// {
+				// "color": "#abce83"
+				// }
+				// ]
+				// },
+				// {
+				// "featureType": "poi",
+				// "elementType": "geometry.fill",
+				// "stylers": [
+				// {
+				// "color": "#769E72"
+				// }
+				// ]
+				// },
+				// {
+				// "featureType": "poi",
+				// "elementType": "labels.text.fill",
+				// "stylers": [
+				// {
+				// "color": "#7B8758"
+				// }
+				// ]
+				// },
+				// {
+				// "featureType": "poi",
+				// "elementType": "labels.text.stroke",
+				// "stylers": [
+				// {
+				// "color": "#EBF4A4"
+				// },
+				// ]
+				// },
+				// {
+				// "featureType": "poi.park",
+				// "elementType": "geometry",
+				// "stylers": [
+				// {
+				// "visibility": "simplified"
+				// },
+				// {
+				// "color": "#8dab68"
+				// }
+				// ]
+				// },
+				// {
+				// "featureType": "road",
+				// "elementType": "geometry.fill",
+				// "stylers": [
+				// {
+				// "visibility": "simplified"
+				// }
+				// ]
+				// },
+				// {
+				// "featureType": "road",
+				// "elementType": "labels.text.fill",
+				// "stylers": [
+				// {
+				// "color": "#5B5B3F"
+				// }
+				// ]
+				// },
+				// {
+				// "featureType": "road",
+				// "elementType": "labels.text.stroke",
+				// "stylers": [
+				// {
+				// "color": "#ABCE83"
+				// }
+				// ]
+				// },
+				// {
+				// "featureType": "road.local",
+				// "elementType": "geometry",
+				// "stylers": [
+				// {
+				// "color": "#A4C67D"
+				// }
+				// ]
+				// },
+				// {
+				// "featureType": "road.arterial",
+				// "elementType": "geometry",
+				// "stylers": [
+				// {
+				// "color": "#9BBF72"
+				// }
+				// ]
+				// },
+				// {
+				// "featureType": "road.highway",
+				// "elementType": "geometry",
+				// "stylers": [
+				// {
+				// "color": "#EBF4A4"
+				// }
+				// ]
+				// },
+				// {
+				// "featureType": "transit",
+				// "stylers": [
+				// {
+				// "visibility": "off"
+				// }
+				// ]
+				// },
+				// {
+				// "featureType": "administrative",
+				// "elementType": "geometry.stroke",
+				// "stylers": [
+				// {
+				// "visibility": "on"
+				// },
+				// {
+				// "color": "#87ae79"
+				// }
+				// ]
+				// },
+				// {
+				// "featureType": "administrative",
+				// "elementType": "geometry.fill",
+				// "stylers": [
+				// {
+				// "visibility": "off"
+				// }
+				// ]
+				// },
+				// {
+				// "featureType": "administrative",
+				// "elementType": "labels.text.fill",
+				// "stylers": [
+				// {
+				// "color": "#495421"
+				// }
+				// ]
+				// },
+				// {
+				// "featureType": "administrative.neighborhood",
+				// "elementType": "labels",
+				// "stylers": [
+				// {
+				// "visibility": "off"
+				// }
+				// ]
+				// },
+				{
+				"featureType": "landscape.man_made",
+				"elementType": "geometry.fill",
+				"stylers": [
+				{
+				"visibility": "off"
 				}
+				]
+				},
 				]
 			},
 			clusterStyles: [

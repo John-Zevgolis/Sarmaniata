@@ -1,13 +1,13 @@
 <template>
-	<footer id="contact" class="section">
+	<footer class="section" id="contact">
 		<div class="footer-top position-relative">
 			<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-xxl-11">
 					<div class="row">
 						<div class="col-lg-5">
-							<div class="mb-4 logo bg-white d-inline-block p-2">
-								<img :src="logo">
+							<div class="mb-4 logo">
+								<img :src="logo.url" :alt="logo.original_name">
 							</div>
 							<div class="description" v-html="contact.content"></div>
 							<div class="address">
@@ -86,12 +86,12 @@
 							<nav class="social mx-2 mx-xxl-4 mb-3 mb-md-0">
 								<ul class="nav justify-content-center justify-content-md-end align-items-center">
 									<li class="px-3">
-										<a href="#" target="_blank">
+										<a href="#" aria-label="Twitter" target="_blank">
 											<font-awesome-icon icon="fa-brands fa-twitter" />
 										</a>
 									</li>
 									<li class="px-3">
-										<a href="https://www.facebook.com/groups/sarmaniata/?ref=share" target="_blank">
+										<a href="https://www.facebook.com/groups/sarmaniata/?ref=share" aria-label="Facebook" target="_blank">
 											<font-awesome-icon icon="fa-brands fa-facebook-f" />
 										</a>
 									</li>

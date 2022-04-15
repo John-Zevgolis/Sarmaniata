@@ -1,9 +1,9 @@
 <template>
-	<section id="sarmaniata" class="sarmaniata">
+	<section id="sarmaniata" class="section sarmaniata">
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
-					<div class="bg-img-wrapper mb-4 mb-lg-0">
+					<div class="bg-img-wrapper ps-lg-4 mb-4 mb-lg-0">
 						<div class="bg-img position-relative" v-lazy:background-image="sarmaniata.thumbnail">
 							<div class="overlay position-absolute w-100 h-100 animated" ref="overlay"></div>
 						</div>
@@ -16,10 +16,6 @@
 </template>
 
 <script>
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-gsap.registerPlugin(ScrollTrigger);
-
 export default {
 	props: ['objData'],
 	computed: {
@@ -52,7 +48,7 @@ export default {
 		}
 
 		.bg-img {
-			padding-top: 141.59292%;
+			padding-top: 123.64959%;
 		}
 
 		.overlay {

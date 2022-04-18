@@ -17,7 +17,7 @@
 
 <script>
 export default {
-	props: ['objData'],
+	props: ['obj-data'],
 	computed: {
 		sarmaniata() {
 			const items = [];
@@ -25,7 +25,7 @@ export default {
 				items.push(this.objData.metadata[prop]);
 			}
 			return items.find(item => {
-				return item.id === '622e1c0764eb9d00090f4ff9'
+				return item.id === '622e1c0764eb9d00090f4ff9';
 			});
 		}
 	}
@@ -35,6 +35,10 @@ export default {
 <style lang="scss">
 .sarmaniata {
 	padding: 7.5rem 0;
+
+	@media (max-width: 991.98px) {
+		padding: 4.0625rem;
+	}
 
 	.bg-img-wrapper {
 		float: right;

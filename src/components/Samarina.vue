@@ -6,7 +6,13 @@
 				<div class="row gx-0">
 					<div class="col-lg-6 offset-lg-6">
 						<div class="parallax-content">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur et libero ut nunc pharetra commodo non eget odio. Curabitur ultricies, eros in scelerisque malesuada, justo augue gravida felis, id dapibus mi purus quis tortor. Nullam congue lacus ipsum, ut pellentesque arcu semper id. Sed ultricies pellentesque sem, eget posuere enim elementum sed. Aenean tempus turpis vitae elementum molestie. Donec varius eu metus nec lacinia. Vestibulum maximus sem at est aliquet, et convallis dui tempor. Pellentesque sed sollicitudin velit. Etiam fermentum nibh ipsum, quis imperdiet nisi vulputate laoreet.
 
+Morbi vitae eros id velit iaculis ullamcorper quis quis velit. Curabitur pellentesque pellentesque nisi et tincidunt. Nunc et est fermentum, aliquet velit vitae, hendrerit mauris. Donec mi nisi, faucibus eu vulputate eget, dapibus eget dolor. Nulla facilisi. Etiam tincidunt massa non neque elementum condimentum. Donec euismod ex lorem, ut sagittis dui congue sit amet.
+
+Mauris ut tortor sed est tempus sodales. Nullam a sapien magna. Vestibulum sit amet libero at purus tincidunt varius. Maecenas turpis tellus, sollicitudin a libero sed, ultricies sodales odio. Phasellus vel dui id dui sollicitudin pretium vitae nec lectus. Curabitur eget maximus neque. Phasellus sed nibh risus. Proin at velit magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+
+Nullam rhoncus e</p>
 						</div>
 					</div>
 				</div>
@@ -96,12 +102,12 @@
 
 <script>
 import { gmapApi } from 'vue2-google-maps';
-import { gsap } from 'gsap';
+import { gsap, Power0 } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 export default {
-	props: ['objData'],
+	props: ['obj-data', 'header-height'],
 	data() {
 		return {
 			showInfoBox: false,
@@ -316,8 +322,30 @@ export default {
 	},
 	mounted() {
 		this.createMap();
+		this.parallax();
 	},
 	methods: {
+		parallax() {
+			const elements = gsap.utils.toArray(".parallax-img");
+			const interval = setInterval(() => {
+				if(elements && elements.length) {
+					elements.forEach((img) => {
+						img.style.backgroundPosition = "50% 0px"; 
+						gsap.to(img, {
+							backgroundPosition: `50% ${innerHeight / 2}px`,
+							ease: Power0.easeNone,
+							scrollTrigger: {
+								trigger: img,
+								start: `top ${this.headerHeight}`, 
+								end: `bottom ${this.headerHeight}`,
+								scrub: true
+							}
+						});
+					});
+					clearInterval(interval);
+				}
+			}, 50);
+		},
 		resetMarkers() {
 			this.disabled = true;
 			this.samarina.metadata.locations = this.locations;
@@ -431,7 +459,7 @@ export default {
 				items.push(this.objData.metadata[prop]);
 			}
 			return items.find(item => {
-				return item.id === '622e1f58bbb43300095a3892'
+				return item.id === '622e1f58bbb43300095a3892';
 			});
 		},
 		filters() {
@@ -468,17 +496,23 @@ export default {
 <style lang="scss" scoped>
 .samarina {
 	.parallax {
-
 		.parallax-img {
 			top: 0;
 			left: 0;
-			background-attachment: fixed;
+
+			@media (max-width: 991.98px) {
+				background-position: center !important;
+			}
 		}
 
 		.parallax-content {
 			padding: 9.5% 6.5% 6% 6.5%;
 			background-color: rgba(255,255,255,0.8);
 			min-height: 775px;
+
+			@media (max-width: 991.98px) {
+				min-height: auto;
+			}
 		}
 	}
 

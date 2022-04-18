@@ -2,8 +2,8 @@
 	<div>
 		<home-carousel :header-height="headerHeight" ref="home" :obj-data="objData"></home-carousel>
 		<sarmaniata ref="sarmaniata" :obj-data="objData"></sarmaniata>
-		<samarina ref="samarina" :obj-data="objData"></samarina>
-		<photos ref="photos" :obj-data="objData"></photos>
+		<samarina :header-height="headerHeight" ref="samarina" :obj-data="objData"></samarina>
+		<photos ref="photos" :obj-data="objData"></photos>	
 		<events ref="events" :obj-data="objData"></events>
 		<the-footer ref="contact" :obj-data="objData" :logo="logo"></the-footer>
 	</div>
@@ -19,6 +19,7 @@ import TheFooter from '../components/TheFooter.vue';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
+import { bus } from '../main';
 
 export default {
 	props: ['obj-data', 'logo', 'header-height'],
@@ -32,10 +33,10 @@ export default {
 	},
 	methods: {
 		animations() {
-			const elements = document.getElementsByClassName('animated');
+			const elements = gsap.utils.toArray(".animated");
 			const interval = setInterval(() => {
-				if(elements && elements.length > 0) {
-					elements.forEach(item => {
+				if(elements && elements.length) {
+					elements.forEach((item) => {
 						gsap.to(item, {
 							scrollTrigger: {
 								start: "top 85%",
@@ -51,33 +52,41 @@ export default {
 		scrollSpy() {
 			const sections = this.$refs;
 			const header = this.$parent.$refs.header;
-			delete sections['header'];
-			for(const prop in sections) {
-				gsap.to(this.$refs[prop].$el, {
-					scrollTrigger: {
-						start: `top ${this.headerHeight + 5}px`,
-						end: `bottom ${this.headerHeight + 5}px`,
-						trigger: this.$refs[prop].$el,
-						onEnter: () => {
-							header.$el.querySelector(`.menu-link[href="#${prop}"]`).classList.add('active');
-						},
-						onLeave: () => {
-							header.$el.querySelector(`.menu-link[href="#${prop}"]`).classList.remove('active');
-						},
-						onEnterBack: () => {
-							header.$el.querySelector(`.menu-link[href="#${prop}"]`).classList.add('active');
-						},
-						onLeaveBack: () => {
-							header.$el.querySelector(`.menu-link[href="#${prop}"]`).classList.remove('active');
-						}
+			const interval = setInterval(() => {
+				if(sections && Object.keys(sections).length && header) {
+					for(const prop in sections) {
+						gsap.to(this.$refs[prop].$el, {
+							scrollTrigger: {
+								start: `top ${this.headerHeight + 5}px`,
+								end: `bottom ${this.headerHeight + 5}px`,
+								trigger: this.$refs[prop].$el,
+								onEnter: () => {
+									header.$el.querySelector(`.menu-link[href="#${prop}"]`).classList.add('active');
+								},
+								onLeave: () => {
+									header.$el.querySelector(`.menu-link[href="#${prop}"]`).classList.remove('active');
+								},
+								onEnterBack: () => {
+									header.$el.querySelector(`.menu-link[href="#${prop}"]`).classList.add('active');
+								},
+								onLeaveBack: () => {
+									header.$el.querySelector(`.menu-link[href="#${prop}"]`).classList.remove('active');
+								}
+							}
+						});
 					}
-				});
-			}
+					clearInterval(interval);
+				}
+			}, 150);
 		}
 	},
 	mounted() {
-		this.scrollSpy();
 		this.animations();
+	},
+	created() {
+		bus.$on('layout-complete', () => {
+			this.scrollSpy();
+		});
 	}
 }
 </script>

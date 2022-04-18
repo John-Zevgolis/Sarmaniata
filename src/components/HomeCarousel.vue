@@ -30,7 +30,7 @@ export default {
 	components: {
 		VueSlickCarousel,
 	},
-	props: ['objData', 'header-height'],
+	props: ['obj-data', 'header-height'],
 	data() {
 		return {
 			settings: {

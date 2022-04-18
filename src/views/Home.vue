@@ -5,7 +5,7 @@
 		</transition>
 		<div v-if="objData && logo && whiteLogo">
 			<the-header ref="header" :obj-data="objData" :logo="logo"></the-header>
-			<home-wrapper v-if="headerHeight" :header-height="headerHeight" :logo="whiteLogo" :obj-data="objData"></home-wrapper>
+			<home-wrapper :header-height="headerHeight" :logo="whiteLogo" :obj-data="objData"></home-wrapper>
 		</div>
 	</div>
 </template>

@@ -18,6 +18,8 @@ import * as VueGoogleMaps from 'vue2-google-maps';
 import GmapCluster from 'vue2-google-maps/dist/components/cluster';
 library.add(faFacebookF, faTwitter, faLocationDot, faPhone, faEnvelope, faAtlassian);
 import VueLazyload from 'vue-lazyload';
+import Lightbox from 'vue-lightbox-lite';
+import 'vue-lightbox-lite/dist/index.css';
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
@@ -30,6 +32,7 @@ Vue.use(VueGoogleMaps, {
 	}
 });
 Vue.component('GmapCluster', GmapCluster);
+Vue.use(Lightbox);
 
 export const bus = new Vue();
 

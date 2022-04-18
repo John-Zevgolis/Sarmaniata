@@ -78,6 +78,10 @@ h1,h2,h3,h4,h5,h6 {
 h3 {
     font-size: 1.5rem;
 
+    &.section-title {
+        margin-bottom: 2.1875rem;
+    }
+
     @media (max-width: 767.98px) {
         font-size: 1.375rem;
     }
@@ -417,6 +421,12 @@ a {
                 } 
             }
         }
+    }
+}
+
+.cool-lightbox-toolbar {
+    i[title="download"] {
+        display: none !important;
     }
 }
 </style>

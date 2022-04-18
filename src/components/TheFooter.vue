@@ -110,7 +110,7 @@
 import { bus } from '../main';
 
 export default {
-	props: ['logo', 'objData'],
+	props: ['logo', 'obj-data'],
 	data() {
 		return {
 			name: '',

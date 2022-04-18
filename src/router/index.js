@@ -31,7 +31,9 @@ const routes = [
   },
   {
     path: '/:notFound(.*)',
-    redirect: '/'
+    name: '404',
+    component: () => import('../views/404.vue')
+    // redirect: '/'
   }
 ]
 
@@ -42,6 +44,7 @@ const router = new VueRouter({
   linkActiveClass: 'active',
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {
+      console.log(savedPosition)
       return savedPosition
     } else {
       return { x: 0, y: 0 }

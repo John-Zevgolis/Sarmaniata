@@ -63,7 +63,7 @@ import ClickOutside from 'vue-click-outside';
 import { bus } from '../main';
 
 export default {
-	props: ['logo', 'objData'],
+	props: ['logo', 'obj-data'],
 	directives: {
 		ClickOutside
 	},
@@ -71,8 +71,7 @@ export default {
 		return {
 			show: false,
 			headerHeight: null,
-			timeout: null,
-			timeout2: null
+			timeout: null
 		};
 	},
 	created() {
@@ -84,22 +83,22 @@ export default {
 			if(this.timeout) clearTimeout(this.timeout);
 			this.timeout = setTimeout(() => {
 				this.handleResize(); 
+				const interval = setInterval(() => {
+					if(this.$refs.header) {
+						bus.$emit('header-height', this.$refs.header.offsetHeight);
+						clearInterval(interval);
+					}
+				}, 150);
 			}, 150);
 		});
 	},
 	methods: {
 		moveToSection(id) {
-			const y = document.querySelector(`.section[id=${id}]`).offsetTop -  this.headerHeight;
+			const y = document.querySelector(`.section[id=${id}]`).offsetTop - this.headerHeight;
 			window.scrollTo({top: y, behavior: 'smooth'});
 		},
-		onImgLoad () {
+		onImgLoad() {
 			bus.$emit('header-height', this.$refs.header.offsetHeight);
-			window.addEventListener('resize', () => {
-				if(this.timeout2) clearTimeout(this.timeout2);
-				this.timeout2 = setTimeout(() => {
-					bus.$emit('header-height', this.$refs.header.offsetHeight)
-				}, 150);
-			});
 		},
 		closeMenu() {
 			if(this.show) {

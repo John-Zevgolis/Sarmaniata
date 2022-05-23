@@ -1,11 +1,11 @@
 <template>
 	<header ref="header" class="fixed-top mx-auto py-1 py-lg-0" :class="{active: show}">
-		<div class="container-fluid">
+		<div class="container">
 			<div class="row">
 				<div class="col-12">
 					<nav class="d-flex flex-wrap flex-lg-nowrap align-items-center navbar-expand-lg px-1 px-xl-3">
 						<router-link class="d-block logo" to="/" aria-label="Home">
-							<img :src="logo.url" :alt="logo.original_name" @load="onImgLoad">
+							<img :src="logo.url" :alt="logo.original_name">
 						</router-link>
 						<div class="d-none d-lg-block">
 							<nav class="social mx-2 mx-xxl-4">
@@ -25,8 +25,8 @@
 						</div>
 						<nav class="main-menu ms-auto d-flex align-items-center justify-content-center" v-click-outside="closeMenu">
 							<ul class="nav flex-nowrap flex-lg-wrap flex-column flex-lg-row text-center text-xl-start w-100">
-								<li v-for="(item, index) in objData.metadata" :key="index">
-									<a :href="`#${item.slug}`" @click.prevent="moveToSection(item.slug)" class="d-block bg-transparent menu-link position-relative">{{item.title}}</a>
+								<li v-for="(event, index) in events.metadata.icons" :key="index">
+									<router-link :to="`${event.slug}`"  class="d-block bg-transparent menu-link position-relative">{{event.title}}</router-link>
 								</li>
 								<li class="d-lg-none mt-3">
 									<nav class="social">
@@ -60,22 +60,17 @@
 
 <script>
 import ClickOutside from 'vue-click-outside';
-import { bus } from '../main';
 
 export default {
-	props: ['logo', 'obj-data'],
+	props: ['logo', 'events'],
 	directives: {
 		ClickOutside
 	},
 	data() {
 		return {
 			show: false,
-			headerHeight: null,
 			timeout: null
 		};
-	},
-	created() {
-		bus.$on('header-height', value => this.headerHeight = value);
 	},
 	mounted() {
 		this.handleResize();
@@ -83,23 +78,10 @@ export default {
 			if(this.timeout) clearTimeout(this.timeout);
 			this.timeout = setTimeout(() => {
 				this.handleResize(); 
-				const interval = setInterval(() => {
-					if(this.$refs.header) {
-						bus.$emit('header-height', this.$refs.header.offsetHeight);
-						clearInterval(interval);
-					}
-				}, 150);
 			}, 150);
 		});
 	},
 	methods: {
-		moveToSection(id) {
-			const y = document.querySelector(`.section[id=${id}]`).offsetTop - this.headerHeight;
-			window.scrollTo({top: y, behavior: 'smooth'});
-		},
-		onImgLoad() {
-			bus.$emit('header-height', this.$refs.header.offsetHeight);
-		},
 		closeMenu() {
 			if(this.show) {
 				this.show = false;

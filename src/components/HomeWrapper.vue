@@ -39,7 +39,7 @@ export default {
 					elements.forEach((item) => {
 						gsap.to(item, {
 							scrollTrigger: {
-								start: "top 85%",
+								start: "top 80%",
 								trigger: item,
 								onEnter: () => item.classList.add('fire')
 							}

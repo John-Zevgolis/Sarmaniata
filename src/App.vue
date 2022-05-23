@@ -8,11 +8,7 @@
 export default {
     metaInfo () {
         return {
-            title: 'Sarmaniata',
-            meta: [
-                {name: 'description', content: 'Ομάδα για τη φύση και τον πολιτισμό της Σαμαρίνας'},
-                {name: 'keywords', content: 'sarmaniata, samarina, festival, σαμαρινα, φεστιβαλ'}
-            ]
+            title: 'Sarmaniata'
         }
     },
 }
@@ -427,6 +423,39 @@ a {
 .cool-lightbox-toolbar {
     i[title="download"] {
         display: none !important;
+    }
+}
+
+.inner-page {
+    margin-top: 105px;
+
+    .bg-img {
+        padding-top: 44.21875%;
+    }
+
+    p:not(.info p, .info-text p) {
+        font-size: 1.25rem;
+        font-style: italic;
+        font-family: 'GFS Didot', serif;
+
+        @media (max-width: 767.98px) {
+            font-size: 1.125rem;
+        }
+    }
+
+    .info {
+        p {
+            font-size: 0.8125rem;
+            line-height: 1.5;
+        }
+    }
+
+    .info-text {
+        p {
+            @media (max-width: 767.98px) {
+                font-size: 0.875rem;
+            }
+        }
     }
 }
 </style>

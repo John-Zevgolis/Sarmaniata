@@ -19,7 +19,8 @@ const store = new Vuex.Store({
 			homepageObjData: null,
 			logo: null,
 			whiteLogo: null,
-			response: null
+			response: null,
+			events: null
 		};
 	},
 	mutations: {
@@ -37,6 +38,9 @@ const store = new Vuex.Store({
 		},
 		saveResponse(state, payload) {
 			state.response = payload;
+		},
+		storeEventsData(state, payload) {
+			state.events = payload;
 		}
 	},
 	actions: {
@@ -45,6 +49,12 @@ const store = new Vuex.Store({
 				id: payload.id,
 				props: payload.props
 			}).then(response => commit('storeData', response.object));
+		},
+		fetchEvents({commit}, payload) {
+			bucket.getObject({
+				id: payload.id,
+				props: payload.props
+			}).then(response => commit('storeEventsData', response.object));
 		},
 		fetchHomepage({commit}, payload) {
 			bucket.getObject({
@@ -95,6 +105,9 @@ const store = new Vuex.Store({
 		},
 		response(state) {
 			return state.response;
+		},
+		events(state) {
+			return state.events;
 		}
 	}
 });

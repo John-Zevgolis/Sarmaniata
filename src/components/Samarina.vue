@@ -6,13 +6,7 @@
 				<div class="row gx-0">
 					<div class="col-lg-6 offset-lg-6">
 						<div class="parallax-content">
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur et libero ut nunc pharetra commodo non eget odio. Curabitur ultricies, eros in scelerisque malesuada, justo augue gravida felis, id dapibus mi purus quis tortor. Nullam congue lacus ipsum, ut pellentesque arcu semper id. Sed ultricies pellentesque sem, eget posuere enim elementum sed. Aenean tempus turpis vitae elementum molestie. Donec varius eu metus nec lacinia. Vestibulum maximus sem at est aliquet, et convallis dui tempor. Pellentesque sed sollicitudin velit. Etiam fermentum nibh ipsum, quis imperdiet nisi vulputate laoreet.
-
-Morbi vitae eros id velit iaculis ullamcorper quis quis velit. Curabitur pellentesque pellentesque nisi et tincidunt. Nunc et est fermentum, aliquet velit vitae, hendrerit mauris. Donec mi nisi, faucibus eu vulputate eget, dapibus eget dolor. Nulla facilisi. Etiam tincidunt massa non neque elementum condimentum. Donec euismod ex lorem, ut sagittis dui congue sit amet.
-
-Mauris ut tortor sed est tempus sodales. Nullam a sapien magna. Vestibulum sit amet libero at purus tincidunt varius. Maecenas turpis tellus, sollicitudin a libero sed, ultricies sodales odio. Phasellus vel dui id dui sollicitudin pretium vitae nec lectus. Curabitur eget maximus neque. Phasellus sed nibh risus. Proin at velit magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-
-Nullam rhoncus e</p>
+							<h3 class="from-bottom animated section-title underline">{{samarina.title}}</h3>
 						</div>
 					</div>
 				</div>
@@ -126,185 +120,168 @@ export default {
 			options: {
 				fullscreenControl: false,
 				styles: [
-				{
-				"featureType": "all",
-				"elementType": "labels",
-				"stylers": [
-				{
-				"visibility": "off"
-				}
-				]
-				},
-				// {
-				// "featureType": "water",
-				// "elementType": "geometry",
-				// "stylers": [
-				// {
-				// "visibility": "on"
-				// },
-				// {
-				// "color": "#aee2e0"
-				// }
-				// ]
-				// },
-				// {
-				// "featureType": "landscape",
-				// "elementType": "geometry.fill",
-				// "stylers": [
-				// {
-				// "color": "#abce83"
-				// }
-				// ]
-				// },
-				// {
-				// "featureType": "poi",
-				// "elementType": "geometry.fill",
-				// "stylers": [
-				// {
-				// "color": "#769E72"
-				// }
-				// ]
-				// },
-				// {
-				// "featureType": "poi",
-				// "elementType": "labels.text.fill",
-				// "stylers": [
-				// {
-				// "color": "#7B8758"
-				// }
-				// ]
-				// },
-				// {
-				// "featureType": "poi",
-				// "elementType": "labels.text.stroke",
-				// "stylers": [
-				// {
-				// "color": "#EBF4A4"
-				// },
-				// ]
-				// },
-				// {
-				// "featureType": "poi.park",
-				// "elementType": "geometry",
-				// "stylers": [
-				// {
-				// "visibility": "simplified"
-				// },
-				// {
-				// "color": "#8dab68"
-				// }
-				// ]
-				// },
-				// {
-				// "featureType": "road",
-				// "elementType": "geometry.fill",
-				// "stylers": [
-				// {
-				// "visibility": "simplified"
-				// }
-				// ]
-				// },
-				// {
-				// "featureType": "road",
-				// "elementType": "labels.text.fill",
-				// "stylers": [
-				// {
-				// "color": "#5B5B3F"
-				// }
-				// ]
-				// },
-				// {
-				// "featureType": "road",
-				// "elementType": "labels.text.stroke",
-				// "stylers": [
-				// {
-				// "color": "#ABCE83"
-				// }
-				// ]
-				// },
-				// {
-				// "featureType": "road.local",
-				// "elementType": "geometry",
-				// "stylers": [
-				// {
-				// "color": "#A4C67D"
-				// }
-				// ]
-				// },
-				// {
-				// "featureType": "road.arterial",
-				// "elementType": "geometry",
-				// "stylers": [
-				// {
-				// "color": "#9BBF72"
-				// }
-				// ]
-				// },
-				// {
-				// "featureType": "road.highway",
-				// "elementType": "geometry",
-				// "stylers": [
-				// {
-				// "color": "#EBF4A4"
-				// }
-				// ]
-				// },
-				// {
-				// "featureType": "transit",
-				// "stylers": [
-				// {
-				// "visibility": "off"
-				// }
-				// ]
-				// },
-				// {
-				// "featureType": "administrative",
-				// "elementType": "geometry.stroke",
-				// "stylers": [
-				// {
-				// "visibility": "on"
-				// },
-				// {
-				// "color": "#87ae79"
-				// }
-				// ]
-				// },
-				// {
-				// "featureType": "administrative",
-				// "elementType": "geometry.fill",
-				// "stylers": [
-				// {
-				// "visibility": "off"
-				// }
-				// ]
-				// },
-				// {
-				// "featureType": "administrative",
-				// "elementType": "labels.text.fill",
-				// "stylers": [
-				// {
-				// "color": "#495421"
-				// }
-				// ]
-				// },
-				// {
-				// "featureType": "administrative.neighborhood",
-				// "elementType": "labels",
-				// "stylers": [
-				// {
-				// "visibility": "off"
-				// }
-				// ]
-				// },
-				{
-				"featureType": "landscape.man_made",
-				"elementType": "geometry.fill",
-				"stylers": [
-				{
-				"visibility": "off"
-				}
-				]
-				},
+					{
+					"featureType": "administrative.locality",
+					"elementType": "all",
+					"stylers": [
+					{
+					"hue": "#0049ff"
+					},
+					{
+					"saturation": 7
+					},
+					{
+					"lightness": 19
+					},
+					{
+					"visibility": "on"
+					}
+					]
+					},
+					{
+					"featureType": "landscape",
+					"elementType": "all",
+					"stylers": [
+					{
+					"hue": "#ff0000"
+					},
+					{
+					"saturation": -100
+					},
+					{
+					"lightness": 100
+					},
+					{
+					"visibility": "simplified"
+					}
+					]
+					},
+					{
+					"featureType": "poi",
+					"elementType": "all",
+					"stylers": [
+					{
+					"hue": "#ff0000"
+					},
+					{
+					"saturation": -100
+					},
+					{
+					"lightness": 100
+					},
+					{
+					"visibility": "off"
+					}
+					]
+					},
+					{
+					"featureType": "road",
+					"elementType": "geometry",
+					"stylers": [
+					{
+					"hue": "#008eff"
+					},
+					{
+					"saturation": -93
+					},
+					{
+					"lightness": 31
+					},
+					{
+					"visibility": "simplified"
+					}
+					]
+					},
+					{
+					"featureType": "road",
+					"elementType": "labels",
+					"stylers": [
+					{
+					"hue": "#008eff"
+					},
+					{
+					"saturation": -93
+					},
+					{
+					"lightness": 31
+					},
+					{
+					"visibility": "on"
+					}
+					]
+					},
+					{
+					"featureType": "road.arterial",
+					"elementType": "labels",
+					"stylers": [
+					{
+					"hue": "#bbc0c4"
+					},
+					{
+					"saturation": -93
+					},
+					{
+					"lightness": -2
+					},
+					{
+					"visibility": "simplified"
+					}
+					]
+					},
+					{
+					"featureType": "road.local",
+					"elementType": "geometry",
+					"stylers": [
+					{
+					"hue": "#007fff"
+					},
+					{
+					"saturation": -90
+					},
+					{
+					"lightness": -16
+					},
+					// {
+					// 	"color": "#d9d9d9"
+					// },
+					{
+					"visibility": "simplified"
+					}
+					]
+					},
+					{
+					"featureType": "transit",
+					"elementType": "all",
+					"stylers": [
+					{
+					"hue": "#007fff"
+					},
+					{
+					"saturation": 10
+					},
+					{
+					"lightness": 69
+					},
+					{
+					"visibility": "on"
+					}
+					]
+					},
+					{
+					"featureType": "water",
+					"elementType": "all",
+					"stylers": [
+					{
+					"visibility": "on"
+					},
+					{
+					"color": "#4683b9"
+					},
+					{
+					"lightness": "30"
+					}
+					]
+					}
 				]
 			},
 			clusterStyles: [
@@ -328,11 +305,10 @@ export default {
 		parallax() {
 			const elements = gsap.utils.toArray(".parallax-img");
 			const interval = setInterval(() => {
-				if(elements && elements.length) {
+				if(elements && elements.length && this.headerHeight) {
 					elements.forEach((img) => {
-						img.style.backgroundPosition = "50% 0px"; 
 						gsap.to(img, {
-							backgroundPosition: `50% ${innerHeight / 2}px`,
+							y: innerHeight / 2,
 							ease: Power0.easeNone,
 							scrollTrigger: {
 								trigger: img,
@@ -499,16 +475,17 @@ export default {
 		.parallax-img {
 			top: 0;
 			left: 0;
-
-			@media (max-width: 991.98px) {
-				background-position: center !important;
-			}
 		}
 
 		.parallax-content {
 			padding: 9.5% 6.5% 6% 6.5%;
 			background-color: rgba(255,255,255,0.8);
 			min-height: 775px;
+
+			p {
+				font-style: italic;
+				font-family: "GFS Didot", serif;
+			}
 
 			@media (max-width: 991.98px) {
 				min-height: auto;

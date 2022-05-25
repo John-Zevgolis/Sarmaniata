@@ -20,7 +20,8 @@ const store = new Vuex.Store({
 			logo: null,
 			whiteLogo: null,
 			response: null,
-			events: null
+			events: null,
+			registration: null
 		};
 	},
 	mutations: {
@@ -41,6 +42,9 @@ const store = new Vuex.Store({
 		},
 		storeEventsData(state, payload) {
 			state.events = payload;
+		},
+		saveRegistration(state, payload) {
+			state.registration = payload;
 		}
 	},
 	actions: {
@@ -85,7 +89,19 @@ const store = new Vuex.Store({
 			axios.post('/process.php', data).then(res => res.data, err => console.log(err.message))
 			.then(res => {
 				commit('saveResponse', res);
-				if(res.status === 'success') bus.$emit('reset');
+				if(res.status === 'success') bus.$emit('resetForm');
+			})
+			.catch(err => console.log(err.message));
+		},
+		register({commit}, payload) {
+			const data = new FormData();
+			data.append('name', payload.name);
+			data.append('phone', payload.phone);
+			data.append('members', payload.members);
+			axios.post('/registration.php', data).then(res => res.data, err => console.log(err.message))
+			.then(res => {
+				commit('saveRegistration', res);
+				if(res.status === 'success') bus.$emit('resetRegistrationForm');
 			})
 			.catch(err => console.log(err.message));
 		}
@@ -108,6 +124,9 @@ const store = new Vuex.Store({
 		},
 		events(state) {
 			return state.events;
+		},
+		registration(state) {
+			return state.registration;
 		}
 	}
 });

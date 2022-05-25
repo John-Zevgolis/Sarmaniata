@@ -142,8 +142,6 @@ img {
     }
 }
 
-
-
 @keyframes overlay {
     from {
         transform: scaleY(1);
@@ -427,7 +425,19 @@ a {
 }
 
 .inner-page {
-    margin-top: 105px;
+    margin-top: 115px;
+
+    @media (max-width: 1399.98px) {
+        margin-top: 96.5px;
+    }
+
+    @media (max-width: 1199.98px) {
+        margin-top: 97.5px;
+    }
+
+    @media (max-width: 991.98px) {
+        margin-top: 97.4px;
+    }
 
     .bg-img {
         padding-top: 44.21875%;

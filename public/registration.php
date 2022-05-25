@@ -5,9 +5,8 @@ $data=array();
 $errors=array();
 
 $name = $_POST["name"];
-$email = $_POST["email"];
-$subject = $_POST["subject"];
-$message = $_POST["message"];
+$phone = $_POST["phone"];
+$members = $_POST["members"];
 
 if (empty($name)) {
 
@@ -20,42 +19,51 @@ if (empty($name)) {
 
 }
 
-if (empty($email)) {
+if (empty($phone)) {
 
     array_push($errors, (object)[
-        "field" => "email",
+        "field" => "phone",
         "text" => "Το πεδίο είναι υποχρεωτικό",
     ]);
 
     $formerrors=true;
 
-} else if( !filter_var($email,FILTER_VALIDATE_EMAIL) ) {
+} else if(strlen($phone) < 10 || strlen($phone) > 10) {
 
     array_push($errors, (object)[
-        "field" => "email",
-        "text" => "Το email δεν είναι έγκυρο",
+        "field" => "phone",
+        "text" => "Το πεδίο πρέπει να έχει 10 ψηφία",
     ]);
 
     $formerrors=true;
 
 }
 
-if (empty($subject)) {
+if (empty($members)) {
     
     array_push($errors, (object)[
-        "field" => "subject",
-        "text" => "Το πεδίο είναι υποχρεωτικό",
+        "field" => "members",
+        "text" => "Πρέπει να επιλέξετε τουλάχιστον 1 άτομο",
+    ]);
+
+    $formerrors=true;
+
+} else if ($members > 4) {
+
+    array_push($errors, (object)[
+        "field" => "members",
+        "text" => "Μπορείτε να επιλέξετε μέχρι 4 άτομα",
     ]);
 
     $formerrors=true;
 
 }
 
-if (empty($message)) {
+else if ($members < 1) {
 
     array_push($errors, (object)[
-        "field" => "message",
-        "text" => "Το πεδίο είναι υποχρεωτικό",
+        "field" => "members",
+        "text" => "Πρέπει να επιλέξετε τουλάχιστον 1 άτομο",
     ]);
 
     $formerrors=true;
@@ -69,15 +77,15 @@ if (!$formerrors) {
     $header  = "Content-Type: text/plain; charset= UTF-8\r\n";
     $header  = "\r\n"; 
     $to="tasou.ga@hotmail.com";
-    $subject="Θέμα: " .$subject;
+    $subject="Θέμα: Δήλωση συμμετοχής";
     $body="Στοιχεια επισκέπτη \n";
     $body.="Ονομα: $name \n";
-    $body.="Εmail: $email \n";
-    $body.="Μηνυμα: $message \n";
+    $body.="Τηλέφωνο: $phone \n";
+    $body.="Αριθμός ατόμων: $members \n";
 
     $r=mail($to,$subject,$body,$headers);
 
-    $data["text"] = "Το μήνυμά σας απεστάλη με επιτυχία! Θα επικοινωνήσουμε άμεσα μαζί σας τις επομένες ώρες.";
+    $data["text"] = "Σε τσακώσαμε! Αντάμωση μπούνε στο παιχνίδι μας.";
     $data["status"] = "success";
     echo json_encode($data);
 

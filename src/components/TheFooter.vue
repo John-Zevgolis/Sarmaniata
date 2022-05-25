@@ -37,7 +37,7 @@
 						</div>
 						<div class="col-lg-5 offset-lg-2">
 							<div class="contact mt-4 mt-lg-0">
-								<h3 class="pb-3 underline text-white fw-normal">{{contact.title}}</h3>
+								<h3 class="pb-3 underline text-white">{{contact.title}}</h3>
 								<div class="subtitle">
 									<p>Για να επικοινωνήσετε μαζί μας, συμπληρώστε την παρακάτω φόρμα.</p>
 									<p><small>* Δεχόμαστε μηνύματα και στη βλαχική</small> <i class="bi bi-emoji-wink"></i></p>
@@ -65,9 +65,7 @@
 										<button :class="{disabled: response && response.status === 'success'}" :disabled="response && response.status === 'success'" class="form-control btn shadow-none rounded-0 my-0 w-auto">ΑΠΟΣΤΟΛΗ</button>
 									</div>
 								</form>
-								<div class="alert alert-success mb-0 mt-4" v-if="response && response.status === 'success'" role="alert">
-									Το μήνυμά σας απεστάλη με επιτυχία! Θα επικοινωνήσουμε άμεσα μαζί σας τις επομένες ώρες.
-								</div>
+								<div class="alert alert-success mb-0 mt-4" v-if="response && response.status === 'success'" role="alert">{{response.text}}</div>
 							</div>
 						</div>
 					</div>
@@ -120,12 +118,12 @@ export default {
 		};
 	},
 	created() {
-		bus.$on('reset', () => {
+		bus.$on('resetForm', () => {
 			this.name = '';
 			this.email = '';
 			this.subject = '';
 			this.message = '';
-		})
+		});
 	},
 	methods: {
 		errorMessage(field, res) {

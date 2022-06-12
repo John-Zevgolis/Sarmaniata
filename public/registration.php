@@ -48,7 +48,7 @@ if (empty($members)) {
 
     $formerrors=true;
 
-} else if ($members > 4) {
+} else if ($members > 5) {
 
     array_push($errors, (object)[
         "field" => "members",

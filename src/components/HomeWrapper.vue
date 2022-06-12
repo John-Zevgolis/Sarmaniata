@@ -3,8 +3,8 @@
 		<home-carousel :header-height="headerHeight" ref="home" :obj-data="objData"></home-carousel>
 		<sarmaniata ref="sarmaniata" :obj-data="objData"></sarmaniata>
 		<samarina :header-height="headerHeight" ref="samarina" :obj-data="objData"></samarina>
-		<photos ref="photos" :obj-data="objData"></photos>	
 		<events ref="events" :obj-data="objData"></events>
+		<photos ref="photos" :obj-data="objData"></photos>	
 		<the-footer ref="contact" :obj-data="objData" :logo="logo"></the-footer>
 	</div>
 </template>
@@ -39,7 +39,7 @@ export default {
 					elements.forEach((item) => {
 						gsap.to(item, {
 							scrollTrigger: {
-								start: "top 80%",
+								start: "top 90%",
 								trigger: item,
 								onEnter: () => item.classList.add('fire')
 							}

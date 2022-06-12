@@ -1,5 +1,5 @@
 <template>
-	<section class="section photos" id="photos">
+	<section class="section photos pt-3 pt-md-5" id="photos">
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
@@ -118,11 +118,11 @@ export default {
 
 <style lang="scss">
 .photos {
-	padding-top: 7.5rem;
+	// padding-top: 7.5rem;
 
-	@media (max-width: 991.98px) {
-		padding-top: 4.0625rem;
-	}
+	// @media (max-width: 991.98px) {
+	// 	padding-top: 4.0625rem;
+	// }
 
 	p {
 		font-style: italic;

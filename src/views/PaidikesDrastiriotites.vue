@@ -25,11 +25,12 @@
 					</div>
 					<div class="row mt-4 mt-md-5" v-if="objData.metadata">
 						<div class="col-lg-7 mb-5 mb-lg-0">
-							<img v-if="objData.metadata.instructions" v-lazy="objData.metadata.instructions.url">
+							<img v-if="objData.metadata.map" v-lazy="objData.metadata.map.url">
 						</div>
 						<div class="col-lg-5">
-							<h3 class="pb-3 underline section-title">ΦΟΡΜΑ ΣΥΜΜΕΤΟΧΗΣ</h3>
-							<div class="form">
+							<h3 class="pb-3 underline section-title mb-0">ΦΟΡΜΑ ΣΥΜΜΕΤΟΧΗΣ</h3>
+							<div v-if="objData.metadata.form_text" v-html="objData.metadata.form_text"></div>
+							<div class="form mt-4">
 								<form @submit.prevent="submitForm" novalidate>
 									<div class="mb-3">
 										<input :disabled="registration && registration.status === 'success'" :class="{error: registration && registration.status === 'error' && errorMessage('name', registration)}" class="form-control rounded-0" placeholder="Ονοματεπώνυμο" v-model="name" name="name" type="text">
@@ -40,7 +41,7 @@
 										<span class="d-block error text-danger" v-if="registration && registration.status === 'error' && errorMessage('phone', registration)">{{errorMessage('phone', registration)}}</span>
 									</div>
 									<div class="mb-3">
-										<input min="1" max="4" :disabled="registration && registration.status === 'success'" :class="{error: registration && registration.status === 'error' && errorMessage('members', registration)}" class="form-control rounded-0" placeholder="Άτομα" v-model="members" name="members" type="number">
+										<input min="1" max="5" :disabled="registration && registration.status === 'success'" :class="{error: registration && registration.status === 'error' && errorMessage('members', registration)}" class="form-control rounded-0" placeholder="Άτομα" v-model="members" name="members" type="number">
 										<span class="d-block error text-danger" v-if="registration && registration.status === 'error' && errorMessage('members', registration)">{{errorMessage('members', registration)}}</span>
 									</div>
 									<div class="mt-4 d-flex justify-content-end">
@@ -53,6 +54,7 @@
 					</div>
 				</div>
 			</section>
+			<modal :objData="objData"></modal>
 		</div>
 	</div>
 </template>
@@ -62,12 +64,14 @@ import data from '../mixins/data';
 import Loader from '../components/Loader.vue';
 import InnerHeader from '../components/InnerHeader.vue';
 import { bus } from '../main';
+import Modal from '../components/Modal.vue';
 
 export default {
 	mixins: [data],
 	components: {
 		Loader,
-		InnerHeader
+		InnerHeader,
+		Modal
 	},
 	data() {
 		return {
@@ -132,6 +136,10 @@ export default {
 </script>
 
 <style lang="scss">
+p a, p a:hover {
+	color: inherit;
+}
+
 .form {
 	.form-control,
 	.form-control:-webkit-autofill,

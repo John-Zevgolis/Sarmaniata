@@ -2,6 +2,7 @@ import Vue from 'vue';
 import 'bootstrap/scss/bootstrap.scss';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'hamburgers/dist/hamburgers.min.css';
+import 'bootstrap/js/dist/modal';
 import App from './App.vue';
 import router from './router';
 import store from './store';

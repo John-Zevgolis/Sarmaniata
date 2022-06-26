@@ -15,7 +15,7 @@
 		</div>
 		<LightBox @close="active = null" :index="active" :items="fancybox"/>
 		<isotope ref="grid" class="grid" :options='options' :list="photos.metadata.gallery" @filter="layoutComplete" v-images-loaded:on.progress="layout">
-			<div class="col-md-6 col-lg-4 col-xl-3" v-for="(item, index) in photos.metadata.gallery" :key="index">
+			<div class="col-md-6 col-lg-3" v-for="(item, index) in photos.metadata.gallery" :key="index">
 				<img width="100%" height="100%" :alt="item.title" :src="item.thumbnail" @click="findIndex(item)">
 			</div>
 		</isotope>

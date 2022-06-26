@@ -19,10 +19,11 @@
 						<span>&#10006;</span>
 					</button>
 					<div class="project-box w-100 d-flex flex-column">
-						<div class="box-content bg-white pt-4 px-4 flex-grow-1">
+						<div class="box-content d-flex align-items-start flex-column bg-white p-4 flex-grow-1">
 							<h5 class="title" v-if="infoboxContent.title">
 								<span class="field">{{infoboxContent.title}}</span>
 							</h5>
+							<a class="btn custom-btn shadow-none rouded-0 px-3 py-2 mt-auto" target="_blank" :href="`https://www.google.com/maps/search/?api=1&query=${infoboxContent.lat}%2C${infoboxContent.lon}`">Οδηγίες</a>
 						</div>
 					</div>
 				</div>
@@ -56,10 +57,16 @@
 						:position="{'lat':marker.lat, 'lng': marker.lon}"
 						:icon="{url: getMarkers(marker)}"
 						:clickable="true"
+						:label="{
+							text: marker.title,
+							className: 'marker-position'
+						}"
 						@click="infobox({
 							title: marker.title,
 							position: $event.latLng,
-							id: marker.id
+							id: marker.id,
+							lat: marker.lat,
+							lon: marker.lon
 						})"
 					/>
 				</GmapCluster>
@@ -85,7 +92,7 @@
 							</div>
 						</div>
 						<div class="text-center mt-auto">
-							<button class="reset-btn btn shadow-none rouded-0" :class="{disabled: disabled}" :disabled="disabled" @click="resetMarkers">ΑΚΥΡΩΣΗ ΦΙΛΤΡΩΝ</button>
+							<button class="custom-btn btn shadow-none rouded-0 px-4 py-3" :class="{disabled: disabled}" :disabled="disabled" @click="resetMarkers">ΑΚΥΡΩΣΗ ΦΙΛΤΡΩΝ</button>
 						</div>
 					</div>
 				</transition>
@@ -385,14 +392,16 @@ export default {
 				}
 			}
 		},
-		infobox({ title, position, id }) {
+		infobox({ title, position, id, lat, lon }) {
 			if(this.selectedMarker === id) return;
 			this.showInfoBox = true;
 			this.infoLoading = true;
 			this.selectedMarker = id;
 			this.infoboxContent = {
 				title,
-				position
+				position,
+				lat,
+				lon
 			}
 			this.$refs.Map.panTo(this.infoboxContent.position);
 		},
@@ -527,8 +536,8 @@ export default {
 			}
 
 			.close-btn {
-				top: 0;
-				right: 0;
+				top: 5px;
+				right: 5px;
 				font-size: 1.3rem;
 				color: #181818;
 			}
@@ -716,21 +725,19 @@ export default {
 					}
 				}
 			}
+		}
 
-			.reset-btn {
-				background: #181818;
-				color: #fff;
-				outline: none;
-				width: 200px;
-				height: 50px;
-				border: 1px solid #181818;
-				transition: all .3s;
-				cursor: pointer;
+		.custom-btn {
+			background: #181818;
+			color: #fff;
+			outline: none;
+			border: 1px solid #181818;
+			transition: all .3s;
+			cursor: pointer;
 
-				&:hover {
-					background: transparent;
-					color: #181818;
-				}
+			&:hover {
+				background: transparent;
+				color: #181818;
 			}
 		}
 	}

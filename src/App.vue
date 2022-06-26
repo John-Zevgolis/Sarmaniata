@@ -420,6 +420,12 @@ a {
                 } 
             }
         }
+
+        .marker-position {
+            top: 40px;
+            left: 0;
+            position: relative;
+        }
     }
 }
 

@@ -13,7 +13,7 @@
 							<router-link class="d-inline-block opacity-0 animated" :to="`${event.slug}`">
 								<span class="icon position-relative d-flex justify-content-center align-items-center rounded-circle mx-auto animated scale">
 									<i class="bi bi-camera-reels-fill" v-if="event.slug === 'provoles'"></i>
-									<i class="bi bi-puzzle-fill" v-if="event.slug === 'paidikes-drastiriotites'"></i>
+									<i class="bi bi-puzzle-fill" v-if="event.slug === 'paixnidi'"></i>
 									<i class="bi bi-chat-dots-fill" v-if="event.slug === 'syzitiseis'"></i>
 									<font-awesome-icon icon="fa-brands fa-atlassian" v-if="event.slug === 'alles-ekdilwseis'" />
 								</span>

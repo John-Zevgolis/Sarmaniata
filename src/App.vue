@@ -51,7 +51,7 @@ body {
 h1,h2,h3,h4,h5,h6 {
     font-weight: 400;
     margin-bottom: 1rem;
-    line-height: 24px;
+    line-height: 34px;
 
     &.underline {
         &:after {
@@ -67,7 +67,6 @@ h1,h2,h3,h4,h5,h6 {
     &.section-title {
         color: #181818;
         letter-spacing: 4px;
-        line-height: 24px;
     }
 }
 
@@ -95,6 +94,12 @@ p {
 img {
   height: auto;
   max-width: 100%;
+}
+
+.text-justify {
+    p {
+        text-align: justify;
+    }
 }
 
 .logo {

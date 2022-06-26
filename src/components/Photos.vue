@@ -7,7 +7,7 @@
 					<div class="from-bottom animated" v-html="photos.content"></div>
 					<ul class="nav justify-content-end filters">
 						<li v-for="(value, key, index) in options.getFilterData" :key="index">
-							<button :class="{active: activeClass === index}" @click="filter(key, index)">{{key}}</button>
+							<button :class="{active: activeClass === index}" @click="filter(key, index)">{{key === 'ΠΕΤΡΑ' ? 'ΠΕΤΡΑ & ΝΕΡΟ' : key}}</button>
 						</li>
 					</ul>
 				</div>
@@ -43,17 +43,14 @@ export default {
 					ΟΛΕΣ() {
 						return true;
 					},
-					ΕΚΚΛΗΣΙΕΣ(el) {
-						return el.metadata.category === "ΕΚΚΛΗΣΙΕΣ"
+					ΠΕΤΡΑ(el) {
+						return el.metadata.category === "ΠΕΤΡΑ"
 					},
-					ΣΠΙΤΙΑ(el) {
-						return el.metadata.category === "ΣΠΙΤΙΑ";
+					ΓΗ(el) {
+						return el.metadata.category === "ΓΗ";
 					},
-					ΜΟΥΣΕΙΑ(el) {
-						return el.metadata.category === "ΜΟΥΣΕΙΑ";
-					},
-					ΚΑΘΗΜΕΡΙΝΟΤΗΤΑ(el) {
-						return el.metadata.category === "ΚΑΘΗΜΕΡΙΝΟΤΗΤΑ";
+					ΖΩΗ(el) {
+						return el.metadata.category === "ΖΩΗ";
 					}
 				},
 			},
@@ -86,7 +83,7 @@ export default {
 			} else {
 				this.fancybox = this.photos.metadata.gallery.map(item => {
 					return item.thumbnail;
-				})
+				});
 			}
 
 			this.$refs.grid.filter(key);
@@ -118,12 +115,6 @@ export default {
 
 <style lang="scss">
 .photos {
-	// padding-top: 7.5rem;
-
-	// @media (max-width: 991.98px) {
-	// 	padding-top: 4.0625rem;
-	// }
-
 	p {
 		font-style: italic;
 		font-family: "GFS Didot", serif;

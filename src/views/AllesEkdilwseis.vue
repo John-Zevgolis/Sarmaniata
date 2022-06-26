@@ -5,23 +5,16 @@
 		</transition>
 		<div v-if="objData && logo && events">
 			<inner-header ref="header" :events="events" :logo="logo"></inner-header>
-			<section class="inner-page pt-4 pb-5">
+			<section class="inner-page py-5">
 				<div class="container">
-					skatoules
-<!-- 					<div class="row align-items-center">
-						<div class="col-lg-10">
-							<div class="bg-img" v-lazy:background-image="objData.thumbnail"></div>
-						</div>
-						<div class="col-lg-2 info mt-4 mt-lg-0 text-center text-lg-start">
-							<p><strong>τοποθεσία:</strong> {{objData.metadata.location}}</p>
-							<p><strong>ημερομηνίες:</strong> {{objData.metadata.date}}</p>
-							<p><strong>ώρα:</strong> {{objData.metadata.time}}</p>
-							<p><strong>διοργάνωση:</strong> {{objData.metadata.organization}}</p>
+					<div class="row mb-5" v-for="(activity, index) in objData.metadata.ekdilwseis" :key="index">
+						<div class="col-12">
+							<div class="img-wrapper ps-lg-4 mb-4 mb-lg-0" v-if="activity.metadata.image">
+								<img v-lazy="activity.metadata.image.url">
+							</div>
+							<span class="text-justify" v-if="activity.metadata.text" v-html="activity.metadata.text"></span>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-12 mt-4 text-center" v-html="objData.content"></div>
-					</div> -->
 				</div>
 			</section>
 		</div>
@@ -43,9 +36,35 @@ export default {
 		fetchData() {
 			this.$store.dispatch('fetchContent', {
 				id: '62496ed86d83ac0009358a4f',
-				props: 'title,content,metadata,thumbnail'
+				props: 'title,content,thumbnail,metadata'
 			});   
 		}
 	}
 };
 </script>
+
+<style lang="scss">
+.img-wrapper {
+	float: right;
+	width: 100%;
+	max-width: 50%;
+	
+
+	@media (max-width: 991.98px) {
+		float: none;
+		max-width: none;
+	}
+}
+
+h2 {
+	span {
+		font-size: 2.5rem;
+		font-family: "GFS Didot", serif;
+		font-style: italic;
+
+		@media (max-width: 1199.98px) {
+			font-size: calc(1.825rem + 0.9vw);
+		}
+	}
+}
+</style>

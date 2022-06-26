@@ -15,9 +15,9 @@ const routes = [
     component: () => import('../views/Provoles.vue')
   },
   {
-    path: '/paidikes-drastiriotites',
-    name: 'PaidikesDrastiriotites',
-    component: () => import('../views/PaidikesDrastiriotites.vue')
+    path: '/paixnidi',
+    name: 'Paixnidi',
+    component: () => import('../views/Paixnidi.vue')
   },
   {
     path: '/syzitiseis',

@@ -169,6 +169,7 @@ export default {
 <style lang="scss">
 footer {
 	background: #181818;
+	margin-top: -1px;
 
 	.description, p {
 		color: #696969;

@@ -422,7 +422,7 @@ a {
         }
 
         .marker-position {
-            top: 40px;
+            top: 35px;
             left: 0;
             position: relative;
         }

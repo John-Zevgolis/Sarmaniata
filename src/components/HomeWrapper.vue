@@ -39,7 +39,7 @@ export default {
 					elements.forEach((item) => {
 						gsap.to(item, {
 							scrollTrigger: {
-								start: "top 90%",
+								start: "top 75%",
 								trigger: item,
 								onEnter: () => item.classList.add('fire')
 							}
@@ -77,7 +77,7 @@ export default {
 					}
 					clearInterval(interval);
 				}
-			}, 150);
+			}, 50);
 		}
 	},
 	mounted() {

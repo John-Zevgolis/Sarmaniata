@@ -4,6 +4,7 @@
 		"lat": 40.13144,
 		"lon": 20.98058,
 		"title": "Βρύση Γκρέκου",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1892-waterfall_4x.png&highlight=0288D1,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -17,6 +18,7 @@
 		"lat": 40.12111,
 		"lon": 20.96586,
 		"title": "Συντιλιούς",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1624-medical_4x.png&highlight=A52714,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -30,6 +32,7 @@
 		"lat": 40.12209,
 		"lon": 20.9789,
 		"title": "Βερδικόντσα",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1720-tree_4x.png&highlight=097138,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -43,6 +46,7 @@
 		"lat": 40.12496,
 		"lon": 21.03517,
 		"title": "Μπράτου",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1720-tree_4x.png&highlight=097138,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -56,6 +60,7 @@
 		"lat": 40.13156,
 		"lon": 21.06082,
 		"title": "Άγιος Μάμας",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1624-medical_4x.png&highlight=A52714,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -69,6 +74,7 @@
 		"lat": 40.10998,
 		"lon": 20.98637,
 		"title": "Μπογδάνος",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1624-medical_4x.png&highlight=A52714,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -82,6 +88,7 @@
 		"lat": 40.10666,
 		"lon": 21.03112,
 		"title": "Κινέτo",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1603-house_4x.png&highlight=A52714,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -95,6 +102,7 @@
 		"lat": 40.10138,
 		"lon": 21.0195,
 		"title": "Μαντάνια",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1892-waterfall_4x.png&highlight=0288D1,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -108,6 +116,7 @@
 		"lat": 40.10152,
 		"lon": 21.024,
 		"title": "Μαντάνια Πίβουλα",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1892-waterfall_4x.png&highlight=0288D1,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -121,6 +130,7 @@
 		"lat": 40.10451,
 		"lon": 21.02208,
 		"title": "Παναγιά μεγάλη - σχολείο",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1624-medical_4x.png&highlight=A52714,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -134,6 +144,7 @@
 		"lat": 40.0959,
 		"lon": 21.01169,
 		"title": "Μουτσέλια",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1837-nordic-walking_4x.png&highlight=006064,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -147,6 +158,7 @@
 		"lat": 40.10133,
 		"lon": 21.01037,
 		"title": "Φαντίνα",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1892-waterfall_4x.png&highlight=0288D1,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -160,6 +172,7 @@
 		"lat": 40.08143,
 		"lon": 20.99423,
 		"title": "Πηξάρια",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1720-tree_4x.png&highlight=097138,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -173,6 +186,7 @@
 		"lat": 40.09349,
 		"lon": 20.95679,
 		"title": "Μόσια 1",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1634-mountain_4x.png&highlight=0288D1,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -186,6 +200,7 @@
 		"lat": 40.08425,
 		"lon": 20.94396,
 		"title": "Μόσια 2",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1634-mountain_4x.png&highlight=0288D1,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -199,6 +214,7 @@
 		"lat": 40.08823,
 		"lon": 20.94532,
 		"title": "Βαθύλακος",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=0288D1,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -212,6 +228,7 @@
 		"lat": 40.10791,
 		"lon": 20.98971,
 		"title": "Γκουργκούλιος",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1634-mountain_4x.png&highlight=0288D1,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -225,6 +242,7 @@
 		"lat": 40.09685,
 		"lon": 21.03409,
 		"title": "Κιατρ αλ Νταγκαρι",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=0288D1,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -238,6 +256,7 @@
 		"lat": 40.10758,
 		"lon": 21.02319,
 		"title": "Νταου κιατρ",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1855-rock-collecting_4x.png&highlight=757575,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -251,6 +270,7 @@
 		"lat": 40.10797,
 		"lon": 21.05632,
 		"title": "Βρύση Κόντορου",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1892-waterfall_4x.png&highlight=0288D1,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -264,6 +284,7 @@
 		"lat": 40.05574,
 		"lon": 21.06988,
 		"title": "Λίμνη (Μπάρα)",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1723-tsunami_4x.png&highlight=0288D1,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -277,6 +298,7 @@
 		"lat": 40.06658,
 		"lon": 21.05265,
 		"title": "Γομάρα (Πυροφυλάκιο)",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1634-mountain_4x.png&highlight=0288D1,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -290,6 +312,7 @@
 		"lat": 40.09127,
 		"lon": 21.0178,
 		"title": "Αλούτο",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1837-nordic-walking_4x.png&highlight=006064,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -303,6 +326,7 @@
 		"lat": 40.0893,
 		"lon": 20.97421,
 		"title": "Άπα σπιτζουράτα",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1892-waterfall_4x.png&highlight=0288D1,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -316,6 +340,7 @@
 		"lat": 40.09737,
 		"lon": 21.02689,
 		"title": "Αρου (Ποτάμι)",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1723-tsunami_4x.png&highlight=0288D1,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -329,6 +354,7 @@
 		"lat": 40.10303,
 		"lon": 21.01661,
 		"title": "Άγιος Κοσμάς",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1624-medical_4x.png&highlight=A52714,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -342,6 +368,7 @@
 		"lat": 40.11124,
 		"lon": 21.01193,
 		"title": "Άγιος Μιχαήλ",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1624-medical_4x.png&highlight=A52714,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -355,6 +382,7 @@
 		"lat": 40.10079,
 		"lon": 21.01888,
 		"title": "Προφήτης Ηλίας",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1624-medical_4x.png&highlight=A52714,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -368,6 +396,7 @@
 		"lat": 40.10213,
 		"lon": 21.01987,
 		"title": "Άγιος Αθανάσιος",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1624-medical_4x.png&highlight=A52714,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -381,6 +410,7 @@
 		"lat": 40.10665,
 		"lon": 21.01535,
 		"title": "Μικρή Παναγία",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1624-medical_4x.png&highlight=A52714,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -394,6 +424,7 @@
 		"lat": 40.08295,
 		"lon": 21.02712,
 		"title": "Αγία Παρασκευή",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1624-medical_4x.png&highlight=A52714,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -407,6 +438,7 @@
 		"lat": 40.08228,
 		"lon": 21.02511,
 		"title": "Αγίος Σωτήρας",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1624-medical_4x.png&highlight=A52714,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -420,6 +452,7 @@
 		"lat": 40.10258,
 		"lon": 21.01396,
 		"title": "Δριστέλες",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1723-tsunami_4x.png&highlight=0288D1,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -433,6 +466,7 @@
 		"lat": 40.10599,
 		"lon": 20.99763,
 		"title": "Βρύση Σιωποτήρα",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1892-waterfall_4x.png&highlight=0288D1,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -446,6 +480,7 @@
 		"lat": 40.10767,
 		"lon": 20.99124,
 		"title": "Βρύση Ζιάγκα",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1892-waterfall_4x.png&highlight=0288D1,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -459,6 +494,7 @@
 		"lat": 40.10731,
 		"lon": 20.98747,
 		"title": "Τσεκούρας",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1634-mountain_4x.png&highlight=0288D1,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -472,6 +508,7 @@
 		"lat": 40.1113,
 		"lon": 21.01225,
 		"title": "Βρύση Σακελάρη",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1892-waterfall_4x.png&highlight=0288D1,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {
@@ -485,6 +522,7 @@
 		"lat": 40.10422,
 		"lon": 21.01423,
 		"title": "Βρύση Γκαβάνη",
+		"image": "https://imgix.cosmicjs.com/960f4c80-f595-11ec-a2eb-c1653f3f9199-thumbnail.jpg",
 		"icon": "https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1892-waterfall_4x.png&highlight=0288D1,ff000000&scale=2.0",
 		"activeIcon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png",
 		"category": {

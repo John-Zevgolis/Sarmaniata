@@ -88,8 +88,8 @@ export default {
 						bus.$emit('header-height', this.$refs.header.offsetHeight);
 						clearInterval(interval);
 					}
-				}, 150);
-			}, 150);
+				}, 50);
+			}, 50);
 		});
 	},
 	methods: {

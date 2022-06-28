@@ -4,26 +4,28 @@
 			<div class="parallax-img position-absolute w-100 h-100 bg-img" v-lazy:background-image="samarina.thumbnail"></div>
 			<div class="container-fluid px-0 position-relative">
 				<div class="row gx-0">
-					<div class="col-lg-6 offset-lg-6">
+					<div class="col-xl-6 offset-xl-6">
 						<div class="parallax-content">
 							<h3 class="from-bottom animated section-title underline">{{samarina.title}}</h3>
+							<div v-html="samarina.content"></div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="map position-relative" :class="{active: showFilters}">
+		<div class="map position-relative bg-white" :class="{active: showFilters}">
 			<transition name="infobox-animation">
-				<div class="infobox d-flex position-absolute col-sm-7 col-md-6 col-lg-5 col-xl-4 col-xxl-3 px-0" style="height: 400px;" :class="{loading: infoLoading}" v-if="showInfoBox">
+				<div class="infobox d-flex position-absolute px-0" style="height: 400px;" :class="{loading: infoLoading}" v-if="showInfoBox">
 					<button aria-label="CloseFilters" @click="closeInfobox" class="close-btn bg-transparent border-0 position-absolute d-flex justify-content-center align-items-center">
 						<span>&#10006;</span>
 					</button>
 					<div class="project-box w-100 d-flex flex-column">
+						<div class="bg-img field" v-lazy:background-image="infoboxContent.img"></div>
 						<div class="box-content d-flex align-items-start flex-column bg-white p-4 flex-grow-1">
 							<h5 class="title" v-if="infoboxContent.title">
 								<span class="field">{{infoboxContent.title}}</span>
 							</h5>
-							<a class="btn custom-btn shadow-none rouded-0 px-3 py-2 mt-auto" target="_blank" :href="`https://www.google.com/maps/search/?api=1&query=${infoboxContent.lat}%2C${infoboxContent.lon}`">Οδηγίες</a>
+							<a class="btn custom-btn shadow-none rouded-0 px-3 py-2 mt-auto" target="_blank" :href="`https://www.google.com/maps/dir/?api=1&origin=My+Location&destination=${infoboxContent.lat}%2C${infoboxContent.lon}`">Οδηγίες</a>
 						</div>
 					</div>
 				</div>
@@ -66,7 +68,8 @@
 							position: $event.latLng,
 							id: marker.id,
 							lat: marker.lat,
-							lon: marker.lon
+							lon: marker.lon,
+							img: marker.image
 						})"
 					/>
 				</GmapCluster>
@@ -103,7 +106,7 @@
 
 <script>
 import { gmapApi } from 'vue2-google-maps';
-import { gsap, Power0 } from 'gsap';
+import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
@@ -124,6 +127,7 @@ export default {
 			locations: null,
 			disabled: true,
 			categories: [],
+			timeout: null,
 			options: {
 				fullscreenControl: false,
 				styles: [
@@ -248,9 +252,6 @@ export default {
 					{
 					"lightness": -16
 					},
-					// {
-					// 	"color": "#d9d9d9"
-					// },
 					{
 					"visibility": "simplified"
 					}
@@ -313,10 +314,10 @@ export default {
 			const elements = gsap.utils.toArray(".parallax-img");
 			const interval = setInterval(() => {
 				if(elements && elements.length && this.headerHeight) {
-					elements.forEach((img) => {
+					elements.forEach(img => {
 						gsap.to(img, {
-							y: innerHeight / 2,
-							ease: Power0.easeNone,
+							y: innerHeight / 4,
+							ease: "sine.out",
 							scrollTrigger: {
 								trigger: img,
 								start: `top ${this.headerHeight}`, 
@@ -392,7 +393,7 @@ export default {
 				}
 			}
 		},
-		infobox({ title, position, id, lat, lon }) {
+		infobox({ title, position, id, lat, lon, img }) {
 			if(this.selectedMarker === id) return;
 			this.showInfoBox = true;
 			this.infoLoading = true;
@@ -401,7 +402,8 @@ export default {
 				title,
 				position,
 				lat,
-				lon
+				lon,
+				img
 			}
 			this.$refs.Map.panTo(this.infoboxContent.position);
 		},
@@ -478,12 +480,16 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .samarina {
 	.parallax {
 		.parallax-img {
 			top: 0;
 			left: 0;
+
+			@media (max-width: 1199.98px) {
+				transform: none !important;
+			}
 		}
 
 		.parallax-content {
@@ -494,11 +500,17 @@ export default {
 			p {
 				font-style: italic;
 				font-family: "GFS Didot", serif;
+				text-align: justify;
 			}
 
-			@media (max-width: 991.98px) {
+			@media (max-width: 1199.98px) {
 				min-height: auto;
 			}
+
+			@media (max-width: 575.98px) {
+				padding-left: 15px;
+				padding-right: 15px;
+			}	
 		}
 	}
 
@@ -529,10 +541,20 @@ export default {
 			transform: translate(0, -50%);
 			z-index: 1;
 			box-shadow: 0px 2px 57px 0px rgba(0, 0, 46, .1);
+			width: 400px;
+			max-width: 400px;
+			min-width: 400px;
 
-			@media (max-width: 575.98px) {
+			@media (max-width: 400px) {
 				left: 1rem;
 				right: 1rem;
+				width: auto;
+				max-width: none;
+				min-width: auto;
+			}
+
+			.bg-img {
+				padding-top: 66.99999%;
 			}
 
 			.close-btn {

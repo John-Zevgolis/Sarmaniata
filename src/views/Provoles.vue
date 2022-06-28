@@ -5,23 +5,22 @@
 		</transition>
 		<div v-if="objData && logo && events">
 			<inner-header ref="header" :events="events" :logo="logo"></inner-header>
-			<section class="inner-page pt-4 pb-5">
+			<section class="inner-page py-5">
 				<div class="container">
-					skata
-<!-- 					<div class="row align-items-center">
-						<div class="col-lg-10">
-							<div class="bg-img" v-lazy:background-image="objData.thumbnail"></div>
-						</div>
-						<div class="col-lg-2 info mt-4 mt-lg-0 text-center text-lg-start">
-							<p><strong>τοποθεσία:</strong> {{objData.metadata.location}}</p>
-							<p><strong>ημερομηνίες:</strong> {{objData.metadata.date}}</p>
-							<p><strong>ώρα:</strong> {{objData.metadata.time}}</p>
-							<p><strong>διοργάνωση:</strong> {{objData.metadata.organization}}</p>
+					<div class="row mb-5" v-for="(imerominia, index) in objData.metadata.provoles" :key="index">	
+						<div class="col-12">
+							<span v-if="imerominia.title" class="d-block date text-center mb-5">{{imerominia.title}}</span>
+							<div class="row mb-5 text-center text-lg-start" v-for="(tainia, i) in imerominia.metadata.tainies" :key="i">
+								<div class="col-lg-auto mb-4 mb-lg-0">
+									<img v-if="tainia.thumbnail" v-lazy="tainia.thumbnail">
+								</div>
+								<div class="col-lg">
+									<h2 v-if="tainia.title" class="section-title mb-4">{{tainia.title}}</h2>
+									<div v-if="tainia.content" class="text-justify" v-html="tainia.content"></div>
+								</div>
+							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-12 mt-4 text-center" v-html="objData.content"></div>
-					</div> -->
 				</div>
 			</section>
 		</div>
@@ -43,9 +42,22 @@ export default {
 		fetchData() {
 			this.$store.dispatch('fetchContent', {
 				id: '62496daf1ce5640009e3bffc',
-				props: 'title,content,metadata,thumbnail'
+				props: 'title,content,thumbnail,metadata'
 			});   
 		}
 	}
 };
 </script>
+
+<style lang="scss">
+.date {
+	font-size: 2.5rem;
+	font-family: "GFS Didot", serif;
+	font-style: italic;
+	color: #181818;
+
+	@media (max-width: 1199.98px) {
+		font-size: calc(1.825rem + 0.9vw);
+	}
+}
+</style>

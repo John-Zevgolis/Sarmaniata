@@ -37,7 +37,7 @@ export default {
 	padding: 7.5rem 0;
 
 	@media (max-width: 991.98px) {
-		padding: 4.0625rem;
+		padding: 4.0625rem 0;
 	}
 
 	.bg-img-wrapper {

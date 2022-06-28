@@ -9,10 +9,10 @@
 				<div class="container">
 					<div class="row mb-5" v-for="(chat, index) in objData.metadata.chats" :key="index">
 						<div class="col-12">
-							<div class="img-wrapper ps-lg-4 mb-4 mb-lg-0" v-if="chat.metadata.image">
-								<img v-lazy="chat.metadata.image.url">
+							<div class="img-wrapper ps-lg-4 mb-4 mb-lg-0" v-if="chat.thumbnail">
+								<img v-lazy="chat.thumbnail">
 							</div>
-							<span class="text-justify" v-if="chat.metadata.text" v-html="chat.metadata.text"></span>
+							<span class="text-justify" v-if="chat.content" v-html="chat.content"></span>
 						</div>
 					</div>
 				</div>
@@ -46,7 +46,6 @@ export default {
 <style lang="scss">
 .img-wrapper {
 	float: right;
-	width: 100%;
 	max-width: 50%;
 	
 

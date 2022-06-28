@@ -9,10 +9,10 @@
 				<div class="container">
 					<div class="row mb-5" v-for="(activity, index) in objData.metadata.ekdilwseis" :key="index">
 						<div class="col-12">
-							<div class="img-wrapper ps-lg-4 mb-4 mb-lg-0" v-if="activity.metadata.image">
-								<img v-lazy="activity.metadata.image.url">
+							<div class="img-wrapper ps-lg-4 mb-4 mb-lg-0" v-if="activity.thumbnail">
+								<img v-lazy="activity.thumbnail">
 							</div>
-							<span class="text-justify" v-if="activity.metadata.text" v-html="activity.metadata.text"></span>
+							<span class="text-justify" v-if="activity.content" v-html="activity.content"></span>
 						</div>
 					</div>
 				</div>
@@ -46,7 +46,6 @@ export default {
 <style lang="scss">
 .img-wrapper {
 	float: right;
-	width: 100%;
 	max-width: 50%;
 	
 

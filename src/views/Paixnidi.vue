@@ -23,7 +23,7 @@
 					<div class="row">
 						<div class="col-12 mt-4 mt-xl-0 text-center" v-html="objData.content"></div>
 					</div>
-					<div class="row mt-4 mt-md-5" v-if="objData.metadata">
+					<div class="row mt-4 mt-md-5 mb-3" v-if="objData.metadata">
 						<div class="col-lg-7 mb-5 mb-lg-0">
 							<img v-if="objData.metadata.map" v-lazy="objData.metadata.map.url">
 						</div>
@@ -50,6 +50,14 @@
 								</form>
 								<div class="alert alert-success mb-0 mt-4" v-if="registration && registration.status === 'success'" role="alert">{{registration.text}} <i class="bi bi-emoji-wink"></i></div>
 							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12 text-center">
+							<router-link class="px-4 py-3 mt-4 custom-btn d-inline-flex align-items-center" to="/" aria-label="Home">
+								ΕΠΙΣΤΡΟΦΗ ΣΤΗΝ ΑΡΧΙΚΗ ΣΕΛΙΔΑ
+								<i class="bi bi-arrow-return-left ms-3"></i>
+							</router-link>
 						</div>
 					</div>
 				</div>
@@ -205,6 +213,12 @@ p a, p a:hover {
 	span.error {
 		font-size: 0.75rem;
 		margin-top: 0.46875rem;
+	}
+}
+
+.custom-btn {
+	@media (max-width: 420px) {
+		font-size: .813rem;
 	}
 }
 </style>

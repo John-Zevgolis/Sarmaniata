@@ -3,12 +3,12 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
-					<div class="bg-img-wrapper ps-lg-4 mb-4 mb-lg-0">
+					<div v-if="sarmaniata.thumbnail" class="bg-img-wrapper ps-lg-4 mb-4 mb-lg-0">
 						<div class="bg-img position-relative" v-lazy:background-image="sarmaniata.thumbnail">
 							<div class="overlay position-absolute w-100 h-100 animated" ref="overlay"></div>
 						</div>
 					</div>
-					<span v-html="sarmaniata.content"></span>
+					<span v-if="sarmaniata.content" v-html="sarmaniata.content"></span>
 				</div>
 			</div>
 		</div>	

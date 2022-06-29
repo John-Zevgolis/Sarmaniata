@@ -7,7 +7,7 @@
 			<inner-header ref="header" :events="events" :logo="logo"></inner-header>
 			<section class="inner-page py-5">
 				<div class="container">
-					<div class="row mb-5" v-for="(imerominia, index) in objData.metadata.provoles" :key="index">	
+					<div class="row" :class="{'mb-4': index < objData.metadata.provoles.length - 1}" v-for="(imerominia, index) in objData.metadata.provoles" :key="index">	
 						<div class="col-12">
 							<span v-if="imerominia.title" class="d-block date text-center mb-5">{{imerominia.title}}</span>
 							<div class="row mb-5 text-center text-lg-start" v-for="(tainia, i) in imerominia.metadata.tainies" :key="i">
@@ -19,6 +19,19 @@
 									<div v-if="tainia.content" class="text-justify" v-html="tainia.content"></div>
 								</div>
 							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<p><small>*Μείνετε συντονισμένοι στην σελίδα μας στο facebook, όπου θα αναρτηθούν οι ώρες και η τοποθεσία των προβολών</small></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12 text-center">
+							<router-link class="px-4 py-3 mt-4 custom-btn d-inline-flex align-items-center" to="/" aria-label="Home">
+								ΕΠΙΣΤΡΟΦΗ ΣΤΗΝ ΑΡΧΙΚΗ ΣΕΛΙΔΑ
+								<i class="bi bi-arrow-return-left ms-3"></i>
+							</router-link>
 						</div>
 					</div>
 				</div>
@@ -58,6 +71,12 @@ export default {
 
 	@media (max-width: 1199.98px) {
 		font-size: calc(1.825rem + 0.9vw);
+	}
+}
+
+.custom-btn {
+	@media (max-width: 420px) {
+		font-size: .813rem;
 	}
 }
 </style>

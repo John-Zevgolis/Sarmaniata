@@ -6,8 +6,8 @@
 				<div class="row gx-0">
 					<div class="col-xl-6 offset-xl-6">
 						<div class="parallax-content">
-							<h3 class="from-bottom animated section-title underline">{{samarina.title}}</h3>
-							<div v-html="samarina.content"></div>
+							<h3 v-if="samarina.title" class="from-bottom animated section-title underline">{{samarina.title}}</h3>
+							<div v-if="samarina.content" v-html="samarina.content"></div>
 						</div>
 					</div>
 				</div>
@@ -15,17 +15,20 @@
 		</div>
 		<div class="map position-relative bg-white" :class="{active: showFilters}">
 			<transition name="infobox-animation">
-				<div class="infobox d-flex position-absolute px-0" style="height: 400px;" :class="{loading: infoLoading}" v-if="showInfoBox">
-					<button aria-label="CloseFilters" @click="closeInfobox" class="close-btn bg-transparent border-0 position-absolute d-flex justify-content-center align-items-center">
+				<div class="infobox d-flex position-absolute px-0" :class="{loading: infoLoading}" v-if="showInfoBox">
+					<button aria-label="CloseFilters" @click="closeInfobox" class="close-btn border-0 position-absolute d-flex justify-content-center align-items-center bg-white">
 						<span>&#10006;</span>
 					</button>
 					<div class="project-box w-100 d-flex flex-column">
-						<div class="bg-img field" v-lazy:background-image="infoboxContent.img"></div>
+						<div v-if="infoboxContent.img" class="bg-img field" v-lazy:background-image="infoboxContent.img"></div>
 						<div class="box-content d-flex align-items-start flex-column bg-white p-4 flex-grow-1">
-							<h5 class="title" v-if="infoboxContent.title">
-								<span class="field">{{infoboxContent.title}}</span>
+							<h5 class="title field mb-2" v-if="infoboxContent.title">
+								<span>{{infoboxContent.title}}</span>
 							</h5>
-							<a class="btn custom-btn shadow-none rouded-0 px-3 py-2 mt-auto" target="_blank" :href="`https://www.google.com/maps/dir/?api=1&origin=My+Location&destination=${infoboxContent.lat}%2C${infoboxContent.lon}`">Οδηγίες</a>
+							<p v-if="infoboxContent.text" class="field mb-0">{{infoboxContent.text}}</p>
+							<div class="mt-auto">
+								<a v-if="infoboxContent.lat && infoboxContent.lon" class="btn custom-btn shadow-none rouded-0 px-3 py-2 mt-4" target="_blank" :href="`https://www.google.com/maps/dir/?api=1&origin=My+Location&destination=${infoboxContent.lat}%2C${infoboxContent.lon}`">Οδηγίες</a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -53,23 +56,22 @@
             </button>
 			<GmapMap :center="{lat: 10, lng: 10}" :options="options" id="map" ref="Map">
 				<GmapCluster :zoomOnClick="true" :styles="clusterStyles">
-					<GmapMarker
+					<GmapMarkerWithLabel
 						v-for="marker in samarina.metadata.locations" 
 						:key="marker.id" 
 						:position="{'lat':marker.lat, 'lng': marker.lon}"
 						:icon="{url: getMarkers(marker)}"
 						:clickable="true"
-						:label="{
-							text: marker.title,
-							className: 'marker-position'
-						}"
+						:label-content="marker.label ? marker.label : marker.title"
+						:label-class="markerClass"
 						@click="infobox({
 							title: marker.title,
 							position: $event.latLng,
 							id: marker.id,
 							lat: marker.lat,
 							lon: marker.lon,
-							img: marker.image
+							img: marker.image,
+							text: marker.text
 						})"
 					/>
 				</GmapCluster>
@@ -86,7 +88,7 @@
 									<li v-for="(item, index) in filters" :key="index">
 										<a href="#" :class="[{active: item.category.active}, item.category.value]" @click.prevent="filterMarkers(item)" class="d-flex align-items-center p-2 rounded border border-white">
 											<span class="d-block me-3">
-												<img width="32" :src="item.icon">
+												<img class="item-icon" :src="item.icon">
 											</span>
 											{{item.category.text}}
 										</a>
@@ -109,9 +111,13 @@ import { gmapApi } from 'vue2-google-maps';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
+import GmapMarkerWithLabel from './markerWithLabel.vue';
 
 export default {
 	props: ['obj-data', 'header-height'],
+	components: {
+		GmapMarkerWithLabel
+	},
 	data() {
 		return {
 			showInfoBox: false,
@@ -128,6 +134,7 @@ export default {
 			disabled: true,
 			categories: [],
 			timeout: null,
+			markerClass: 'marker-position',
 			options: {
 				fullscreenControl: false,
 				styles: [
@@ -393,7 +400,7 @@ export default {
 				}
 			}
 		},
-		infobox({ title, position, id, lat, lon, img }) {
+		infobox({ title, position, id, lat, lon, img, text }) {
 			if(this.selectedMarker === id) return;
 			this.showInfoBox = true;
 			this.infoLoading = true;
@@ -403,7 +410,8 @@ export default {
 				position,
 				lat,
 				lon,
-				img
+				img,
+				text
 			}
 			this.$refs.Map.panTo(this.infoboxContent.position);
 		},
@@ -544,6 +552,20 @@ export default {
 			width: 400px;
 			max-width: 400px;
 			min-width: 400px;
+			max-height: 90%;
+			overflow: auto;
+
+			&::-webkit-scrollbar {
+				width: 5px;
+			}
+
+			&::-webkit-scrollbar-track {
+				background: #f1f1f1;
+			}
+
+			&::-webkit-scrollbar-thumb {
+				background: #181818;
+			}
 
 			@media (max-width: 400px) {
 				left: 1rem;
@@ -557,9 +579,20 @@ export default {
 				padding-top: 66.99999%;
 			}
 
+			.box-content {
+				p {
+					font-size: .75rem;
+					line-height: 16px;
+				}
+
+				.custom-btn {
+					font-size: 0.875rem;
+				}
+			}
+
 			.close-btn {
-				top: 5px;
-				right: 5px;
+				top: 0;
+				right: 0;
 				font-size: 1.3rem;
 				color: #181818;
 			}
@@ -683,29 +716,25 @@ export default {
 						a {
 							color: #181818;
 
-							&.active {
-								&.vrysi, &.locations, &.nera {
-									background: rgba(2, 136, 209, .1);
-								}
+							.item-icon {
+								min-width: 48px;
+							}
 
-								&.ekklisies, &.ktiria {
+							&.active {
+								&.ekklisies {
 									background: rgba(165, 39, 20, .1);
 								}
 
-								&.dasi {
-									background: rgba(9, 113, 56, .1);
+								&.ktiria {
+									background: rgba(173, 82, 113, .1);
 								}
 
-								&.diadromes {
-									background: rgba(0, 96, 100, .1);
+								&.vryses {
+									background: rgba(44, 88, 125, .1);
 								}
 
-								&.vouna {
-									background: rgba(66, 166, 221, .1);
-								}
-
-								&.oryxeia {
-									background: rgba(117, 117, 117, .1);
+								&.topothesies {
+									background: rgba(149, 177, 105, .1);
 								}
 							}
 						}
@@ -746,20 +775,6 @@ export default {
 						transform: rotate(180deg);
 					}
 				}
-			}
-		}
-
-		.custom-btn {
-			background: #181818;
-			color: #fff;
-			outline: none;
-			border: 1px solid #181818;
-			transition: all .3s;
-			cursor: pointer;
-
-			&:hover {
-				background: transparent;
-				color: #181818;
 			}
 		}
 	}

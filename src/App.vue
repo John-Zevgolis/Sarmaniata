@@ -102,6 +102,20 @@ img {
     }
 }
 
+.custom-btn {
+    background: #181818;
+    color: #fff;
+    outline: none;
+    border: 1px solid #181818;
+    transition: all .3s;
+    cursor: pointer;
+
+    &:hover {
+        background: transparent;
+        color: #181818;
+    }
+}
+
 .logo {
     img {
         @media (max-width: 1399.98px) {
@@ -422,9 +436,9 @@ a {
         }
 
         .marker-position {
-            top: 35px;
-            left: 0;
+            transform: translate(-50%, 5px);
             position: relative;
+            text-align: center;
         }
     }
 }

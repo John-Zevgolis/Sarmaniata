@@ -3,7 +3,7 @@
 		<div class="container py-5">
 			<div class="row">
 				<div class="col-12 text-center">
-					<h3 class="underline section-title mb-5 from-bottom animated">{{events.title}}</h3>
+					<h3 v-if="events.title" class="underline section-title mb-5 from-bottom animated">{{events.title}}</h3>
 				</div>
 			</div>
 			<div class="row justify-content-center">

@@ -3,8 +3,8 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
-					<h3 class="from-bottom animated section-title underline">{{photos.title}}</h3>
-					<div class="from-bottom animated" v-html="photos.content"></div>
+					<h3 v-if="photos.title" class="from-bottom animated section-title underline">{{photos.title}}</h3>
+					<div v-if="photos.content" class="from-bottom animated" v-html="photos.content"></div>
 					<ul class="nav justify-content-end filters">
 						<li v-for="(value, key, index) in options.getFilterData" :key="index">
 							<button :class="{active: activeClass === index}" @click="filter(key, index)">{{key === 'ΠΕΤΡΑ' ? 'ΠΕΤΡΑ & ΝΕΡΟ' : key}}</button>

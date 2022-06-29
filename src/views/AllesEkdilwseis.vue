@@ -15,6 +15,14 @@
 							<span class="text-justify" v-if="activity.content" v-html="activity.content"></span>
 						</div>
 					</div>
+					<div class="row">
+						<div class="col-12 text-center">
+							<router-link class="px-4 py-3 mt-4 custom-btn d-inline-flex align-items-center" to="/" aria-label="Home">
+								ΕΠΙΣΤΡΟΦΗ ΣΤΗΝ ΑΡΧΙΚΗ ΣΕΛΙΔΑ
+								<i class="bi bi-arrow-return-left ms-3"></i>
+							</router-link>
+						</div>
+					</div>
 				</div>
 			</section>
 		</div>
@@ -64,6 +72,12 @@ h2 {
 		@media (max-width: 1199.98px) {
 			font-size: calc(1.825rem + 0.9vw);
 		}
+	}
+}
+
+.custom-btn {
+	@media (max-width: 420px) {
+		font-size: .813rem;
 	}
 }
 </style>

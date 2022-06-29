@@ -437,7 +437,6 @@ a {
 
         .marker-position {
             transform: translate(-50%, 5px);
-            position: relative;
             text-align: center;
         }
     }

@@ -21,11 +21,16 @@
 				</div>
 				<div class="container">
 					<div class="row">
-						<div class="col-12 mt-4 mt-xl-0 text-center" v-html="objData.content"></div>
+						<div class="col-12">
+							<h1 class="section-title underline mt-4 mt-xl-0 mb-4 text-center">{{objData.title}}</h1>
+						</div>
 					</div>
-					<div class="row mt-4 mt-md-5 mb-3" v-if="objData.metadata">
+					<div class="row">
+						<div class="col-12 text-center" v-html="objData.content"></div>
+					</div>
+					<div class="row mt-4 mt-md-5 mb-4" v-if="objData.metadata">
 						<div class="col-lg-7 mb-5 mb-lg-0">
-							<img v-if="objData.metadata.map" v-lazy="objData.metadata.map.url">
+							<img alt="Χάρτης Τοποθεσιών" v-if="objData.metadata.map" v-lazy="objData.metadata.map.url">
 						</div>
 						<div class="col-lg-5">
 							<h3 class="pb-3 underline section-title mb-0">ΦΟΡΜΑ ΣΥΜΜΕΤΟΧΗΣ</h3>
@@ -64,6 +69,14 @@
 			</section>
 			<modal :objData="objData"></modal>
 		</div>
+		<ShareNetwork
+			class="share-btns position-fixed"
+			network="facebook"
+			url="https://sarmaniata.gr/paixnidi">
+			<span class="share-facebook d-flex justify-content-center align-items-center">
+				<font-awesome-icon icon="fa-brands fa-facebook-f" />
+			</span>
+		</ShareNetwork>
 	</div>
 </template>
 
@@ -88,6 +101,58 @@ export default {
 			members: 1
 		};
 	},
+	// metaInfo() {
+	// 	return {
+	// 		meta: [
+	// 			{
+	// 				property: 'og:url',
+	// 			},
+	// 			{
+	// 				property: 'og:title', 
+	// 				content: 'Sarmaniata | Παιχνίδι'
+	// 			},
+	// 			{
+	// 				property: 'og:description', 
+	// 				content: 'Ομάδα για τη φύση και τον πολιτισμό της Σαμαρίνας'
+	// 			},
+	// 			{	
+	// 				property: 'og:image', 
+	// 				content: 'https://sarmaniata.gr/summer.jpg'
+	// 			},
+	// 			{
+	// 				property: 'og:image:alt', 
+	// 				content: 'Ομάδα για τη φύση και τον πολιτισμό της Σαμαρίνας'
+	// 			},
+	// 			{
+	// 				property: 'og:image:secure_url',
+	// 				content: 'https://sarmaniata.gr/summer.jpg'
+	// 			},
+	// 			{
+	// 				property: 'og:image:type', 
+	// 				content: 'image/jpg'
+	// 			},
+	// 			{
+	// 				property: 'twitter:card', 
+	// 				content: 'summary_large_image'
+	// 			},
+	// 			{
+	// 				property: 'twitter:title', 
+	// 				content: 'Sarmaniata | Παιχνίδι'
+	// 			},
+	// 			{
+	// 				property: 'twitter:description', 
+	// 				content: 'Ομάδα για τη φύση και τον πολιτισμό της Σαμαρίνας'
+	// 			},
+	// 			{
+	// 				property: 'twitter:url'
+	// 			},
+	// 			{
+	// 				property: 'twitter:image',
+	// 				content: 'https://sarmaniata.gr/summer.jpg'
+	// 			}
+	// 		]
+	// 	}
+	// },
 	created() {
 		bus.$on('resetRegistrationForm', () => {
 			this.name = '';
@@ -213,12 +278,6 @@ p a, p a:hover {
 	span.error {
 		font-size: 0.75rem;
 		margin-top: 0.46875rem;
-	}
-}
-
-.custom-btn {
-	@media (max-width: 420px) {
-		font-size: .813rem;
 	}
 }
 </style>

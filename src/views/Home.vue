@@ -7,6 +7,14 @@
 			<the-header ref="header" :obj-data="objData" :logo="logo"></the-header>
 			<home-wrapper :header-height="headerHeight" :logo="whiteLogo" :obj-data="objData"></home-wrapper>
 		</div>
+		<ShareNetwork
+			class="share-btns position-fixed"
+			network="facebook"
+			url="https://sarmaniata.gr">
+			<span class="share-facebook d-flex justify-content-center align-items-center">
+				<font-awesome-icon icon="fa-brands fa-facebook-f" />
+			</span>
+		</ShareNetwork>
 	</div>
 </template>
 
@@ -29,6 +37,58 @@ export default {
 			headerHeight: null
 		};
 	},
+	// metaInfo() {
+	// 	return {
+	// 		meta: [
+	// 			{
+	// 				property: 'og:url',
+	// 			},
+	// 			{
+	// 				property: 'og:title', 
+	// 				content: 'Sarmaniata'
+	// 			},
+	// 			{
+	// 				property: 'og:description', 
+	// 				content: 'Ομάδα για τη φύση και τον πολιτισμό της Σαμαρίνας'
+	// 			},
+	// 			{	
+	// 				property: 'og:image', 
+	// 				content: 'https://sarmaniata.gr/sarmaniata.jpg'
+	// 			},
+	// 			{
+	// 				property: 'og:image:alt', 
+	// 				content: 'Ομάδα για τη φύση και τον πολιτισμό της Σαμαρίνας'
+	// 			},
+	// 			{
+	// 				property: 'og:image:secure_url',
+	// 				content: 'https://sarmaniata.gr/sarmaniata.jpg'
+	// 			},
+	// 			{
+	// 				property: 'og:image:type', 
+	// 				content: 'image/jpg'
+	// 			},
+	// 			{
+	// 				property: 'twitter:card', 
+	// 				content: 'summary_large_image'
+	// 			},
+	// 			{
+	// 				property: 'twitter:title', 
+	// 				content: 'Sarmaniata'
+	// 			},
+	// 			{
+	// 				property: 'twitter:description', 
+	// 				content: 'Ομάδα για τη φύση και τον πολιτισμό της Σαμαρίνας'
+	// 			},
+	// 			{
+	// 				property: 'twitter:url'
+	// 			},
+	// 			{
+	// 				property: 'twitter:image',
+	// 				content: 'https://sarmaniata.gr/sarmaniata.jpg'
+	// 			}
+	// 		]
+	// 	}
+	// },
 	methods: {
 		fetchLogo() {
 			this.$store.dispatch('fetchLogo');

@@ -21,6 +21,7 @@ library.add(faFacebookF, faTwitter, faLocationDot, faPhone, faEnvelope, faAtlass
 import VueLazyload from 'vue-lazyload';
 import Lightbox from 'vue-lightbox-lite';
 import 'vue-lightbox-lite/dist/index.css';
+import VueSocialSharing from 'vue-social-sharing';
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
@@ -34,6 +35,7 @@ Vue.use(VueGoogleMaps, {
 });
 Vue.component('GmapCluster', GmapCluster);
 Vue.use(Lightbox);
+Vue.use(VueSocialSharing);
 
 export const bus = new Vue();
 

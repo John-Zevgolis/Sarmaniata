@@ -463,8 +463,42 @@ a {
         margin-top: 97.4px;
     }
 
+    h1 {
+        &:after {
+            margin: 1.5rem auto 0;
+        }
+    }
+
+    h2 {
+        span {
+            font-size: 2.5rem;
+            font-family: "GFS Didot", serif;
+            font-style: italic;
+
+            @media (max-width: 1199.98px) {
+                font-size: calc(1.825rem + 0.9vw);
+            }
+        }
+    }
+
+    p {
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
     .bg-img {
         padding-top: 44.21875%;
+    }
+
+    .img-wrapper {
+        float: right;
+        max-width: 50%;
+
+        @media (max-width: 991.98px) {
+            float: none;
+            max-width: none;
+        }
     }
 
     p:not(.info p, .info-text p) {
@@ -489,6 +523,30 @@ a {
             @media (max-width: 767.98px) {
                 font-size: 0.875rem;
             }
+        }
+    }
+
+    .custom-btn {
+        @media (max-width: 420px) {
+            font-size: .813rem;
+        }
+    }
+}
+
+.share-btns {
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+
+    span {
+        width: 50px;
+        height: 50px;
+        border-radius: 5px 0 0 5px;
+        color: #fff;
+        font-size: 1.125rem;
+
+        &.share-facebook {
+            background: #4267B2
         }
     }
 }

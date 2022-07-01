@@ -7,10 +7,15 @@
 			<inner-header ref="header" :events="events" :logo="logo"></inner-header>
 			<section class="inner-page py-5">
 				<div class="container">
-					<div class="row mb-5" v-for="(activity, index) in objData.metadata.ekdilwseis" :key="index">
+					<div class="row">
 						<div class="col-12">
+							<h1 class="section-title underline mb-5 text-center">{{objData.title}}</h1>
+						</div>
+					</div>
+					<div class="row" :class="{'mb-5': index < objData.metadata.ekdilwseis.length - 1}" v-for="(activity, index) in objData.metadata.ekdilwseis" :key="index">
+						<div class="col-12 mb-4">
 							<div class="img-wrapper ps-lg-4 mb-4 mb-lg-0" v-if="activity.thumbnail">
-								<img v-lazy="activity.thumbnail">
+								<img :alt="activity.title" v-lazy="activity.thumbnail">
 							</div>
 							<span class="text-justify" v-if="activity.content" v-html="activity.content"></span>
 						</div>
@@ -26,6 +31,14 @@
 				</div>
 			</section>
 		</div>
+		<ShareNetwork
+			class="share-btns position-fixed"
+			network="facebook"
+			url="https://sarmaniata.gr/alles-ekdilwseis">
+			<span class="share-facebook d-flex justify-content-center align-items-center">
+				<font-awesome-icon icon="fa-brands fa-facebook-f" />
+			</span>
+		</ShareNetwork>
 	</div>
 </template>
 
@@ -40,6 +53,58 @@ export default {
 		Loader,
 		InnerHeader
 	},
+	// metaInfo() {
+	// 	return {
+	// 		meta: [
+	// 			{
+	// 				property: 'og:url', 
+	// 			},
+	// 			{
+	// 				property: 'og:title', 
+	// 				content: 'Sarmaniata | Άλλες Εκδηλώσεις'
+	// 			},
+	// 			{
+	// 				property: 'og:description', 
+	// 				content: 'Ομάδα για τη φύση και τον πολιτισμό της Σαμαρίνας'
+	// 			},
+	// 			{	
+	// 				property: 'og:image', 
+	// 				content: 'https://sarmaniata.gr/winter.jpg'
+	// 			},
+	// 			{
+	// 				property: 'og:image:alt', 
+	// 				content: 'Ομάδα για τη φύση και τον πολιτισμό της Σαμαρίνας'
+	// 			},
+	// 			{
+	// 				property: 'og:image:secure_url',
+	// 				content: 'https://sarmaniata.gr/winter.jpg'
+	// 			},
+	// 			{
+	// 				property: 'og:image:type', 
+	// 				content: 'image/jpg'
+	// 			},
+	// 			{
+	// 				property: 'twitter:card', 
+	// 				content: 'summary_large_image'
+	// 			},
+	// 			{
+	// 				property: 'twitter:title', 
+	// 				content: 'Sarmaniata | Άλλες Εκδηλώσεις'
+	// 			},
+	// 			{
+	// 				property: 'twitter:description', 
+	// 				content: 'Ομάδα για τη φύση και τον πολιτισμό της Σαμαρίνας'
+	// 			},
+	// 			{
+	// 				property: 'twitter:url'
+	// 			},
+	// 			{
+	// 				property: 'twitter:image',
+	// 				content: 'https://sarmaniata.gr/winter.jpg'
+	// 			}
+	// 		]
+	// 	}
+	// },
 	methods: {
 		fetchData() {
 			this.$store.dispatch('fetchContent', {
@@ -50,34 +115,3 @@ export default {
 	}
 };
 </script>
-
-<style lang="scss">
-.img-wrapper {
-	float: right;
-	max-width: 50%;
-	
-
-	@media (max-width: 991.98px) {
-		float: none;
-		max-width: none;
-	}
-}
-
-h2 {
-	span {
-		font-size: 2.5rem;
-		font-family: "GFS Didot", serif;
-		font-style: italic;
-
-		@media (max-width: 1199.98px) {
-			font-size: calc(1.825rem + 0.9vw);
-		}
-	}
-}
-
-.custom-btn {
-	@media (max-width: 420px) {
-		font-size: .813rem;
-	}
-}
-</style>

@@ -3,7 +3,7 @@
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-body p-0">
-					<img v-if="objData.metadata.instructions" v-lazy="objData.metadata.instructions.url">
+					<img alt="Οδηγίες" v-if="objData.metadata.instructions" v-lazy="objData.metadata.instructions.url">
 				</div>
 			</div>
 		</div>

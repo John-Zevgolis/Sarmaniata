@@ -3,7 +3,7 @@
 		<transition name="fade">
 			<loader v-show="loading"></loader>
 		</transition>
-		<div v-if="objData && logo && events">
+		<div v-if="objData && logo && events && footerData && whiteLogo">
 			<inner-header ref="header" :events="events" :logo="logo"></inner-header>
 			<section class="inner-page py-5">
 				<div class="container">
@@ -20,16 +20,9 @@
 							<span class="text-justify" v-if="chat.content" v-html="chat.content"></span>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-12 text-center">
-							<router-link class="px-4 py-3 mt-4 custom-btn d-inline-flex align-items-center" to="/" aria-label="Home">
-								ΕΠΙΣΤΡΟΦΗ ΣΤΗΝ ΑΡΧΙΚΗ ΣΕΛΙΔΑ
-								<i class="bi bi-arrow-return-left ms-3"></i>
-							</router-link>
-						</div>
-					</div>
 				</div>
 			</section>
+			<inner-footer ref="contact" :obj-data="footerData" :logo="whiteLogo"></inner-footer>
 		</div>
 		<ShareNetwork
 			class="share-btns position-fixed"
@@ -46,12 +39,14 @@
 import data from '../mixins/data';
 import Loader from '../components/Loader.vue';
 import InnerHeader from '../components/InnerHeader.vue';
+import InnerFooter from '../components/InnerFooter.vue';
 
 export default {
 	mixins: [data],
 	components: {
 		Loader,
-		InnerHeader
+		InnerHeader,
+		InnerFooter
 	},
 	// metaInfo() {
 	// 	return {

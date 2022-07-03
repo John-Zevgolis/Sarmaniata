@@ -25,8 +25,11 @@
 						</div>
 						<nav class="main-menu ms-auto d-flex align-items-center justify-content-center" v-click-outside="closeMenu">
 							<ul class="nav flex-nowrap flex-lg-wrap flex-column flex-lg-row text-center text-xl-start w-100">
+								<li>
+									<router-link to="/" exact class="d-block bg-transparent menu-link position-relative">ΑΡΧΙΚΗ</router-link>
+								</li>
 								<li v-for="(event, index) in events.metadata.icons" :key="index">
-									<router-link :to="`${event.slug}`"  class="d-block bg-transparent menu-link position-relative">{{event.title}}</router-link>
+									<router-link :to="`${event.slug}`" class="d-block bg-transparent menu-link position-relative">{{event.title}}</router-link>
 								</li>
 								<li class="d-lg-none mt-3">
 									<nav class="social">

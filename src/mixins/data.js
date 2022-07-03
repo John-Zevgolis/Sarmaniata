@@ -15,6 +15,8 @@ export default {
 		await this.fetchData();
 		await this.fetchEventsData();
 		await this.fetchLogo();
+		await this.fetchFooterData();
+		await this.fetchWhiteLogo();
 		this.loading = false;
 	},
 	methods: {
@@ -26,6 +28,14 @@ export default {
 				id: '622e1ef3bbb43300095a3890',
 				props: 'metadata'
 			});   
+		},
+		fetchFooterData() {
+			this.$store.dispatch('fetchFooterContent', {
+				props: 'title,content,metadata'
+			});   
+		},
+		fetchWhiteLogo() {
+			this.$store.dispatch('fetchWhiteLogo');
 		}
 	},
 	computed: {
@@ -37,6 +47,12 @@ export default {
 		},
 		events() {
 			return this.$store.getters['events'];
+		},
+		footerData() {
+			return this.$store.getters['footerData'];
+		},
+		whiteLogo() {
+			return this.$store.getters['whiteLogo'];
 		}
 	},
 	watch: {

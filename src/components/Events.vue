@@ -1,26 +1,35 @@
 <template>
-	<section id="events" class="section events py-5">
-		<div class="container py-5">
-			<div class="row">
-				<div class="col-12 text-center">
-					<h3 v-if="events.title" class="underline section-title mb-5 from-bottom animated">{{events.title}}</h3>
+	<section id="events" class="section events">
+		<div class="py-5">
+			<div class="container py-5">
+				<div class="row">
+					<div class="col-12 text-center">
+						<h3 v-if="events.title" class="underline section-title mb-5 from-bottom animated">{{events.title}}</h3>
+					</div>
 				</div>
-			</div>
-			<div class="row justify-content-center">
-				<div class="col-xl-10 col-xxl-9">
-					<div class="row">
-						<div class="col-sm-6 col-md-3 mb-4 mb-md-0 text-center" v-for="(event, index) in events.metadata.icons" :key="index">
-							<router-link class="d-inline-block opacity-0 animated" :to="`${event.slug}`">
-								<span class="icon position-relative d-flex justify-content-center align-items-center rounded-circle mx-auto animated scale">
-									<i class="bi bi-camera-reels-fill" v-if="event.slug === 'provoles'"></i>
-									<i class="bi bi-puzzle-fill" v-if="event.slug === 'paixnidi'"></i>
-									<i class="bi bi-chat-dots-fill" v-if="event.slug === 'syzitiseis'"></i>
-									<font-awesome-icon icon="fa-brands fa-atlassian" v-if="event.slug === 'alles-ekdilwseis'" />
-								</span>
-								<span class="d-block mt-3 title">{{event.title}}</span>
-							</router-link>
+				<div class="row justify-content-center">
+					<div class="col-xl-10 col-xxl-9">
+						<div class="row">
+							<div class="col-sm-6 col-md-3 mb-4 mb-md-0 text-center" v-for="(event, index) in events.metadata.icons" :key="index">
+								<router-link class="d-inline-block opacity-0 animated" :to="`${event.slug}`">
+									<span class="icon position-relative d-flex justify-content-center align-items-center rounded-circle mx-auto animated scale">
+										<i class="bi bi-camera-reels-fill" v-if="event.slug === 'provoles'"></i>
+										<i class="bi bi-puzzle-fill" v-if="event.slug === 'paixnidi'"></i>
+										<i class="bi bi-chat-dots-fill" v-if="event.slug === 'syzitiseis'"></i>
+										<font-awesome-icon icon="fa-brands fa-atlassian" v-if="event.slug === 'alles-ekdilwseis'" />
+									</span>
+									<span class="d-block mt-3 title">{{event.title}}</span>
+								</router-link>
+							</div>
 						</div>
 					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid px-0">
+			<div class="row gx-0">
+				<div class="col-12">
+					<img v-if="events.thumbnail" v-lazy="events.thumbnail">
 				</div>
 			</div>
 		</div>

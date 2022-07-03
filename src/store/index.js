@@ -19,9 +19,10 @@ const store = new Vuex.Store({
 			homepageObjData: null,
 			logo: null,
 			whiteLogo: null,
-			response: null,
+			response: 'skata',
 			events: null,
-			registration: null
+			registration: null,
+			footerData: null
 		};
 	},
 	mutations: {
@@ -45,6 +46,15 @@ const store = new Vuex.Store({
 		},
 		saveRegistration(state, payload) {
 			state.registration = payload;
+		},
+		storeFooterData(state, payload) {
+			state.footerData = payload;
+		},
+		resetResponse(state) {
+			state.response = null;
+		},
+		resetRegistration(state) {
+			state.registration = null;
 		}
 	},
 	actions: {
@@ -79,6 +89,15 @@ const store = new Vuex.Store({
 				id: '624d6bc9354d6f0e475d4d41',
 				props: 'url,original_name'
 			}).then(response => commit('storeWhiteLogo', response.media));
+		},
+		fetchFooterContent({commit}, payload) {
+			bucket.getObjects({
+				query: {
+					type: 'contact',
+					slug: 'contact'
+				},
+				props: payload.props
+			}).then(response => commit('storeFooterData', response.objects[0]));
 		},
 		sendEmail({commit}, payload) {
 			const data = new FormData();
@@ -127,6 +146,9 @@ const store = new Vuex.Store({
 		},
 		registration(state) {
 			return state.registration;
+		},
+		footerData(state) {
+			return state.footerData;
 		}
 	}
 });

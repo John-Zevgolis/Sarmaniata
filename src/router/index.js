@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import store from '../store';
 
 Vue.use(VueRouter)
 
@@ -48,5 +49,11 @@ const router = new VueRouter({
     }
   }
 });
+
+router.beforeEach((_,_2,next) => {
+  if(store.getters.response) store.commit('resetResponse');
+  if(store.getters.registration) store.commit('resetRegistration');
+  next();
+})
 
 export default router;

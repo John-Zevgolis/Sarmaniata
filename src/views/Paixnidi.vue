@@ -3,13 +3,13 @@
 		<transition name="fade">
 			<loader v-show="loading"></loader>
 		</transition>
-		<div v-if="objData && logo && events">
+		<div v-if="objData && logo && events && footerData && whiteLogo">
 			<inner-header ref="header" :events="events" :logo="logo"></inner-header>
 			<section class="inner-page pt-4 pb-5">
 				<div class="container-fluid">
 					<div class="row align-items-center">
-						<div class="col-lg-10 offset-lg-1 col-xl-8 offset-xl-2" v-if="objData.thumbnail">
-							<div class="bg-img" v-lazy:background-image="objData.thumbnail"></div>
+						<div class="col-lg-10 offset-lg-1 col-xl-8 offset-xl-2">
+							<div class="bg-img" v-if="objData.metadata.banner" v-lazy:background-image="objData.metadata.banner.url"></div>
 						</div>
 						<div v-if="objData.metadata" class="col-xl-2 info mt-3 mt-xl-0 text-center text-xl-start">
 							<p v-if="objData.metadata.location"><strong>τοποθεσία:</strong> {{objData.metadata.location}}</p>
@@ -38,15 +38,22 @@
 							<div class="form mt-4">
 								<form @submit.prevent="submitForm" novalidate>
 									<div class="mb-3">
-										<input :disabled="registration && registration.status === 'success'" :class="{error: registration && registration.status === 'error' && errorMessage('name', registration)}" class="form-control rounded-0" placeholder="Ονοματεπώνυμο" v-model="name" name="name" type="text">
+										<input :disabled="registration && registration.status === 'success'" class="form-control rounded-0" placeholder="Ονοματεπώνυμο" v-model="name" name="name" type="text">
 										<span class="d-block error text-danger" v-if="registration && registration.status === 'error' && errorMessage('name', registration)">{{errorMessage('name', registration)}}</span>
 									</div>
 									<div class="mb-3">
-										<input @keypress="validateNumber" minlength="10" maxlength="10" :disabled="registration && registration.status === 'success'" :class="{error: registration && registration.status === 'error' && errorMessage('phone', registration)}" class="form-control rounded-0" placeholder="Τηλέφωνο" v-model="phone" name="phone" type="text">
+										<input @keypress="validateNumber" minlength="10" maxlength="10" :disabled="registration && registration.status === 'success'" class="form-control rounded-0" placeholder="Τηλέφωνο" v-model="phone" name="phone" type="text">
 										<span class="d-block error text-danger" v-if="registration && registration.status === 'error' && errorMessage('phone', registration)">{{errorMessage('phone', registration)}}</span>
 									</div>
-									<div class="mb-3">
-										<input min="1" max="5" :disabled="registration && registration.status === 'success'" :class="{error: registration && registration.status === 'error' && errorMessage('members', registration)}" class="form-control rounded-0" placeholder="Άτομα" v-model="members" name="members" type="number">
+									<div class="mb-3 error">
+										<Select2 
+											:disabled="registration && registration.status === 'success'" 
+											:options="values" 
+											v-model="members" 
+											name="members"
+											placeholder="Αριθμός Ατόμων"
+											:settings=" {minimumResultsForSearch: -1, selectionCssClass:'filters-selection', dropdownCssClass: 'filters-dropdown', theme: 'filters', width: '100%'}">
+										</Select2>
 										<span class="d-block error text-danger" v-if="registration && registration.status === 'error' && errorMessage('members', registration)">{{errorMessage('members', registration)}}</span>
 									</div>
 									<div class="mt-4 d-flex justify-content-end">
@@ -57,16 +64,9 @@
 							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-12 text-center">
-							<router-link class="px-4 py-3 mt-4 custom-btn d-inline-flex align-items-center" to="/" aria-label="Home">
-								ΕΠΙΣΤΡΟΦΗ ΣΤΗΝ ΑΡΧΙΚΗ ΣΕΛΙΔΑ
-								<i class="bi bi-arrow-return-left ms-3"></i>
-							</router-link>
-						</div>
-					</div>
 				</div>
 			</section>
+			<inner-footer ref="contact" :obj-data="footerData" :logo="whiteLogo"></inner-footer>
 			<modal :objData="objData"></modal>
 		</div>
 		<ShareNetwork
@@ -86,19 +86,45 @@ import Loader from '../components/Loader.vue';
 import InnerHeader from '../components/InnerHeader.vue';
 import { bus } from '../main';
 import Modal from '../components/Modal.vue';
+import InnerFooter from '../components/InnerFooter.vue';
+import Select2 from 'v-select2-component';
 
 export default {
 	mixins: [data],
 	components: {
 		Loader,
 		InnerHeader,
-		Modal
+		Modal,
+		InnerFooter,
+		Select2
 	},
 	data() {
 		return {
 			name: '',
 			phone: '',
-			members: 1
+			members: null,
+			values: [
+				{
+					id: 1,
+					text: '1 άτομο'
+				},
+				{
+					id: 2,
+					text: '2 άτομα'
+				},
+				{
+					id: 3,
+					text: '3 άτομα'
+				},
+				{
+					id: 4,
+					text: '4 άτομα'
+				},
+				{
+					id: 5,
+					text: '5 άτομα'
+				},
+			]
 		};
 	},
 	// metaInfo() {
@@ -157,7 +183,7 @@ export default {
 		bus.$on('resetRegistrationForm', () => {
 			this.name = '';
 			this.phone = '';
-			this.members = 1;
+			this.members = [];
 		});
 	},
 	methods: {
@@ -243,14 +269,6 @@ p a, p a:hover {
 		&:focus:not(button) {
 			border-color: #999;
 		}
-
-		&.error {
-			color: #842029;
-			background: #f8d7da;
-			border-color: #f5c2c7;
-			-webkit-text-fill-color: #842029;
-			-webkit-box-shadow: 0 0 0px 1000px #f8d7da inset;
-		}
 	}
 
 	button.form-control {
@@ -279,5 +297,66 @@ p a, p a:hover {
 		font-size: 0.75rem;
 		margin-top: 0.46875rem;
 	}
+}
+
+.select2-container--filters {
+    .select2-selection--single {
+        height: 46px;
+
+        .select2-selection__rendered {
+            padding-left: 1.125rem;
+            padding-right: calc(17px + (1.125rem * 2));
+            border-radius: 4px;
+            color: #181818;
+            border: 1px solid #181818;
+            padding-top: 0;
+            padding-bottom: 0;
+            border-radius: 0;
+            line-height: 46px
+        }
+
+        .select2-selection__arrow {
+            top: 50%;
+            transform: translateY(-50%);
+            right: 1.125rem;
+            pointer-events: none;
+            color: #014257;
+            font-size: 1.0625rem;
+            position: absolute;
+
+            &:before {
+                content: "\f282";
+                display: inline-block;
+                font-family: bootstrap-icons !important;
+                font-style: normal;
+                font-weight: normal !important;
+                font-variant: normal;
+                text-transform: none;
+                line-height: 1;
+                vertical-align: -0.125em;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+        }
+    }
+
+    .filters-dropdown {
+        border-color: #181818;
+        border-radius: 0;
+        z-index: 1000;
+        background-color: #fff !important;
+
+        .select2-results__options {
+            .select2-results__option {
+                color: #181818;
+                padding: 6px 1.125rem !important;
+
+                &.select2-results__option--highlighted {
+                    color: #fff;
+                    background-color: #181818;
+                }
+            }
+        }
+    }
 }
 </style>

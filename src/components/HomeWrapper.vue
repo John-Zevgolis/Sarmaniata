@@ -10,12 +10,12 @@
 </template>
 
 <script>
-import HomeCarousel from '../components/HomeCarousel.vue';
-import Sarmaniata from '../components/Sarmaniata.vue';
-import Samarina from '../components/Samarina.vue';
-import Events from '../components/Events.vue';
-import Photos from '../components/Photos.vue';
-import TheFooter from '../components/TheFooter.vue';
+import HomeCarousel from './HomeCarousel.vue';
+import Sarmaniata from './Sarmaniata.vue';
+import Samarina from './Samarina.vue';
+import Events from './Events.vue';
+import Photos from './Photos.vue';
+import TheFooter from './TheFooter.vue';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);

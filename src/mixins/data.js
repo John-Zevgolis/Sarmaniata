@@ -10,7 +10,7 @@ export default {
 			loading: false
 		};
 	},
-	async mounted() {
+	async created() {
 		this.loading = true;
 		await this.fetchData();
 		await this.fetchEventsData();

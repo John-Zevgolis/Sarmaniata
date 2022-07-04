@@ -355,10 +355,17 @@ export default {
 		},
 		filterMarkers(item) {
 			item.category.active = !item.category.active;
+
 			if(this.filters.some(item => {
 				return item.category.active === true;
 			})) {
 				this.disabled = false;
+			}
+
+			if(this.filters.every(item => {
+				return item.category.active === true;
+			})) {
+				this.disabled = true;
 			}
 
 			if(item.category.active) {
